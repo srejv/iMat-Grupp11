@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
+import java.awt.CardLayout;
 
 public class MainWindow {
 
@@ -122,6 +123,13 @@ public class MainWindow {
 		textField = new JTextField();
 		panel.add(textField);
 		textField.setColumns(10);
+		
+		JPanel panel_1 = new JPanel();
+		frame.getContentPane().add(panel_1, BorderLayout.WEST);
+		
+		JPanel panel_2 = new JPanel();
+		frame.getContentPane().add(panel_2, BorderLayout.CENTER);
+		panel_2.setLayout(new CardLayout(0, 0));
 	}
 	
 	public JFrame getFrame() {
