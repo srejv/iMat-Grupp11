@@ -111,25 +111,25 @@ public class MainWindow {
 		JMenuItem mntmAbout = new JMenuItem("About...");
 		mnHelp.add(mntmAbout);
 		
-		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, BorderLayout.NORTH);
+		JPanel panelTop = new JPanel();
+		frame.getContentPane().add(panelTop, BorderLayout.NORTH);
 		
 		JButton btnBack = new JButton("Back");
-		panel.add(btnBack);
+		panelTop.add(btnBack);
 		
 		JButton btnForward = new JButton("Forward");
-		panel.add(btnForward);
+		panelTop.add(btnForward);
 		
 		textField = new JTextField();
-		panel.add(textField);
+		panelTop.add(textField);
 		textField.setColumns(10);
 		
-		JPanel panel_1 = new JPanel();
-		frame.getContentPane().add(panel_1, BorderLayout.WEST);
+		JPanel panelLeftMenu = new JPanel();
+		frame.getContentPane().add(panelLeftMenu, BorderLayout.WEST);
 		
-		JPanel panel_2 = new JPanel();
-		frame.getContentPane().add(panel_2, BorderLayout.CENTER);
-		panel_2.setLayout(new CardLayout(0, 0));
+		JPanel panelMainStage = new JPanel();
+		frame.getContentPane().add(panelMainStage, BorderLayout.CENTER);
+		panelMainStage.setLayout(new CardLayout(0, 0));
 	}
 	
 	public JFrame getFrame() {
