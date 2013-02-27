@@ -34,15 +34,19 @@ public class CheckoutCardView extends JPanel {
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
+		setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("1px"),},
+			new RowSpec[] {
+				RowSpec.decode("1px"),}));
 		
 		JLabel lblCardInformation = new JLabel("Card information");
-		add(lblCardInformation, "2, 2");
+		add(lblCardInformation, "1, 1, fill, fill");
 		
 		JButton btnEditDetails = new JButton("Edit Details");
-		add(btnEditDetails, "6, 2");
+		add(btnEditDetails, "1, 1, fill, fill");
 		
 		JLabel lblYouHavntAdded = new JLabel("You havn't added any card details.");
-		add(lblYouHavntAdded, "4, 6");
+		add(lblYouHavntAdded, "1, 1, fill, fill");
 
 	}
 
