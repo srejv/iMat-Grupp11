@@ -1,5 +1,7 @@
 package se.grupp11.imat.controllers;
 
+import java.awt.EventQueue;
+
 import se.grupp11.imat.MainWindow;
 
 public class MainController {
@@ -7,15 +9,28 @@ public class MainController {
 	MainWindow window;
 	
 	ShoppingCartController cartController;
-	//SelectionController selController;
-	//ListController listController;
+	
+	
+	public MainController() {
+		cartController = new ShoppingCartController();
+		
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					window = new MainWindow();
+					window.getFrame().setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
 	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
+		MainController c = new MainController();
 	}
-
 }
