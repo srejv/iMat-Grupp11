@@ -16,7 +16,7 @@ public class StartPage extends JPanel {
 	 * Create the panel.
 	 */
 	public StartPage() {
-		setLayout(new MigLayout("", "[190px,grow][190px,grow][190px,grow][190px,grow]", "[561px][grow][grow][grow]"));
+		setLayout(new MigLayout("wrap 4", "[190px,grow][190px,grow][190px,grow][190px,grow]", "[561px][grow][grow][grow]"));
 		
 		ProductSquareItem productSquareItem = new ProductSquareItem();
 		add(productSquareItem, "cell 0 0,grow");
