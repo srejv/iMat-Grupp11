@@ -26,6 +26,10 @@ import se.grupp11.imat.views.StartPage;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JScrollBar;
+import javax.swing.JLabel;
+import java.awt.Dimension;
 
 public class MainWindow {
 
@@ -46,8 +50,6 @@ public class MainWindow {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1193, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		JPanel Startpage = new StartPage();
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		
@@ -179,19 +181,17 @@ public class MainWindow {
 		});
 		panelLeftMenu.add(list);
 		
-		JPanel panelMainStage = new JPanel();
-		panelMainStage.add(Startpage);
-		
-		frame.getContentPane().add(panelMainStage, BorderLayout.CENTER);
-		panelMainStage.setLayout(new CardLayout(0, 0));
-		
 		JPanel ShoppingCartPanel = new JPanel();
 		frame.getContentPane().add(ShoppingCartPanel, BorderLayout.EAST);
 		ShoppingCartPanel.setLayout(new GridLayout(2, 1, 0, 0));
 		
+		JScrollPane scrollPane = new JScrollPane();
+		ShoppingCartPanel.add(scrollPane);
+		
 		JList ShoppingCart = new JList();
+		scrollPane.setViewportView(ShoppingCart);
 		ShoppingCart.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Testitem 1\t|\tprice", "Testitem 2\t|\tprice", "Testitem 3\t|\tprice", "Testitem 4\t|\tprice"};
+			String[] values = new String[] {"Testitem 1\t|\tprice", "Testitem 2\t|\tprice", "Testitem 3\t|\tprice", "Testitem 4\t|\tprice", "Testitem 1\t|\tprice", "Testitem 2\t|\tprice", "Testitem 3\t|\tprice", "Testitem 4\t|\tpriceTestitem 1\t|\tprice", "Testitem 2\t|\tprice", "Testitem 3\t|\tprice", "Testitem 4\t|\tpriceTestitem 1\t|\tprice", "Testitem 2\t|\tprice", "Testitem 3\t|\tprice", "Testitem 4\t|\tpriceTestitem 1\t|\tprice", "Testitem 2\t|\tprice", "Testitem 3\t|\tprice", "Testitem 4\t|\tpriceTestitem 1\t|\tprice", "Testitem 2\t|\tprice", "Testitem 3\t|\tprice", "Testitem 4\t|\tpriceTestitem 1\t|\tprice", "Testitem 2\t|\tprice", "Testitem 3\t|\tprice", "Testitem 4\t|\tprice"};
 			public int getSize() {
 				return values.length;
 			}
@@ -199,7 +199,6 @@ public class MainWindow {
 				return values[index];
 			}
 		});
-		ShoppingCartPanel.add(ShoppingCart);
 		
 		JPanel southPanelShoppingCart = new JPanel();
 		ShoppingCartPanel.add(southPanelShoppingCart);
@@ -210,8 +209,25 @@ public class MainWindow {
 		JButton buyButton = new JButton("Till Kassan");
 		southPanelShoppingCart.add(buyButton);
 		
-		//---Borders--//
-		panelMainStage.setBorder(BorderFactory.createLineBorder(Color.black));
+		JScrollPane scrollPaneMainStage = new JScrollPane();
+		frame.getContentPane().add(scrollPaneMainStage, BorderLayout.CENTER);
+		
+		JPanel panelMainStage = new JPanel();
+		scrollPaneMainStage.setViewportView(panelMainStage);
+		panelMainStage.setLayout(new BorderLayout(0, 0));
+		
+		StartPage startPage = new StartPage();
+		startPage.setPreferredSize(new Dimension(1000, 1000));
+		startPage.setMinimumSize(new Dimension(1000, 1000));
+		panelMainStage.add(startPage, BorderLayout.CENTER);
+		
+		JLabel label = new JLabel("");
+		
+		JLabel label_1 = new JLabel("");
+		
+		JLabel label_2 = new JLabel("");
+		
+		JLabel label_3 = new JLabel("");
 		
 		
 	}
