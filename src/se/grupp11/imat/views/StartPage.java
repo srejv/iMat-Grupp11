@@ -1,12 +1,8 @@
 package se.grupp11.imat.views;
 
 import javax.swing.JPanel;
-import java.awt.GridLayout;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.FlowLayout;
-import java.awt.Dimension;
+import javax.swing.JScrollPane;
+
 import net.miginfocom.swing.MigLayout;
 
 public class StartPage extends JPanel {
@@ -17,6 +13,7 @@ public class StartPage extends JPanel {
 	 */
 	public StartPage() {
 		setLayout(new MigLayout("", "[190px,grow][190px,grow][190px,grow][190px,grow]", "[561px][grow][grow][grow]"));
+		
 		
 		ProductSquareItem productSquareItem = new ProductSquareItem();
 		add(productSquareItem, "cell 0 0,grow");

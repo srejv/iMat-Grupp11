@@ -1,7 +1,10 @@
 package se.grupp11.imat;
 
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.GridLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -12,6 +15,17 @@ import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 import java.awt.CardLayout;
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
+import java.awt.FlowLayout;
+import javax.swing.SwingConstants;
+import javax.swing.BoxLayout;
+
+import se.grupp11.imat.views.StartPage;
+
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MainWindow {
 
@@ -30,9 +44,10 @@ public class MainWindow {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 800, 600);
+		frame.setBounds(100, 100, 1193, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		JPanel Startpage = new StartPage();
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		
@@ -113,23 +128,92 @@ public class MainWindow {
 		
 		JPanel panelTop = new JPanel();
 		frame.getContentPane().add(panelTop, BorderLayout.NORTH);
+		panelTop.setLayout(new BorderLayout(0, 0));
+		
+		JPanel westPanel = new JPanel();
+		panelTop.add(westPanel, BorderLayout.WEST);
 		
 		JButton btnBack = new JButton("Back");
-		panelTop.add(btnBack);
+		westPanel.add(btnBack);
+		btnBack.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		JButton btnForward = new JButton("Forward");
-		panelTop.add(btnForward);
+		westPanel.add(btnForward);
+		btnForward.setHorizontalAlignment(SwingConstants.LEFT);
+		
+		JPanel centerPanel = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) centerPanel.getLayout();
+		flowLayout.setAlignment(FlowLayout.LEFT);
+		panelTop.add(centerPanel, BorderLayout.CENTER);
 		
 		textField = new JTextField();
-		panelTop.add(textField);
-		textField.setColumns(10);
+		centerPanel.add(textField);
+
+		textField.setColumns(20);
+		
+		JPanel eastPanel = new JPanel();
+		panelTop.add(eastPanel, BorderLayout.EAST);
 		
 		JPanel panelLeftMenu = new JPanel();
 		frame.getContentPane().add(panelLeftMenu, BorderLayout.WEST);
+		panelLeftMenu.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JList list = new JList();
+		list.addMouseListener(new MouseAdapter() {
+			/**
+			 * List item clicked
+			 */
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+			}
+		});
+		list.setSize(500, 100);
+		list.setModel(new AbstractListModel() {
+			String[] values = new String[] {"Test1 längre text...", "Test2", "Test3", "Test4"};
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		panelLeftMenu.add(list);
 		
 		JPanel panelMainStage = new JPanel();
+		panelMainStage.add(Startpage);
+		
 		frame.getContentPane().add(panelMainStage, BorderLayout.CENTER);
 		panelMainStage.setLayout(new CardLayout(0, 0));
+		
+		JPanel ShoppingCartPanel = new JPanel();
+		frame.getContentPane().add(ShoppingCartPanel, BorderLayout.EAST);
+		ShoppingCartPanel.setLayout(new GridLayout(2, 1, 0, 0));
+		
+		JList ShoppingCart = new JList();
+		ShoppingCart.setModel(new AbstractListModel() {
+			String[] values = new String[] {"Testitem 1\t|\tprice", "Testitem 2\t|\tprice", "Testitem 3\t|\tprice", "Testitem 4\t|\tprice"};
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		ShoppingCartPanel.add(ShoppingCart);
+		
+		JPanel southPanelShoppingCart = new JPanel();
+		ShoppingCartPanel.add(southPanelShoppingCart);
+		
+		JButton btnRensa = new JButton("Rensa");
+		southPanelShoppingCart.add(btnRensa);
+		
+		JButton buyButton = new JButton("Till Kassan");
+		southPanelShoppingCart.add(buyButton);
+		
+		//---Borders--//
+		panelMainStage.setBorder(BorderFactory.createLineBorder(Color.black));
+		
+		
 	}
 	
 	public JFrame getFrame() {
