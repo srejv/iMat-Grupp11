@@ -1,6 +1,4 @@
-package se.grupp11.imat;
-
-import java.awt.EventQueue;
+package se.grupp11.imat.views;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
@@ -12,6 +10,11 @@ import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 import java.awt.CardLayout;
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
+import javax.swing.UIManager;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 
 public class MainWindow {
 
@@ -30,7 +33,7 @@ public class MainWindow {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 800, 600);
+		frame.setBounds(100, 100, 1087, 705);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -112,6 +115,7 @@ public class MainWindow {
 		mnHelp.add(mntmAbout);
 		
 		JPanel panelTop = new JPanel();
+		panelTop.setBorder(new LineBorder(new Color(0, 0, 0)));
 		frame.getContentPane().add(panelTop, BorderLayout.NORTH);
 		
 		JButton btnBack = new JButton("Back");
@@ -127,9 +131,28 @@ public class MainWindow {
 		JPanel panelLeftMenu = new JPanel();
 		frame.getContentPane().add(panelLeftMenu, BorderLayout.WEST);
 		
+		JList list = new JList();
+		list.setModel(new AbstractListModel() {
+			String[] values = new String[] {"Br\u00F6d", "Chark", "Mejeri", "Godis och fika", "Frukt och gr\u00F6nt", "Dryck", "Basvaror"};
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		panelLeftMenu.add(list);
+		
 		JPanel panelMainStage = new JPanel();
 		frame.getContentPane().add(panelMainStage, BorderLayout.CENTER);
 		panelMainStage.setLayout(new CardLayout(0, 0));
+		
+		StartPage startPage = new StartPage();
+		startPage.setBorder(UIManager.getBorder("DesktopIcon.border"));
+		panelMainStage.add(startPage, "");
+
+		
+		
 	}
 	
 	public JFrame getFrame() {

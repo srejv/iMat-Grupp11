@@ -2,6 +2,8 @@ package se.grupp11.imat;
 
 import java.awt.EventQueue;
 
+import se.grupp11.imat.views.MainWindow;
+
 public class Main {
 
 	/**

@@ -11,6 +11,11 @@ import com.jgoodies.forms.layout.RowSpec;
 public class CheckoutAdressView extends JPanel {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Create the panel.
 	 */
 	public CheckoutAdressView() {
