@@ -8,9 +8,19 @@ import java.awt.GridBagConstraints;
 import java.awt.FlowLayout;
 import javax.swing.JSpinner;
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.BevelBorder;
+import se.chalmers.ait.dat215.project.*;
 
 public class ProductSquareItem extends JPanel {
 
+	
+	private Product _prod;
+	
+	public void loadProduct(Product prod) {
+		_prod = prod;
+	}
 	/**
 	 * 
 	 */
@@ -52,4 +62,6 @@ public class ProductSquareItem extends JPanel {
 	public void setThisSize(Dimension size) {
 		setSize(size);
 	}
+	
+	
 }

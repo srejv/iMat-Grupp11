@@ -7,7 +7,6 @@ import se.grupp11.imat.MainWindow;
 public class MainController {
 
 	MainWindow window;
-	
 	ShoppingCartController cartController;
 	
 	
