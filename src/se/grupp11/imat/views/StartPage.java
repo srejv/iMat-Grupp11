@@ -4,6 +4,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import net.miginfocom.swing.MigLayout;
+
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
 public class StartPage extends JPanel {
@@ -14,6 +17,9 @@ public class StartPage extends JPanel {
 	 */
 	public StartPage() {
 		setLayout(new GridLayout(4, 4, 0, 0));
+		
+		setMaximumSize(new Dimension(680, 1200));
+		setMinimumSize(new Dimension(680, 1200));
 		
 		
 		ProductSquareItem productSquareItem = new ProductSquareItem();
@@ -61,6 +67,10 @@ public class StartPage extends JPanel {
 		
 		ProductSquareItem productSquareItem_15 = new ProductSquareItem();
 		add(productSquareItem_15);
+		
+		
+
+
 
 	}
 }

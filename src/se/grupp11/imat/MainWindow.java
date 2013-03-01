@@ -34,7 +34,7 @@ import java.awt.Dimension;
 public class MainWindow {
 
 	private JFrame frame;
-	private JTextField textField;
+	private JTextField txtSk;
 
 	/**
 	 * Create the application.
@@ -48,7 +48,7 @@ public class MainWindow {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1193, 600);
+		frame.setBounds(100, 100, 1193, 696);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
@@ -135,6 +135,7 @@ public class MainWindow {
 		JPanel westPanel = new JPanel();
 		panelTop.add(westPanel, BorderLayout.WEST);
 		
+		
 		JButton btnBack = new JButton("Back");
 		westPanel.add(btnBack);
 		btnBack.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -144,17 +145,20 @@ public class MainWindow {
 		btnForward.setHorizontalAlignment(SwingConstants.LEFT);
 		
 		JPanel centerPanel = new JPanel();
+		
 		FlowLayout flowLayout = (FlowLayout) centerPanel.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		panelTop.add(centerPanel, BorderLayout.CENTER);
 		
-		textField = new JTextField();
-		centerPanel.add(textField);
+		txtSk = new JTextField();
+		txtSk.setText("Sök…");
+		centerPanel.add(txtSk);
 
-		textField.setColumns(20);
+		txtSk.setColumns(20);
 		
 		JPanel eastPanel = new JPanel();
 		panelTop.add(eastPanel, BorderLayout.EAST);
+		
 		
 		JPanel panelLeftMenu = new JPanel();
 		frame.getContentPane().add(panelLeftMenu, BorderLayout.WEST);
@@ -201,6 +205,7 @@ public class MainWindow {
 		});
 		
 		JPanel southPanelShoppingCart = new JPanel();
+		southPanelShoppingCart.setBackground(new Color(255, 255, 255));
 		ShoppingCartPanel.add(southPanelShoppingCart);
 		
 		JButton btnRensa = new JButton("Rensa");
@@ -217,9 +222,10 @@ public class MainWindow {
 		panelMainStage.setLayout(new BorderLayout(0, 0));
 		
 		StartPage startPage = new StartPage();
-		startPage.setPreferredSize(new Dimension(1000, 1000));
-		startPage.setMinimumSize(new Dimension(1000, 1000));
+		startPage.setPreferredSize(new Dimension(680, 1200));
+		startPage.setMinimumSize(new Dimension(680, 1200));
 		panelMainStage.add(startPage, BorderLayout.CENTER);
+		
 		
 		JLabel label = new JLabel("");
 		
@@ -230,6 +236,12 @@ public class MainWindow {
 		JLabel label_3 = new JLabel("");
 		
 		
+		westPanel.setBackground(new Color(255,33,81));
+		centerPanel.setBackground(new Color(255,33,81));
+		eastPanel.setBackground(new Color(255,33,81));
+		
+		Color c=new Color(255, 250, 250);
+		startPage.setBackground(c);
 	}
 	
 	public JFrame getFrame() {
