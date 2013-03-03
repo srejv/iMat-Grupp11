@@ -1,13 +1,12 @@
 package se.grupp11.imat.views;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import java.awt.BorderLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.FlowLayout;
-import javax.swing.JSpinner;
+import java.awt.Color;
 import java.awt.Dimension;
+
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
 
 public class ProductSquareItem extends JPanel {
 
@@ -44,6 +43,8 @@ public class ProductSquareItem extends JPanel {
 		JSpinner spinner = new JSpinner();
 		spinner.setBounds(146, 90, 37, 28);
 		add(spinner);
+		
+		setBorder(BorderFactory.createLineBorder(Color.black));
 
 	}
 	public Dimension getThisSize() {

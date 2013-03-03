@@ -5,6 +5,8 @@ import javax.swing.JScrollPane;
 
 import net.miginfocom.swing.MigLayout;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class StartPage extends JPanel {
 	private final ProductSquareItem productSquareItem_4 = new ProductSquareItem();
@@ -17,6 +19,11 @@ public class StartPage extends JPanel {
 		
 		
 		ProductSquareItem productSquareItem = new ProductSquareItem();
+		productSquareItem.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+			}
+		});
 		add(productSquareItem);
 		
 		ProductSquareItem productSquareItem_1 = new ProductSquareItem();

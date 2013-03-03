@@ -21,6 +21,8 @@ import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
 import javax.swing.BoxLayout;
 
+import se.chalmers.ait.dat215.project.ShoppingItem;
+import se.grupp11.imat.controllers.ShoppingCartController;
 import se.grupp11.imat.views.StartPage;
 
 import java.awt.Component;
@@ -30,16 +32,28 @@ import javax.swing.JScrollPane;
 import javax.swing.JScrollBar;
 import javax.swing.JLabel;
 import java.awt.Dimension;
+import se.grupp11.imat.views.SettingsView;
+import se.grupp11.imat.views.CheckOutView;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class MainWindow {
+public class MainWindow{
 
+	private JList list;
 	private JFrame frame;
 	private JTextField textField;
-
+	private static CardLayout cards;
+	private static JPanel panelMainStage;
+	private JButton btnBack;
+	private JButton editDetails;
+	private static JList shoppingCartList;
+	private ShoppingCartController scc;
+	
 	/**
 	 * Create the application.
 	 */
 	public MainWindow() {
+		this.editDetails = editDetails;
 		initialize();
 	}
 
@@ -47,6 +61,8 @@ public class MainWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1193, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,10 +76,21 @@ public class MainWindow {
 		mnFile.add(mntmNewList);
 		
 		JMenuItem mntmToCheckout = new JMenuItem("To Checkout");
+		mntmToCheckout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cards.show(panelMainStage, "CheckOut");
+			}
+		});
 		mnFile.add(mntmToCheckout);
 		
 		JMenuItem mntmEmptyShoppingCart = new JMenuItem("Empty Shopping Cart");
 		mnFile.add(mntmEmptyShoppingCart);
+		
+		JSeparator separator_4 = new JSeparator();
+		mnFile.add(separator_4);
+		
+		JMenuItem mntmSettings = new JMenuItem("Settings\n");
+		mnFile.add(mntmSettings);
 		
 		JSeparator separator = new JSeparator();
 		mnFile.add(separator);
@@ -135,7 +162,7 @@ public class MainWindow {
 		JPanel westPanel = new JPanel();
 		panelTop.add(westPanel, BorderLayout.WEST);
 		
-		JButton btnBack = new JButton("Back");
+		btnBack = new JButton("Back");
 		westPanel.add(btnBack);
 		btnBack.setHorizontalAlignment(SwingConstants.RIGHT);
 		
@@ -160,13 +187,14 @@ public class MainWindow {
 		frame.getContentPane().add(panelLeftMenu, BorderLayout.WEST);
 		panelLeftMenu.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JList list = new JList();
+		list = new JList();
 		list.addMouseListener(new MouseAdapter() {
 			/**
 			 * List item clicked
 			 */
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				System.out.println(list.getSelectedValue());
 			}
 		});
 		list.setSize(500, 100);
@@ -188,9 +216,9 @@ public class MainWindow {
 		JScrollPane scrollPane = new JScrollPane();
 		ShoppingCartPanel.add(scrollPane);
 		
-		JList ShoppingCart = new JList();
-		scrollPane.setViewportView(ShoppingCart);
-		ShoppingCart.setModel(new AbstractListModel() {
+		shoppingCartList = new JList();
+		scrollPane.setViewportView(shoppingCartList);
+		shoppingCartList.setModel(new AbstractListModel() {
 			String[] values = new String[] {"Testitem 1\t|\tprice", "Testitem 2\t|\tprice", "Testitem 3\t|\tprice", "Testitem 4\t|\tprice", "Testitem 1\t|\tprice", "Testitem 2\t|\tprice", "Testitem 3\t|\tprice", "Testitem 4\t|\tpriceTestitem 1\t|\tprice", "Testitem 2\t|\tprice", "Testitem 3\t|\tprice", "Testitem 4\t|\tpriceTestitem 1\t|\tprice", "Testitem 2\t|\tprice", "Testitem 3\t|\tprice", "Testitem 4\t|\tpriceTestitem 1\t|\tprice", "Testitem 2\t|\tprice", "Testitem 3\t|\tprice", "Testitem 4\t|\tpriceTestitem 1\t|\tprice", "Testitem 2\t|\tprice", "Testitem 3\t|\tprice", "Testitem 4\t|\tpriceTestitem 1\t|\tprice", "Testitem 2\t|\tprice", "Testitem 3\t|\tprice", "Testitem 4\t|\tprice"};
 			public int getSize() {
 				return values.length;
@@ -203,23 +231,38 @@ public class MainWindow {
 		JPanel southPanelShoppingCart = new JPanel();
 		ShoppingCartPanel.add(southPanelShoppingCart);
 		
+		scc = new ShoppingCartController();
 		JButton btnRensa = new JButton("Rensa");
 		southPanelShoppingCart.add(btnRensa);
+		btnRensa.addActionListener(scc);
+		btnRensa.setActionCommand("erase");
 		
 		JButton buyButton = new JButton("Till Kassan");
 		southPanelShoppingCart.add(buyButton);
+		buyButton.addActionListener(scc);
+		buyButton.setActionCommand("buy");
 		
 		JScrollPane scrollPaneMainStage = new JScrollPane();
 		frame.getContentPane().add(scrollPaneMainStage, BorderLayout.CENTER);
 		
-		JPanel panelMainStage = new JPanel();
+		panelMainStage = new JPanel();
 		scrollPaneMainStage.setViewportView(panelMainStage);
-		panelMainStage.setLayout(new BorderLayout(0, 0));
+		panelMainStage.setLayout(new CardLayout(0, 0));
+		cards = (CardLayout) panelMainStage.getLayout();
+		
+		
 		
 		StartPage startPage = new StartPage();
 		startPage.setPreferredSize(new Dimension(1000, 1000));
 		startPage.setMinimumSize(new Dimension(1000, 1000));
-		panelMainStage.add(startPage, BorderLayout.CENTER);
+		panelMainStage.add(startPage, "StartPage");
+		
+		SettingsView settingsView = new SettingsView();
+		panelMainStage.add(settingsView, "Settings");
+		
+		CheckOutView checkOutView = new CheckOutView();
+		panelMainStage.add(checkOutView, "CheckOut");
+		
 		
 		JLabel label = new JLabel("");
 		
@@ -231,8 +274,19 @@ public class MainWindow {
 		
 		
 	}
+
+	public static void setCard(String cardID){
+		cards.show(panelMainStage, cardID);
+	}
 	
+	public static void eraseShoppingCart(){
+		shoppingCartList.removeAll();
+	}
+
 	public JFrame getFrame() {
 		return frame;
+	}
+	public JButton getBtnBack() {
+		return btnBack;
 	}
 }
