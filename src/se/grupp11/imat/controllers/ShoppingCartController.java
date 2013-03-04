@@ -90,14 +90,7 @@ public class ShoppingCartController implements ActionListener{
 			putValue(SHORT_DESCRIPTION, desc);
 			putValue(MNEMONIC_KEY, mnemonic);
 		}
-		
-		public void actionPerformed(ActionEvent e){
-			if(e.getActionCommand() == "erase"){
-				MainWindow.eraseShoppingCart();
-			}
-			else if(e.getActionCommand() == "buy"){
-				MainWindow.setCard("CheckOut");
-			}
+			
 		
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -105,6 +98,13 @@ public class ShoppingCartController implements ActionListener{
 			ShoppingList newList = new ShoppingList("ShoppingList " + (new GregorianCalendar()).getTime().toString());
 			for(ShoppingListItem item : _list.getList()) {
 				newList.addItem(item);
+			}
+			
+			if(arg0.getActionCommand() == "erase"){
+				MainWindow.eraseShoppingCart();
+			}
+			else if(arg0.getActionCommand() == "buy"){
+				MainWindow.setCard("CheckOut");
 			}
 
 		}
