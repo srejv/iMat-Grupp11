@@ -1,31 +1,14 @@
 package se.grupp11.imat.controllers;
 
 import java.awt.event.ActionEvent;
-<<<<<<< HEAD
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
 import se.grupp11.imat.MainWindow;
 
-public class ShoppingCartController implements ActionListener{
-	private JButton erase;
-	private JButton buy;
 	
-	public ShoppingCartController(){
-		/*this.erase = erase;
-		this.buy = buy;
-		this.erase.addActionListener(this);
-		this.erase.setActionCommand("erase");
-		this.buy.addActionListener(this);*/
-	}
-	public void actionPerformed(ActionEvent e){
-		if(e.getActionCommand() == "erase"){
-			MainWindow.eraseShoppingCart();
-		}
-		else if(e.getActionCommand() == "buy"){
-			MainWindow.setCard("CheckOut");
-=======
+
 import java.util.GregorianCalendar;
 
 import javax.swing.AbstractAction;
@@ -36,7 +19,7 @@ import se.chalmers.ait.dat215.project.Product;
 import se.grupp11.imat.models.ShoppingList;
 import se.grupp11.imat.models.ShoppingListItem;
 
-public class ShoppingCartController {
+public class ShoppingCartController implements ActionListener{
 
 	private ShoppingList _list; 		// Model
 	//private ShoppingCartView _view;		// View
@@ -108,6 +91,14 @@ public class ShoppingCartController {
 			putValue(MNEMONIC_KEY, mnemonic);
 		}
 		
+		public void actionPerformed(ActionEvent e){
+			if(e.getActionCommand() == "erase"){
+				MainWindow.eraseShoppingCart();
+			}
+			else if(e.getActionCommand() == "buy"){
+				MainWindow.setCard("CheckOut");
+			}
+		
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
@@ -115,7 +106,7 @@ public class ShoppingCartController {
 			for(ShoppingListItem item : _list.getList()) {
 				newList.addItem(item);
 			}
->>>>>>> origin/Markus2
+
 		}
 	}
 }

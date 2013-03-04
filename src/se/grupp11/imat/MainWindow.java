@@ -41,7 +41,7 @@ public class MainWindow{
 
 	private JList list;
 	private JFrame frame;
-<<<<<<< HEAD
+
 	private JTextField textField;
 	private static CardLayout cards;
 	private static JPanel panelMainStage;
@@ -50,10 +50,10 @@ public class MainWindow{
 	private static JList shoppingCartList;
 	private ShoppingCartController scc;
 	
-=======
+
 	private JTextField txtSk;
 
->>>>>>> origin/Markus2
+
 	/**
 	 * Create the application.
 	 */
@@ -167,12 +167,10 @@ public class MainWindow{
 		JPanel westPanel = new JPanel();
 		panelTop.add(westPanel, BorderLayout.WEST);
 		
-<<<<<<< HEAD
 		btnBack = new JButton("Back");
-=======
 		
 		JButton btnBack = new JButton("Back");
->>>>>>> origin/Markus2
+
 		westPanel.add(btnBack);
 		btnBack.setHorizontalAlignment(SwingConstants.RIGHT);
 		
@@ -267,7 +265,7 @@ public class MainWindow{
 		
 		
 		StartPage startPage = new StartPage();
-<<<<<<< HEAD
+
 		startPage.setPreferredSize(new Dimension(1000, 1000));
 		startPage.setMinimumSize(new Dimension(1000, 1000));
 		panelMainStage.add(startPage, "StartPage");
@@ -278,11 +276,10 @@ public class MainWindow{
 		CheckOutView checkOutView = new CheckOutView();
 		panelMainStage.add(checkOutView, "CheckOut");
 		
-=======
+
 		startPage.setPreferredSize(new Dimension(680, 1200));
 		startPage.setMinimumSize(new Dimension(680, 1200));
 		panelMainStage.add(startPage, BorderLayout.CENTER);
->>>>>>> origin/Markus2
 		
 		
 		JLabel label = new JLabel("");

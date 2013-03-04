@@ -1,6 +1,6 @@
 package se.grupp11.imat.views;
 
-<<<<<<< HEAD
+
 import java.awt.Color;
 import java.awt.Dimension;
 
@@ -8,7 +8,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
-=======
+
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -31,8 +31,6 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
->>>>>>> origin/Markus2
-
 public class ProductSquareItem extends JPanel {
 
 	
@@ -84,11 +82,8 @@ public class ProductSquareItem extends JPanel {
 		JSpinner spinner = new JSpinner();
 		spinner.setBounds(55, 239, 44, 36);
 		add(spinner);
-<<<<<<< HEAD
 		
 		setBorder(BorderFactory.createLineBorder(Color.black));
-
-=======
 		this.setOpaque(false);
 		
 		lblImage.setIcon(new ImageIcon(((new ImageIcon("/Users/Markus/Dropbox/Projekt/iMat-Grupp11/imat/images/product_8.jpg")).getImage()).getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
@@ -100,7 +95,6 @@ public class ProductSquareItem extends JPanel {
 		});
 		btnLggTillI.setBounds(106, 239, 91, 36);
 		add(btnLggTillI);
->>>>>>> origin/Markus2
 	}
 	public Dimension getThisSize() {
 		return getSize();
