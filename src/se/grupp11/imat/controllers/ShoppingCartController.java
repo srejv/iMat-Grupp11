@@ -100,13 +100,19 @@ public class ShoppingCartController implements ActionListener{
 				newList.addItem(item);
 			}
 			
-			if(arg0.getActionCommand() == "erase"){
-				MainWindow.eraseShoppingCart();
-			}
-			else if(arg0.getActionCommand() == "buy"){
-				MainWindow.setCard("CheckOut");
-			}
 
 		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		if(arg0.getActionCommand() == "erase"){
+			MainWindow.eraseShoppingCart();
+		}
+		else if(arg0.getActionCommand() == "buy"){
+			MainWindow.setCard("CheckOut");
+		}
+
+		
 	}
 }
