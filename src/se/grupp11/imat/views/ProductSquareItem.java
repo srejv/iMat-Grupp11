@@ -31,6 +31,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.LineBorder;
 public class ProductSquareItem extends JPanel {
 
 	
@@ -47,7 +48,7 @@ public class ProductSquareItem extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ProductSquareItem() {
+	public ProductSquareItem(Product item) {
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -63,19 +64,22 @@ public class ProductSquareItem extends JPanel {
 		setRequestFocusEnabled(false);
 		setLayout(null);
 		
+		loadProduct(item);
+		
+		
 		JLabel lblImage = new JLabel("");
 		lblImage.setBounds(55, 6, 128, 128);
 		add(lblImage);
 		
-		JLabel lblNamn = new JLabel("Namn");
+		JLabel lblNamn = new JLabel("Namn: "+ _prod.getName());
 		lblNamn.setBounds(58, 146, 61, 16);
 		add(lblNamn);
 		
-		JLabel lblPris = new JLabel("Pris");
+		JLabel lblPris = new JLabel("Pris:" + _prod.getPrice() + "kr");
 		lblPris.setBounds(58, 174, 61, 16);
 		add(lblPris);
 		
-		JLabel lblJmfPrisper = new JLabel("Jmf pris (per kilo?)");
+		JLabel lblJmfPrisper = new JLabel("Jmfpris: " );
 		lblJmfPrisper.setBounds(58, 202, 114, 16);
 		add(lblJmfPrisper);
 		
@@ -83,10 +87,10 @@ public class ProductSquareItem extends JPanel {
 		spinner.setBounds(55, 239, 44, 36);
 		add(spinner);
 		
-		setBorder(BorderFactory.createLineBorder(Color.black));
+		setBorder(null);
 		this.setOpaque(false);
 		
-		lblImage.setIcon(new ImageIcon(((new ImageIcon("/Users/Markus/Dropbox/Projekt/iMat-Grupp11/imat/images/product_8.jpg")).getImage()).getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
+		lblImage.setIcon(new ImageIcon(((new ImageIcon(_prod.getImageName())).getImage()).getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
 		
 		JButton btnLggTillI = new JButton("Köp");
 		btnLggTillI.addActionListener(new ActionListener() {

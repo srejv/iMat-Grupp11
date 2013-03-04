@@ -14,6 +14,8 @@ import java.awt.event.MouseEvent;
 public class StartPage extends JPanel {
 	private final ProductSquareItem productSquareItem_4 = new ProductSquareItem();
 
+	
+	IMatDataHandler
 	/**
 	 * Create the panel.
 	 */
