@@ -297,6 +297,8 @@ public class MainWindow{
 		
 		Color c=new Color(255, 250, 250);
 		startPage.setBackground(c);
+		
+		MainWindow.setCard("StartPage");
 	}
 
 	public static void setCard(String cardID){

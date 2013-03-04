@@ -109,4 +109,16 @@ public class ShoppingCartController implements ActionListener{
 
 		}
 	}
+	
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		
+		if(arg0.getActionCommand() == "erase"){
+			MainWindow.eraseShoppingCart();
+		}
+		else if(arg0.getActionCommand() == "buy"){
+			MainWindow.setCard("CheckOut");
+		}
+
+	}
 }
