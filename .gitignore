@@ -4,3 +4,15 @@
 # Package Files #
 *.war
 *.ear
+
+bin/.DS_Store
+
+bin/se/.DS_Store
+
+bin/se/grupp11/.DS_Store
+
+src/.DS_Store
+
+src/se/.DS_Store
+
+src/se/grupp11/.DS_Store
