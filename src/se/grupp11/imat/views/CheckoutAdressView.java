@@ -3,6 +3,9 @@ package se.grupp11.imat.views;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+
+import se.grupp11.imat.controllers.CheckOutController;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.factories.FormFactory;
@@ -10,6 +13,7 @@ import com.jgoodies.forms.layout.RowSpec;
 
 public class CheckoutAdressView extends JPanel {
 
+	CheckOutController al = CheckOutController.getInstance();
 	/**
 	 * Create the panel.
 	 */
@@ -34,6 +38,8 @@ public class CheckoutAdressView extends JPanel {
 		
 		JButton btnEditDetails = new JButton("Edit Details");
 		add(btnEditDetails, "6, 2, left, top");
+		btnEditDetails.addActionListener(al);
+		btnEditDetails.setActionCommand("settings");
 		
 		JLabel lblYouHavntFilled = new JLabel("You havn't filled in your details yet.");
 		add(lblYouHavntFilled, "4, 6, left, center");
