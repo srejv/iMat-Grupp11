@@ -41,6 +41,7 @@ public class MainWindow{
 
 	private JList list;
 	private JFrame frame;
+<<<<<<< HEAD
 	private JTextField textField;
 	private static CardLayout cards;
 	private static JPanel panelMainStage;
@@ -49,6 +50,10 @@ public class MainWindow{
 	private static JList shoppingCartList;
 	private ShoppingCartController scc;
 	
+=======
+	private JTextField txtSk;
+
+>>>>>>> origin/Markus2
 	/**
 	 * Create the application.
 	 */
@@ -64,7 +69,7 @@ public class MainWindow{
 		
 		
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1193, 600);
+		frame.setBounds(100, 100, 1193, 696);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
@@ -162,7 +167,12 @@ public class MainWindow{
 		JPanel westPanel = new JPanel();
 		panelTop.add(westPanel, BorderLayout.WEST);
 		
+<<<<<<< HEAD
 		btnBack = new JButton("Back");
+=======
+		
+		JButton btnBack = new JButton("Back");
+>>>>>>> origin/Markus2
 		westPanel.add(btnBack);
 		btnBack.setHorizontalAlignment(SwingConstants.RIGHT);
 		
@@ -171,17 +181,20 @@ public class MainWindow{
 		btnForward.setHorizontalAlignment(SwingConstants.LEFT);
 		
 		JPanel centerPanel = new JPanel();
+		
 		FlowLayout flowLayout = (FlowLayout) centerPanel.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		panelTop.add(centerPanel, BorderLayout.CENTER);
 		
-		textField = new JTextField();
-		centerPanel.add(textField);
+		txtSk = new JTextField();
+		txtSk.setText("Sök…");
+		centerPanel.add(txtSk);
 
-		textField.setColumns(20);
+		txtSk.setColumns(20);
 		
 		JPanel eastPanel = new JPanel();
 		panelTop.add(eastPanel, BorderLayout.EAST);
+		
 		
 		JPanel panelLeftMenu = new JPanel();
 		frame.getContentPane().add(panelLeftMenu, BorderLayout.WEST);
@@ -229,6 +242,7 @@ public class MainWindow{
 		});
 		
 		JPanel southPanelShoppingCart = new JPanel();
+		southPanelShoppingCart.setBackground(new Color(255, 255, 255));
 		ShoppingCartPanel.add(southPanelShoppingCart);
 		
 		scc = new ShoppingCartController();
@@ -253,6 +267,7 @@ public class MainWindow{
 		
 		
 		StartPage startPage = new StartPage();
+<<<<<<< HEAD
 		startPage.setPreferredSize(new Dimension(1000, 1000));
 		startPage.setMinimumSize(new Dimension(1000, 1000));
 		panelMainStage.add(startPage, "StartPage");
@@ -262,6 +277,12 @@ public class MainWindow{
 		
 		CheckOutView checkOutView = new CheckOutView();
 		panelMainStage.add(checkOutView, "CheckOut");
+		
+=======
+		startPage.setPreferredSize(new Dimension(680, 1200));
+		startPage.setMinimumSize(new Dimension(680, 1200));
+		panelMainStage.add(startPage, BorderLayout.CENTER);
+>>>>>>> origin/Markus2
 		
 		
 		JLabel label = new JLabel("");
@@ -273,6 +294,12 @@ public class MainWindow{
 		JLabel label_3 = new JLabel("");
 		
 		
+		westPanel.setBackground(new Color(255,33,81));
+		centerPanel.setBackground(new Color(255,33,81));
+		eastPanel.setBackground(new Color(255,33,81));
+		
+		Color c=new Color(255, 250, 250);
+		startPage.setBackground(c);
 	}
 
 	public static void setCard(String cardID){

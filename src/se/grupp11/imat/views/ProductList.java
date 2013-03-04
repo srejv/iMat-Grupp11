@@ -14,7 +14,6 @@ public class ProductList extends JPanel {
 	 */
 	public ProductList() {
 		setLayout(new BorderLayout(0, 0));
-
 	}
 
 }
