@@ -1,7 +1,6 @@
 package se.grupp11.imat;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
@@ -264,11 +263,7 @@ public class MainWindow{
 		
 		
 		
-		StartPage startPage = new StartPage();
 
-		startPage.setPreferredSize(new Dimension(1000, 1000));
-		startPage.setMinimumSize(new Dimension(1000, 1000));
-		panelMainStage.add(startPage, "StartPage");
 		
 		SettingsView settingsView = new SettingsView();
 		panelMainStage.add(settingsView, "Settings");
@@ -277,9 +272,7 @@ public class MainWindow{
 		panelMainStage.add(checkOutView, "CheckOut");
 		
 
-		startPage.setPreferredSize(new Dimension(680, 1200));
-		startPage.setMinimumSize(new Dimension(680, 1200));
-		panelMainStage.add(startPage, BorderLayout.CENTER);
+
 		
 		
 		JLabel label = new JLabel("");
@@ -290,6 +283,13 @@ public class MainWindow{
 		
 		JLabel label_3 = new JLabel("");
 		
+		StartPage startPage = new StartPage();
+
+		startPage.setPreferredSize(new Dimension(1000, 1000));
+		startPage.setMinimumSize(new Dimension(1000, 1000));
+		panelMainStage.add(startPage, "StartPage");
+		startPage.setPreferredSize(new Dimension(680, 1200));
+		startPage.setMinimumSize(new Dimension(680, 1200));
 		
 		westPanel.setBackground(new Color(255,33,81));
 		centerPanel.setBackground(new Color(255,33,81));
@@ -297,6 +297,9 @@ public class MainWindow{
 		
 		Color c=new Color(255, 250, 250);
 		startPage.setBackground(c);
+		
+		setCard("StartPage");
+		
 	}
 
 	public static void setCard(String cardID){
