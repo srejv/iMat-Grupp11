@@ -72,6 +72,12 @@ public class ProductSquareItem extends JPanel {
 		add(lblJmfPrisper);
 		
 		JSpinner spinner = new JSpinner();
+		spinner.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				setBorder(BorderFactory.createMatteBorder(2,2,2,2, Color.RED));
+			}
+		});
 		spinner.setBounds(55, 239, 44, 36);
 		add(spinner);
 		this.setOpaque(false);
@@ -79,6 +85,12 @@ public class ProductSquareItem extends JPanel {
 		lblImage.setIcon(new ImageIcon(((new ImageIcon("/Users/Markus/Dropbox/Projekt/iMat-Grupp11/imat/images/product_8.jpg")).getImage()).getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
 		
 		JButton btnLggTillI = new JButton("Köp");
+		btnLggTillI.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				setBorder(BorderFactory.createMatteBorder(2,2,2,2, Color.RED));
+			}
+		});
 		btnLggTillI.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
