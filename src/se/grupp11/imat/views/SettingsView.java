@@ -1,24 +1,28 @@
 package se.grupp11.imat.views;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.factories.FormFactory;
-import javax.swing.JTextField;
-import javax.swing.JButton;
 import java.awt.Font;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import se.grupp11.imat.controllers.SettingsController;
+
+import com.jgoodies.forms.factories.FormFactory;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.RowSpec;
+
 public class SettingsView extends JPanel {
-	private JTextField textFieldFirstName;
-	private JTextField textFieldLastName;
-	private JTextField textFieldAdress;
-	private JTextField textFieldPostalCode;
-	private JTextField textFieldCity;
-	private JTextField textFieldEmail;
-	private JTextField textFieldCellphone;
-	private JTextField textFieldCardNumber;
+	private static JTextField textFieldFirstName;
+	private static JTextField textFieldLastName;
+	private static JTextField textFieldAdress;
+	private static JTextField textFieldPostalCode;
+	private static JTextField textFieldCity;
+	private static JTextField textFieldEmail;
+	private static JTextField textFieldCellphone;
+	private static JTextField textFieldCardNumber;
 
 	/**
 	 * Create the panel.
@@ -123,7 +127,56 @@ public class SettingsView extends JPanel {
 		
 		JButton btnSave = new JButton("Save");
 		add(btnSave, "2, 28");
+		btnSave.addActionListener(new SettingsController());
 
+	}
+	
+	
+	public static String getFirstName(){
+		return textFieldFirstName.getText();
+		
+	}
+	public static String getLastName(){
+		return textFieldLastName.getText();
+		
+	}
+	public static String getAdress(){
+		return textFieldAdress.getText();
+		
+	}
+	public static String getPostCode(){
+		try{
+			Integer.parseInt(textFieldPostalCode.getText());
+			return textFieldPostalCode.getText();
+		}catch(NumberFormatException e){
+			return null;
+		}
+		
+	}
+	public static String getCity(){
+		return textFieldCity.getText();
+		
+	}
+	public static String getEmail(){
+		return textFieldEmail.getText();
+		
+	}
+	public static String getCellPhone(){
+		try{
+			Integer.parseInt(textFieldCellphone.getText());
+			return textFieldCellphone.getText();
+		}catch(NumberFormatException e){
+			return null;
+		}
+		
+	}
+	public static String getCardNumber(){
+		try{
+			Integer.parseInt(textFieldCardNumber.getText());
+			return textFieldCardNumber.getText();
+		}catch(NumberFormatException e){
+			return null;
+		}
 	}
 
 }

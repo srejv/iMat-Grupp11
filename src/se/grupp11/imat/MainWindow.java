@@ -1,41 +1,34 @@
 package se.grupp11.imat;
 
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.GridLayout;
-
-import javax.swing.BorderFactory;
-import javax.swing.JFrame;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JMenuItem;
-import javax.swing.JSeparator;
 import java.awt.CardLayout;
-import javax.swing.JList;
-import javax.swing.AbstractListModel;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
-import javax.swing.SwingConstants;
-import javax.swing.BoxLayout;
-
-import se.chalmers.ait.dat215.project.ShoppingItem;
-import se.grupp11.imat.controllers.ShoppingCartController;
-import se.grupp11.imat.views.StartPage;
-
-import java.awt.Component;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JScrollPane;
-import javax.swing.JScrollBar;
+
+import javax.swing.AbstractListModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.Dimension;
-import se.grupp11.imat.views.SettingsView;
+import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import se.grupp11.imat.controllers.ShoppingCartController;
 import se.grupp11.imat.views.CheckOutView;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import se.grupp11.imat.views.SettingsView;
+import se.grupp11.imat.views.StartPage;
 
 public class MainWindow{
 
@@ -96,6 +89,15 @@ public class MainWindow{
 		
 		JMenuItem mntmSettings = new JMenuItem("Settings\n");
 		mnFile.add(mntmSettings);
+		mntmSettings.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				MainWindow.setCard("Settings");
+				
+			}
+			
+		});
 		
 		JSeparator separator = new JSeparator();
 		mnFile.add(separator);
@@ -266,8 +268,8 @@ public class MainWindow{
 		
 		StartPage startPage = new StartPage();
 
-		startPage.setPreferredSize(new Dimension(1000, 1000));
-		startPage.setMinimumSize(new Dimension(1000, 1000));
+		startPage.setPreferredSize(new Dimension(680, 1200));
+		startPage.setMinimumSize(new Dimension(680, 1200));
 		panelMainStage.add(startPage, "StartPage");
 		
 		SettingsView settingsView = new SettingsView();
@@ -277,9 +279,7 @@ public class MainWindow{
 		panelMainStage.add(checkOutView, "CheckOut");
 		
 
-		startPage.setPreferredSize(new Dimension(680, 1200));
-		startPage.setMinimumSize(new Dimension(680, 1200));
-		panelMainStage.add(startPage, BorderLayout.CENTER);
+		
 		
 		
 		JLabel label = new JLabel("");

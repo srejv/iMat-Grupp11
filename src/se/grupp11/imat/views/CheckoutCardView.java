@@ -13,6 +13,7 @@ import se.grupp11.imat.controllers.CheckOutController;
 public class CheckoutCardView extends JPanel {
 
 	CheckOutController al = CheckOutController.getInstance();
+	
 	/**
 	 * Create the panel.
 	 */
@@ -45,6 +46,7 @@ public class CheckoutCardView extends JPanel {
 		add(btnEditDetails, "6, 2");
 		btnEditDetails.addActionListener(al);
 		btnEditDetails.setActionCommand("settings");
+		
 		
 		JLabel lblYouHavntAdded = new JLabel("You havn't added any card details.");
 		add(lblYouHavntAdded, "4, 6");
