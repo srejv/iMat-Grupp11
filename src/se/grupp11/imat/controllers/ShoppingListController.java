@@ -11,6 +11,8 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.UUID;
 
+import javax.swing.JPopupMenu;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

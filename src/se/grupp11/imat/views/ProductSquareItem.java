@@ -13,8 +13,10 @@ import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JPopupMenu;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.TransferHandler;
 
@@ -43,6 +45,8 @@ import javax.swing.border.EtchedBorder;
 
 import se.chalmers.ait.dat215.project.*;
 import se.grupp11.imat.controllers.ShoppingCartController;
+import se.grupp11.imat.controllers.ShoppingListController;
+import se.grupp11.imat.models.ShoppingList;
 import se.grupp11.imat.models.ShoppingListItem;
 
 import java.awt.event.MouseEvent;
@@ -56,6 +60,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.SpringLayout;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+
+import org.omg.PortableServer.ID_ASSIGNMENT_POLICY_ID;
 public class ProductSquareItem extends JPanel implements Transferable, 
 				DragSourceListener, DragGestureListener, ActionListener, ChangeListener, MouseListener {
 
@@ -64,18 +70,44 @@ public class ProductSquareItem extends JPanel implements Transferable,
 	private int amount;
 	private DragSource source;
 	private TransferHandler t;
+	private JPopupMenu _popupMenu;
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4434560229573347151L;
 	private JSpinner spinner;
-
+	
+	private void fillPopupMenu() {
+		JMenuItem menuItem = new JMenuItem("Add to cart");
+		menuItem.addActionListener(this);
+		_popupMenu.add(menuItem);
+		
+		for(ShoppingList l : ShoppingListController.getInstance().getAll()) {
+			menuItem = new JMenuItem("Add to: " + l.getTitle());
+			menuItem.setActionCommand(l.getId().toString());
+			menuItem.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// Shopping cart
+					ShoppingListController.getInstance()
+						.getList(e.getActionCommand())
+						.addItem(new ShoppingListItem(item, amount));
+				}
+			});
+			_popupMenu.add(menuItem);
+		}
+	}
 	/**
 	 * Create the panel.
 	 */
 	public ProductSquareItem(Product item2, int amount) {
 		this.amount = amount;
+		_popupMenu = new JPopupMenu();
+		fillPopupMenu();
+		MouseListener popupListener = new PopupListener();
+		this.addMouseListener(popupListener);
+		
 		setPreferredSize(new Dimension(160, 246));
 		addMouseListener(new MouseAdapter() {
 			@Override
@@ -252,4 +284,22 @@ public class ProductSquareItem extends JPanel implements Transferable,
 		// TODO Auto-generated method stub
 		
 	}
+	
+	class PopupListener extends MouseAdapter {
+	    public void mousePressed(MouseEvent e) {
+	        maybeShowPopup(e);
+	    }
+
+	    public void mouseReleased(MouseEvent e) {
+	        maybeShowPopup(e);
+	    }
+
+	    private void maybeShowPopup(MouseEvent e) {
+	        if (e.isPopupTrigger()) {
+	            _popupMenu.show(e.getComponent(),
+	                       e.getX(), e.getY());
+	        }
+	    }
+	}
+
 }
