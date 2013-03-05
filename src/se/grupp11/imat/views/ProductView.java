@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Font;
 import javax.swing.JButton;
+import javax.swing.border.EtchedBorder;
 
 public class ProductView extends JPanel {
 
@@ -26,7 +27,8 @@ public class ProductView extends JPanel {
 		setLayout(null);
 		
 		JPanel westPanel = new JPanel();
-		westPanel.setBounds(48, 319, 220, 210);
+		westPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		westPanel.setBounds(48, 373, 220, 156);
 		add(westPanel);
 		westPanel.setLayout(null);
 		
@@ -34,17 +36,18 @@ public class ProductView extends JPanel {
 		lblUrsprungSverige.setBounds(32, 37, 138, 16);
 		westPanel.add(lblUrsprungSverige);
 		
-		JLabel lblPrist = new JLabel("Pris: ");
+		JLabel lblPrist = new JLabel("Pris: " + product.getPrice());
 		lblPrist.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 20));
 		lblPrist.setBounds(32, 65, 138, 37);
 		westPanel.add(lblPrist);
 		
-		JLabel lblHead = new JLabel("Rubrik");
+		JLabel lblHead = new JLabel(product.getName());
 		lblHead.setFont(new Font("Lucida Grande", Font.BOLD, 30));
-		lblHead.setBounds(122, 6, 523, 58);
+		lblHead.setBounds(48, 6, 523, 58);
 		add(lblHead);
 		
 		JPanel eastPanel = new JPanel();
+		eastPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		eastPanel.setBounds(333, 76, 341, 453);
 		add(eastPanel);
 		eastPanel.setLayout(null);
@@ -61,15 +64,15 @@ public class ProductView extends JPanel {
 		lblNewLabel.setBounds(6, 204, 309, 243);
 		eastPanel.add(lblNewLabel);
 		
-		JLabel label = new JLabel("BILD");
-		label.setBounds(48, 76, 232, 231);
+		JLabel label = new JLabel("");
+		label.setBounds(48, 76, 250, 250);
 		add(label);
 		
 		JButton btnNewButton = new JButton("Lägg till i Kundvagnen\n");
-		btnNewButton.setBounds(432, 541, 242, 67);
+		btnNewButton.setBounds(198, 541, 203, 29);
 		add(btnNewButton);
 		
-		label.setIcon(new ImageIcon(((new ImageIcon("/Users/Markus/.dat215/imat/images/" + product.getImageName())).getImage()).getScaledInstance(300, 300, java.awt.Image.SCALE_SMOOTH)));
+		label.setIcon(new ImageIcon(((new ImageIcon("/Users/Markus/.dat215/imat/images/" + product.getImageName())).getImage()).getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH)));
 		
 		this.setBackground(new Color(255,250,250));
 		westPanel.setOpaque(false);

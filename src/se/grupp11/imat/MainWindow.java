@@ -44,7 +44,7 @@ public class MainWindow{
 	private JList list;
 	private JFrame frame;
 
-	private JTextField textField;
+
 	private static CardLayout cards;
 	private static JPanel panelMainStage;
 	private JButton btnBack;
@@ -62,7 +62,6 @@ public class MainWindow{
 	 * Create the application.
 	 */
 	public MainWindow() {
-		this.editDetails = editDetails;
 		initialize();
 	}
 
@@ -329,5 +328,5 @@ public class MainWindow{
 	public static void setProductView(Product item){
 		productView=new ProductView(item);
 		panelMainStage.add(productView, "productView");
-		}
+	}
 }
