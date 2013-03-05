@@ -27,7 +27,7 @@ public class ProductView extends JPanel {
 		setLayout(null);
 		
 		JPanel westPanel = new JPanel();
-		westPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		westPanel.setBorder(null);
 		westPanel.setBounds(48, 373, 220, 156);
 		add(westPanel);
 		westPanel.setLayout(null);
@@ -47,8 +47,8 @@ public class ProductView extends JPanel {
 		add(lblHead);
 		
 		JPanel eastPanel = new JPanel();
-		eastPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		eastPanel.setBounds(333, 76, 341, 453);
+		eastPanel.setBorder(null);
+		eastPanel.setBounds(383, 76, 341, 453);
 		add(eastPanel);
 		eastPanel.setLayout(null);
 		
@@ -69,7 +69,7 @@ public class ProductView extends JPanel {
 		add(label);
 		
 		JButton btnNewButton = new JButton("Lägg till i Kundvagnen\n");
-		btnNewButton.setBounds(198, 541, 203, 29);
+		btnNewButton.setBounds(224, 541, 203, 29);
 		add(btnNewButton);
 		
 		label.setIcon(new ImageIcon(((new ImageIcon("/Users/Markus/.dat215/imat/images/" + product.getImageName())).getImage()).getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH)));
