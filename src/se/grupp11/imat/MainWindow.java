@@ -23,7 +23,11 @@ import javax.swing.AbstractListModel;
 import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
 
+<<<<<<< HEAD
 import se.chalmers.ait.dat215.project.ProductCategory;
+=======
+import se.chalmers.ait.dat215.project.IMatDataHandler;
+>>>>>>> nuclear--markus
 import se.chalmers.ait.dat215.project.ShoppingItem;
 import se.grupp11.imat.controllers.*;
 import se.grupp11.imat.models.ShoppingList;
@@ -43,8 +47,14 @@ import se.grupp11.imat.views.SettingsView;
 import se.grupp11.imat.views.CheckOutView;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
+=======
+import se.grupp11.imat.views.ProductView;
+import se.chalmers.ait.dat215.project.Product;
+import se.grupp11.imat.views.HistoryView;
+>>>>>>> nuclear--markus
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -52,7 +62,7 @@ import javax.swing.event.ListSelectionListener;
 public class MainWindow{
 	private JFrame frame;
 
-	private JTextField textField;
+
 	private static CardLayout cards;
 	private static JPanel panelMainStage;
 	private JButton btnBack;
@@ -70,6 +80,8 @@ public class MainWindow{
 	private static ListViewEdit editListView;
 	private ListView shoppingCartView;
 	
+	private static ProductView productView;
+	
 
 	private JTextField txtSk;
 
@@ -78,6 +90,7 @@ public class MainWindow{
 	 * Create the application.
 	 */
 	public MainWindow() {
+<<<<<<< HEAD
 		
 		/*ShoppingList l = ShoppingListController.getInstance().create();
 		l.setTitle("Åh va götte.");
@@ -90,6 +103,8 @@ public class MainWindow{
 		this.editDetails = editDetails;
 		leftMenuItems = new ArrayList<NavigationLink>();
 		fillMenu();
+=======
+>>>>>>> nuclear--markus
 		initialize();
 		
 		ShoppingList list = new ShoppingList();
@@ -255,6 +270,7 @@ public class MainWindow{
 		JPanel eastPanel = new JPanel();
 		panelTop.add(eastPanel, BorderLayout.EAST);
 		
+<<<<<<< HEAD
 		JPanel navPanel = new JPanel();
 		frame.getContentPane().add(navPanel, BorderLayout.WEST);
 		navPanel.setPreferredSize(new Dimension(100, 10));
@@ -295,6 +311,27 @@ public class MainWindow{
 		});
 		navlist.setModel(new AbstractListModel() {
 			
+=======
+		
+		JPanel panelLeftMenu = new JPanel();
+		frame.getContentPane().add(panelLeftMenu, BorderLayout.WEST);
+		panelLeftMenu.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		list = new JList();
+		list.addMouseListener(new MouseAdapter() {
+			/**
+			 * List item clicked
+			 */
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				System.out.println(list.getSelectedValue());
+				MainWindow.setCard("HistoryPanel");
+			}
+		});
+		list.setSize(500, 100);
+		list.setModel(new AbstractListModel() {
+			String[] values = new String[] {"Test1 längre text...", "Test2", "Test3", "Test4", "Tidigare Köp"};
+>>>>>>> nuclear--markus
 			public int getSize() {
 				return leftMenuItems.size();
 			}
@@ -371,8 +408,17 @@ public class MainWindow{
 		Color c=new Color(255, 250, 250);
 		startPage.setBackground(c);
 		
+		HistoryView historyView = new HistoryView();
+		panelMainStage.add(historyView, "HistoryView");
+		
+		
 		setCard("StartPage");
 		
+<<<<<<< HEAD
+=======
+	
+		
+>>>>>>> nuclear--markus
 		
 	}
 
@@ -394,6 +440,7 @@ public class MainWindow{
 	public JButton getBtnBack() {
 		return btnBack;
 	}
+<<<<<<< HEAD
 	public JList getNavlist() {
 		return navlist;
 	}
@@ -440,5 +487,11 @@ public class MainWindow{
 
 	public static ListViewEdit getListEditPanel() {
 		return editListView;
+=======
+	
+	public static void setProductView(Product item){
+		productView=new ProductView(item);
+		panelMainStage.add(productView, "productView");
+>>>>>>> nuclear--markus
 	}
 }

@@ -44,10 +44,14 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 
 import se.chalmers.ait.dat215.project.*;
+<<<<<<< HEAD
 import se.grupp11.imat.controllers.ShoppingCartController;
 import se.grupp11.imat.controllers.ShoppingListController;
 import se.grupp11.imat.models.ShoppingList;
 import se.grupp11.imat.models.ShoppingListItem;
+=======
+import se.grupp11.imat.MainWindow;
+>>>>>>> nuclear--markus
 
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
@@ -101,6 +105,7 @@ public class ProductSquareItem extends JPanel implements Transferable,
 	/**
 	 * Create the panel.
 	 */
+<<<<<<< HEAD
 	public ProductSquareItem(Product item2, int amount) {
 		this.amount = amount;
 		_popupMenu = new JPopupMenu();
@@ -109,6 +114,9 @@ public class ProductSquareItem extends JPanel implements Transferable,
 		this.addMouseListener(popupListener);
 		
 		setPreferredSize(new Dimension(160, 246));
+=======
+	public ProductSquareItem(final Product item) {
+>>>>>>> nuclear--markus
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -123,9 +131,13 @@ public class ProductSquareItem extends JPanel implements Transferable,
 		setMinimumSize(new Dimension(170, 300));
 		setRequestFocusEnabled(false);
 		
+<<<<<<< HEAD
 		item=item2;
 		SpringLayout springLayout = new SpringLayout();
 		setLayout(springLayout);
+=======
+		this.setItem(item);
+>>>>>>> nuclear--markus
 		
 		
 		JLabel lblImage = new JLabel("");
@@ -178,6 +190,7 @@ public class ProductSquareItem extends JPanel implements Transferable,
 		btnLggTillI.addActionListener(this);
 		add(btnLggTillI);
 		
+<<<<<<< HEAD
 		t = new TransferHandler() {
 			public Transferable createTransferable(JComponent c) {
 				return new ProductSquareItem(item, (Integer)spinner.getValue()); 
@@ -192,6 +205,16 @@ public class ProductSquareItem extends JPanel implements Transferable,
 	}
 	public ProductSquareItem(Product product) {
 		this(product, 1);
+=======
+		this.addMouseListener(new MouseAdapter() {
+		    public void mouseClicked(MouseEvent evt) {
+		        if (evt.getClickCount() == 2) {
+		            MainWindow.setProductView(item);
+		            MainWindow.setCard("productView");
+		        }
+		    }
+		});
+>>>>>>> nuclear--markus
 	}
 	public Dimension getThisSize() {
 		return getSize();
@@ -199,6 +222,7 @@ public class ProductSquareItem extends JPanel implements Transferable,
 	public void setThisSize(Dimension size) {
 		setSize(size);
 	}
+<<<<<<< HEAD
 	
 	public Product getProduct() {
 		return item;
@@ -302,4 +326,12 @@ public class ProductSquareItem extends JPanel implements Transferable,
 	    }
 	}
 
+=======
+	public Product getItem() {
+		return item;
+	}
+	public void setItem(Product item) {
+		this.item = item;
+	}
+>>>>>>> nuclear--markus
 }
