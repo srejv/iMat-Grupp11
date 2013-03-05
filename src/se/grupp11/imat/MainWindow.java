@@ -3,12 +3,8 @@ package se.grupp11.imat;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
-<<<<<<< HEAD
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-=======
->>>>>>> origin/nuclear--markus
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,8 +25,10 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import se.chalmers.ait.dat215.project.Product;
 import se.grupp11.imat.controllers.ShoppingCartController;
 import se.grupp11.imat.views.CheckOutView;
+import se.grupp11.imat.views.ProductView;
 import se.grupp11.imat.views.SettingsView;
 import se.grupp11.imat.views.ShoppingCartView;
 import se.grupp11.imat.views.StartPage;
@@ -46,7 +44,7 @@ public class MainWindow{
 	private JButton btnBack;
 	private JButton editDetails;
 	private ShoppingCartController scc;
-	
+	private static ProductView productView;
 
 	private JTextField txtSk;
 
@@ -275,14 +273,12 @@ public class MainWindow{
 		cards = (CardLayout) panelMainStage.getLayout();
 		
 		
-		
+		StartPage startPage = new StartPage();
 
-<<<<<<< HEAD
 		startPage.setPreferredSize(new Dimension(680, 1200));
 		startPage.setMinimumSize(new Dimension(680, 1200));
 		panelMainStage.add(startPage, "StartPage");
-=======
->>>>>>> origin/nuclear--markus
+
 		
 		SettingsView settingsView = new SettingsView();
 		panelMainStage.add(settingsView, "Settings");
@@ -291,11 +287,6 @@ public class MainWindow{
 		panelMainStage.add(checkOutView, "CheckOut");
 		
 
-<<<<<<< HEAD
-		
-=======
-
->>>>>>> origin/nuclear--markus
 		
 		
 		JLabel label = new JLabel("");
@@ -306,7 +297,7 @@ public class MainWindow{
 		
 		JLabel label_3 = new JLabel("");
 		
-		StartPage startPage = new StartPage();
+		startPage = new StartPage();
 
 		startPage.setPreferredSize(new Dimension(1000, 1000));
 		startPage.setMinimumSize(new Dimension(1000, 1000));
@@ -321,22 +312,24 @@ public class MainWindow{
 		Color c=new Color(255, 250, 250);
 		startPage.setBackground(c);
 		
-<<<<<<< HEAD
 		ShoppingCartView shoppingCartView = new ShoppingCartView();
 		shoppingCartView.setMinimumSize(new Dimension(680, 400));
 		frame.getContentPane().add(shoppingCartView, BorderLayout.EAST);
 		
 		MainWindow.setCard("StartPage");
-=======
+
 		setCard("StartPage");
 		
->>>>>>> origin/nuclear--markus
 	}
 
 	public static void setCard(String cardID){
 		cards.show(panelMainStage, cardID);
 	}
 	
+	public static void setProductView(Product item){
+		productView = new ProductView(item);
+		panelMainStage.add(productView, "productView");
+	}
 	
 
 	public JFrame getFrame() {

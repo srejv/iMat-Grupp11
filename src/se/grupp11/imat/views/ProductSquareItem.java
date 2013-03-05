@@ -3,39 +3,32 @@ package se.grupp11.imat.views;
 
 import java.awt.Color;
 import java.awt.Dimension;
-
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JSpinner;
-
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.FlowLayout;
-import javax.swing.JSpinner;
-import java.awt.Dimension;
-import java.awt.event.MouseAdapter;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.EtchedBorder;
-
-import se.chalmers.ait.dat215.project.*;
-import java.awt.event.MouseEvent;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.border.LineBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+
+import se.chalmers.ait.dat215.project.IMatDataHandler;
+import se.chalmers.ait.dat215.project.Product;
+import se.chalmers.ait.dat215.project.ShoppingCart;
+import se.chalmers.ait.dat215.project.ShoppingItem;
+import se.grupp11.imat.MainWindow;
+import se.grupp11.imat.controllers.ShoppingCartController;
 public class ProductSquareItem extends JPanel {
 
 	
 	private Product item;
+	private IMatDataHandler imdh = IMatDataHandler.getInstance();
+	private ShoppingCart sc = imdh.getShoppingCart();
+	private ShoppingCartController scc = ShoppingCartController.getInstance();
+	public static JSpinner spinner;
 	
 
 	/**
@@ -46,7 +39,7 @@ public class ProductSquareItem extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ProductSquareItem(Product item) {
+	public ProductSquareItem(final Product item) {
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -62,8 +55,9 @@ public class ProductSquareItem extends JPanel {
 		setRequestFocusEnabled(false);
 		setLayout(null);
 		
-		this.item=item;
+		this.setItem(item);
 		
+		sc.addShoppingCartListener(scc);
 		
 		JLabel lblImage = new JLabel("");
 		lblImage.setBounds(55, 6, 128, 128);
@@ -81,27 +75,45 @@ public class ProductSquareItem extends JPanel {
 		lblJmfPrisper.setBounds(58, 202, 114, 16);
 		add(lblJmfPrisper);
 		
-		JSpinner spinner = new JSpinner();
+		spinner = new JSpinner();
 		spinner.setBounds(55, 239, 44, 36);
 		add(spinner);
 		
 		setBorder(null);
 		this.setOpaque(false);
 		
-		lblImage.setIcon(new ImageIcon(((new ImageIcon("/Users/Markus/.dat215/imat/images/" + item.getImageName())).getImage()).getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
+		lblImage.setIcon(new ImageIcon(((new ImageIcon("/Users/HForsvall/.dat215/imat/images/" + item.getImageName())).getImage()).getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
 		
 		JButton btnLggTillI = new JButton("Köp");
 		btnLggTillI.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				sc.addProduct(item);
+				sc.fireShoppingCartChanged(new ShoppingItem(item, (double) Double.parseDouble(spinner.getValue().toString())), true);
+				System.out.println(sc.getTotal());
 			}
 		});
 		btnLggTillI.setBounds(106, 239, 91, 36);
 		add(btnLggTillI);
+		
+		this.addMouseListener(new MouseAdapter() {
+		    public void mouseClicked(MouseEvent evt) {
+		        if (evt.getClickCount() == 2) {
+		            MainWindow.setProductView(item);
+		            MainWindow.setCard("productView");
+		        }
+		    }
+		});
 	}
 	public Dimension getThisSize() {
 		return getSize();
 	}
 	public void setThisSize(Dimension size) {
 		setSize(size);
+	}
+	public Product getItem() {
+		return item;
+	}
+	public void setItem(Product item) {
+		this.item = item;
 	}
 }

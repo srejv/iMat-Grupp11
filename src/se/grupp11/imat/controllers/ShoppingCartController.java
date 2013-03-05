@@ -2,24 +2,18 @@ package se.grupp11.imat.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-
-import se.grupp11.imat.MainWindow;
-
-	
-
 import java.util.GregorianCalendar;
 
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 
-import se.chalmers.ait.dat215.project.IMatDataHandler;
-import se.chalmers.ait.dat215.project.Product;
+import se.chalmers.ait.dat215.project.CartEvent;
+import se.chalmers.ait.dat215.project.ShoppingCartListener;
+import se.grupp11.imat.MainWindow;
 import se.grupp11.imat.models.ShoppingList;
 import se.grupp11.imat.models.ShoppingListItem;
 
-public class ShoppingCartController implements ActionListener{
+public class ShoppingCartController implements ActionListener, ShoppingCartListener{
 
 	private static ShoppingCartController scc;
 	private ShoppingList _list; 		// Model
@@ -106,7 +100,7 @@ public class ShoppingCartController implements ActionListener{
 			for(ShoppingListItem item : _list.getList()) {
 				newList.addItem(item);
 			}
-<<<<<<< HEAD
+
 
 		}
 	}
@@ -118,22 +112,15 @@ public class ShoppingCartController implements ActionListener{
 			MainWindow.setCard("CheckOut");
 		}
 
-=======
+
 			
 
 		}
-	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		if(arg0.getActionCommand() == "erase"){
-			MainWindow.eraseShoppingCart();
-		}
-		else if(arg0.getActionCommand() == "buy"){
-			MainWindow.setCard("CheckOut");
-		}
-
+	public void shoppingCartChanged(CartEvent arg0) {
 		
->>>>>>> origin/nuclear--markus
+		
 	}
-}
+	}
+
