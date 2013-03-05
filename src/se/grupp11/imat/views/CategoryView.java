@@ -62,6 +62,7 @@ public class CategoryView extends JPanel  {
 	
 	public void LoadCategory(ProductCategory category) {
 		
+		productVector.clear();
 		List<Product> prodList = IMatDataHandler.getInstance().getProducts(category);
 		for (Product product : prodList) {
 			//JPanel p = new JPanel();
@@ -78,6 +79,11 @@ public class CategoryView extends JPanel  {
 	private Vector productVector;
 	private JList list_1;
 	private final class AbstractListModelExtension extends AbstractListModel {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 6801474331410870270L;
+
 		@Override
 		public Object getElementAt(int arg0) {
 			return productVector.get(arg0);

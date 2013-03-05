@@ -264,9 +264,10 @@ public class MainWindow{
 					if(o instanceof CategoryLink) {
 						CategoryLink l = (CategoryLink)o;
 						categoryView.LoadCategory(l.getCategory());
+						panelMainStage.add(categoryView, "Category");
 						setCard("Category");
-						categoryView.updateUI();
-					} 
+						
+					}
 					else if(o instanceof SeparationLink) {
 						// no thing
 						navlist.setSelectedIndex(-1);
@@ -282,7 +283,7 @@ public class MainWindow{
 						NavigationLink link = (NavigationLink) o; 
 						setCard(link.getValue());
 					}
-					panelMainStage.updateUI();
+					panelMainStage.revalidate();
 			    }
 			}
 		});
@@ -347,14 +348,6 @@ public class MainWindow{
 
 		
 		
-		JLabel label = new JLabel("");
-		
-		JLabel label_1 = new JLabel("");
-		
-		JLabel label_2 = new JLabel("");
-		
-		JLabel label_3 = new JLabel("");
-		
 		startPage = new StartPage();
 
 		startPage.setPreferredSize(new Dimension(1000, 1000));
@@ -371,8 +364,6 @@ public class MainWindow{
 		startPage.setBackground(c);
 		
 		setCard("StartPage");
-		
-		
 		
 		
 	}

@@ -47,6 +47,7 @@ public class ProductSquareItem extends JPanel {
 	 * Create the panel.
 	 */
 	public ProductSquareItem(Product item) {
+		setPreferredSize(new Dimension(206, 300));
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
