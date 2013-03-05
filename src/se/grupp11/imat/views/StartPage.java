@@ -43,47 +43,47 @@ public class StartPage extends JPanel {
 		});
 		add(productSquareItem);
 		
-		ProductSquareItem productSquareItem_1 = new ProductSquareItem(handler.getProduct(20));
+		ProductSquareItem productSquareItem_1 = new ProductSquareItem(handler.getProduct(21));
 		add(productSquareItem_1);
 		
-		ProductSquareItem productSquareItem_2 = new ProductSquareItem(handler.getProduct(20));
+		ProductSquareItem productSquareItem_2 = new ProductSquareItem(handler.getProduct(22));
 		add(productSquareItem_2);
 		
-		ProductSquareItem productSquareItem_3 = new ProductSquareItem(handler.getProduct(20));
+		ProductSquareItem productSquareItem_3 = new ProductSquareItem(handler.getProduct(23));
 		add(productSquareItem_3);
 		
-		ProductSquareItem productSquareItem_5 = new ProductSquareItem(handler.getProduct(20));
+		ProductSquareItem productSquareItem_5 = new ProductSquareItem(handler.getProduct(24));
 		add(productSquareItem_5);
 		add(productSquareItem_4);
 		
-		ProductSquareItem productSquareItem_9 = new ProductSquareItem(handler.getProduct(20));
+		ProductSquareItem productSquareItem_9 = new ProductSquareItem(handler.getProduct(25));
 		add(productSquareItem_9);
 		
-		ProductSquareItem productSquareItem_13 = new ProductSquareItem(handler.getProduct(20));
+		ProductSquareItem productSquareItem_13 = new ProductSquareItem(handler.getProduct(26));
 		add(productSquareItem_13);
 		
-		ProductSquareItem productSquareItem_6 = new ProductSquareItem(handler.getProduct(20));
+		ProductSquareItem productSquareItem_6 = new ProductSquareItem(handler.getProduct(27));
 		add(productSquareItem_6);
 		
-		ProductSquareItem productSquareItem_8 = new ProductSquareItem(handler.getProduct(20));
+		ProductSquareItem productSquareItem_8 = new ProductSquareItem(handler.getProduct(28));
 		add(productSquareItem_8);
 		
-		ProductSquareItem productSquareItem_10 = new ProductSquareItem(handler.getProduct(20));
+		ProductSquareItem productSquareItem_10 = new ProductSquareItem(handler.getProduct(29));
 		add(productSquareItem_10);
 		
-		ProductSquareItem productSquareItem_14 = new ProductSquareItem(handler.getProduct(20));
+		ProductSquareItem productSquareItem_14 = new ProductSquareItem(handler.getProduct(30));
 		add(productSquareItem_14);
 		
-		ProductSquareItem productSquareItem_7 = new ProductSquareItem(handler.getProduct(20));
+		ProductSquareItem productSquareItem_7 = new ProductSquareItem(handler.getProduct(31));
 		add(productSquareItem_7);
 		
-		ProductSquareItem productSquareItem_11 = new ProductSquareItem(handler.getProduct(20));
+		ProductSquareItem productSquareItem_11 = new ProductSquareItem(handler.getProduct(32));
 		add(productSquareItem_11);
 		
-		ProductSquareItem productSquareItem_12 = new ProductSquareItem(handler.getProduct(20));
+		ProductSquareItem productSquareItem_12 = new ProductSquareItem(handler.getProduct(33));
 		add(productSquareItem_12);
 		
-		ProductSquareItem productSquareItem_15 = new ProductSquareItem(handler.getProduct(20));
+		ProductSquareItem productSquareItem_15 = new ProductSquareItem(handler.getProduct(34));
 		add(productSquareItem_15);
 		
 		

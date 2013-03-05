@@ -69,11 +69,11 @@ public class ProductSquareItem extends JPanel {
 		lblImage.setBounds(55, 6, 128, 128);
 		add(lblImage);
 		
-		JLabel lblNamn = new JLabel("Namn: "+ item.getName());
+		JLabel lblNamn = new JLabel(""+ item.getName());
 		lblNamn.setBounds(58, 146, 61, 16);
 		add(lblNamn);
 		
-		JLabel lblPris = new JLabel("Pris:" + item.getPrice() + "kr");
+		JLabel lblPris = new JLabel("" + item.getPrice() + "kr");
 		lblPris.setBounds(58, 174, 61, 16);
 		add(lblPris);
 		
@@ -88,7 +88,7 @@ public class ProductSquareItem extends JPanel {
 		setBorder(null);
 		this.setOpaque(false);
 		
-		lblImage.setIcon(new ImageIcon(((new ImageIcon(item.getImageName())).getImage()).getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
+		lblImage.setIcon(new ImageIcon(((new ImageIcon("/Users/Markus/.dat215/imat/images/" + item.getImageName())).getImage()).getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
 		
 		JButton btnLggTillI = new JButton("Köp");
 		btnLggTillI.addActionListener(new ActionListener() {
