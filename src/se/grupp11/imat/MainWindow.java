@@ -28,7 +28,6 @@ import se.chalmers.ait.dat215.project.ShoppingItem;
 import se.grupp11.imat.controllers.*;
 import se.grupp11.imat.models.ShoppingList;
 import se.grupp11.imat.models.ShoppingListItem;
-import se.grupp11.imat.views.nav.NavigationLink;
 import se.grupp11.imat.views.nav.NavigationLink.NavType;
 import se.grupp11.imat.views.nav.*;
 import se.grupp11.imat.views.StartPage;
@@ -39,6 +38,7 @@ import java.awt.Dimension;
 
 import se.grupp11.imat.views.CategoryView;
 import se.grupp11.imat.views.ListView;
+import se.grupp11.imat.views.ListViewEdit;
 import se.grupp11.imat.views.SettingsView;
 import se.grupp11.imat.views.CheckOutView;
 import java.awt.event.ActionListener;
@@ -66,7 +66,8 @@ public class MainWindow{
 	private SettingsView settingsView;
 	private CheckOutView checkOutView;
 	private CategoryView categoryView;
-	private ListView listView;
+	private static ListView listView;
+	private static ListViewEdit editListView;
 	private ListView shoppingCartView;
 	
 
@@ -352,7 +353,8 @@ public class MainWindow{
 		listView = new ListView();
 		panelMainStage.add(listView, "List");
 
-		
+		editListView = new ListViewEdit();
+		panelMainStage.add(editListView, "EditList");
 		
 		startPage = new StartPage();
 
@@ -381,6 +383,10 @@ public class MainWindow{
 	public static void eraseShoppingCart(){
 		//shoppingCartView.removeAll();
 	}
+	
+	public static ListView getListPanel() {
+		return listView;
+	}
 
 	public JFrame getFrame() {
 		return frame;
@@ -398,8 +404,6 @@ public class MainWindow{
 		public Component getListCellRendererComponent(JList list, Object value,
 				int index, boolean isSelected, boolean cellHasFocus) {
 			NavigationLink c = (NavigationLink)value;
-			System.out.println(c.type);
-			// TODO Auto-generated method stub
 			if (c.type == NavType.Separation) {
 				JLabel lblSeparator = new JLabel( );
 				lblSeparator.setBorder( 
@@ -412,20 +416,29 @@ public class MainWindow{
 				c.setBackground(Color.GREEN);
 			} else if (value instanceof NewListLink)  {
 				c.setBackground(Color.GREEN);
+
 			} else if(c.type == NavType.NavLink)   {
 				c.setBackground(Color.RED);
 			}
 			
 			if(isSelected) {
 				if(c.type == NavType.NewListLink) {
-					JTextField shoppingListName = new JTextField();
-					shoppingListName.setFocusable(true);
-					return shoppingListName;
+					ShoppingList slist = ShoppingListController.getInstance().create();
+					slist.setTitle("A new list");
+					slist.setDescription("A whole new list.");
+					leftMenuItems.add(new ListLink(slist.getTitle(), slist));
+					navlist.setListData(leftMenuItems.toArray());
+					navlist.repaint();
+					return new JLabel("");
 				}
 				c.setBackground(Color.getHSBColor(0.f, 0.f, 0.9f));
 			}
 			
 			return c;
 		}
+	}
+
+	public static ListViewEdit getListEditPanel() {
+		return editListView;
 	}
 }

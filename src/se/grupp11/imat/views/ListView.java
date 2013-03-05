@@ -1,6 +1,7 @@
 package se.grupp11.imat.views;
 
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
 import javax.swing.SpringLayout;
 import javax.swing.JLabel;
@@ -11,6 +12,8 @@ import javax.swing.TransferHandler;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -20,11 +23,17 @@ import java.util.Vector;
 import javax.swing.DropMode;
 
 import se.chalmers.ait.dat215.project.IMatDataHandler;
+import se.grupp11.imat.MainWindow;
 import se.grupp11.imat.controllers.ShoppingCartController;
 import se.grupp11.imat.controllers.ShoppingListController;
 import se.grupp11.imat.dnd.ToShoppingCartTransferHandler;
 import se.grupp11.imat.models.ShoppingList;
 import se.grupp11.imat.models.ShoppingListItem;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ListView extends JPanel  {
 	
@@ -37,6 +46,7 @@ public class ListView extends JPanel  {
 	private JList list_1;
 	private JLabel lblDescription;
 	private Vector list_data;
+	private JButton btnEdit;
 	
 
 	public void setShoppingList(ShoppingList list) {
@@ -56,6 +66,24 @@ public class ListView extends JPanel  {
 		setLayout(springLayout);
 		
 		lblListTitle = new JLabel("ListName");
+		lblListTitle.addMouseListener(new MouseAdapter() {
+			JTextField field;
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				field = new JTextField(lblListTitle.getText());
+				field.addFocusListener(new FocusListener() {
+					
+					@Override
+					public void focusLost(FocusEvent arg0) {
+						lblListTitle.setText(field.getText());
+					}
+					
+					@Override
+					public void focusGained(FocusEvent arg0) {
+					}
+				});
+			}
+		});
 		springLayout.putConstraint(SpringLayout.NORTH, lblListTitle, 10, SpringLayout.NORTH, this);
 		springLayout.putConstraint(SpringLayout.WEST, lblListTitle, 10, SpringLayout.WEST, this);
 		add(lblListTitle);
@@ -70,9 +98,6 @@ public class ListView extends JPanel  {
 		springLayout.putConstraint(SpringLayout.EAST, list_1, -10, SpringLayout.EAST, this);
 		list_1.setCellRenderer(new CustomCellRenderer());
 		list_1.setModel(new AbstractListModel() {
-			/**
-			 * 
-			 */
 			private static final long serialVersionUID = -9065824185601074599L;
 			public int getSize() { return list_data.size(); }
 			public Object getElementAt(int i) { return list_data.get(i); }
@@ -114,6 +139,18 @@ public class ListView extends JPanel  {
 		springLayout.putConstraint(SpringLayout.NORTH, lblDescription, 6, SpringLayout.SOUTH, lblListTitle);
 		springLayout.putConstraint(SpringLayout.WEST, lblDescription, 0, SpringLayout.WEST, lblListTitle);
 		add(lblDescription);
+		
+		btnEdit = new JButton("Edit");
+		btnEdit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListViewEdit lve = MainWindow.getListEditPanel();
+				lve.setShoppingList(list);
+				MainWindow.setCard("EditList");
+			}
+		});
+		springLayout.putConstraint(SpringLayout.NORTH, btnEdit, 0, SpringLayout.NORTH, lblListTitle);
+		springLayout.putConstraint(SpringLayout.EAST, btnEdit, -10, SpringLayout.EAST, this);
+		add(btnEdit);
 	}
 	
 	
