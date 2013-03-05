@@ -24,6 +24,7 @@ import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
 
 import se.chalmers.ait.dat215.project.ProductCategory;
+import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.ShoppingItem;
 import se.grupp11.imat.controllers.*;
 import se.grupp11.imat.models.ShoppingList;
@@ -45,6 +46,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
+import se.grupp11.imat.views.ProductView;
+import se.chalmers.ait.dat215.project.Product;
+import se.grupp11.imat.views.HistoryView;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -52,7 +56,7 @@ import javax.swing.event.ListSelectionListener;
 public class MainWindow{
 	private JFrame frame;
 
-	private JTextField textField;
+
 	private static CardLayout cards;
 	private static JPanel panelMainStage;
 	private JButton btnBack;
@@ -69,6 +73,8 @@ public class MainWindow{
 	private static ListView listView;
 	private static ListViewEdit editListView;
 	private ListView shoppingCartView;
+	
+	private static ProductView productView;
 	
 
 	private JTextField txtSk;
@@ -371,8 +377,13 @@ public class MainWindow{
 		Color c=new Color(255, 250, 250);
 		startPage.setBackground(c);
 		
+		HistoryView historyView = new HistoryView();
+		panelMainStage.add(historyView, "HistoryView");
+		
+		
 		setCard("StartPage");
 		
+
 		
 	}
 
@@ -394,6 +405,7 @@ public class MainWindow{
 	public JButton getBtnBack() {
 		return btnBack;
 	}
+
 	public JList getNavlist() {
 		return navlist;
 	}
@@ -440,5 +452,10 @@ public class MainWindow{
 
 	public static ListViewEdit getListEditPanel() {
 		return editListView;
+	}
+	
+	public static void setProductView(Product item){
+		productView=new ProductView(item);
+		panelMainStage.add(productView, "productView");
 	}
 }

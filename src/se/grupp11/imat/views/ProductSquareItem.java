@@ -48,6 +48,7 @@ import se.grupp11.imat.controllers.ShoppingCartController;
 import se.grupp11.imat.controllers.ShoppingListController;
 import se.grupp11.imat.models.ShoppingList;
 import se.grupp11.imat.models.ShoppingListItem;
+import se.grupp11.imat.MainWindow;
 
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
@@ -109,6 +110,7 @@ public class ProductSquareItem extends JPanel implements Transferable,
 		this.addMouseListener(popupListener);
 		
 		setPreferredSize(new Dimension(160, 246));
+
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -192,6 +194,7 @@ public class ProductSquareItem extends JPanel implements Transferable,
 	}
 	public ProductSquareItem(Product product) {
 		this(product, 1);
+
 	}
 	public Dimension getThisSize() {
 		return getSize();
@@ -301,5 +304,4 @@ public class ProductSquareItem extends JPanel implements Transferable,
 	        }
 	    }
 	}
-
 }
