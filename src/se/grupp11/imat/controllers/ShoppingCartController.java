@@ -44,6 +44,8 @@ public class ShoppingCartController implements ActionListener{
 		_list.removeItem(item);
 	}
 	
+
+	
 	class AddAction extends AbstractAction {
 		public AddAction(String text, ImageIcon icon, String desc, Integer mnemonic) {
 			super(text, icon);

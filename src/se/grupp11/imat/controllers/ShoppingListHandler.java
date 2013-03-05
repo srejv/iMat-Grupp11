@@ -27,9 +27,12 @@ public class ShoppingListHandler {
 	private static void writeFile(String title, String content) {
         try {
         	BufferedWriter out = new BufferedWriter(new FileWriter("shoppinglists/" + title + ".json" ));
-        	out.write(Charset.defaultCharset().encode(content).toString());
+        	
+        	out.write(content.toString());
             out.close();
-        } catch (IOException e) {}
+        } catch (IOException e) {
+        	System.out.println(e.getMessage());
+        }
 	}
 	
 	private static String readFile(String path) throws IOException {
@@ -74,13 +77,31 @@ public class ShoppingListHandler {
 	public static void SaveShoppingList(ShoppingList list) {
 		Gson gson = new Gson();
 		String json = gson.toJson(list);
-		ShoppingListHandler.writeFile(list.getId() + "", json);
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("{");
+		buffer.append("'title':'" + list.getTitle() + "',");
+		buffer.append("'id':'" + list.getId().toString() + "',");
+		buffer.append("'description':'" + list.getDescription() + "',");
+		buffer.append("'items' : [");
+		for(ShoppingListItem i : list.getList()) {
+			buffer.append("{");
+			buffer.append("'id':" + i.getItem().getProductId() + ",");
+			buffer.append("'amount':" + i.getAmount());
+			buffer.append("},");
+		}
+		buffer.append("]}");
+		
+		System.out.println("SAVING: " + buffer.toString());
+
+		ShoppingListHandler.writeFile(list.getId() + "", buffer.toString());
 	}
 	
 	public static ShoppingList LoadShoppingList(String json) {
 		ShoppingList list = null;
 		// Set up 
 		JsonParser parser = new JsonParser();
+		
+		System.out.println("LOADING: " + json);
 		
 		// Get json array
 		JsonObject obj = parser.parse(json).getAsJsonObject();
@@ -94,7 +115,9 @@ public class ShoppingListHandler {
 	    // Get list content
 	    JsonArray listitems = obj.get("items").getAsJsonArray();
 	    for(int i = 0; i < listitems.size(); i++) {
-	    	
+	    	if(listitems.get(i).isJsonNull()) {
+	    		continue;
+	    	}
     		int pid = listitems.get(i).getAsJsonObject().get("id").getAsInt();
     		int amount = listitems.get(i).getAsJsonObject().get("amount").getAsInt();
     		ShoppingListItem item = new ShoppingListItem(pid, amount);

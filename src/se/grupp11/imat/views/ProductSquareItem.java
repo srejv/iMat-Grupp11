@@ -104,4 +104,8 @@ public class ProductSquareItem extends JPanel {
 	public void setThisSize(Dimension size) {
 		setSize(size);
 	}
+	
+	public Product getProduct() {
+		return item;
+	}
 }

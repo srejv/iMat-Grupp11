@@ -3,11 +3,12 @@ package se.grupp11.imat;
 import java.awt.Color;
 import java.awt.GridLayout;
 
-import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
+
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -18,27 +19,32 @@ import javax.swing.JList;
 import javax.swing.AbstractListModel;
 import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
-import javax.swing.BoxLayout;
 
+import se.chalmers.ait.dat215.project.ProductCategory;
 import se.chalmers.ait.dat215.project.ShoppingItem;
-import se.grupp11.imat.controllers.ShoppingCartController;
+import se.grupp11.imat.controllers.*;
+import se.grupp11.imat.models.ShoppingList;
+import se.grupp11.imat.models.ShoppingListItem;
+import se.grupp11.imat.views.nav.*;
 import se.grupp11.imat.views.StartPage;
 
-import java.awt.Component;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.JScrollPane;
-import javax.swing.JScrollBar;
 import javax.swing.JLabel;
 import java.awt.Dimension;
+
+import se.grupp11.imat.views.CategoryView;
+import se.grupp11.imat.views.ListView;
 import se.grupp11.imat.views.SettingsView;
 import se.grupp11.imat.views.CheckOutView;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 public class MainWindow{
-
-	private JList list;
 	private JFrame frame;
 
 	private JTextField textField;
@@ -48,6 +54,15 @@ public class MainWindow{
 	private JButton editDetails;
 	private static JList shoppingCartList;
 	private ShoppingCartController scc;
+	private JList navlist;
+	private List<NavigationLink> leftMenuItems;
+	
+	// Main stage pages
+	private StartPage startPage;
+	private SettingsView settingsView;
+	private CheckOutView checkOutView;
+	private CategoryView categoryView;
+	private ListView listView;
 	
 
 	private JTextField txtSk;
@@ -57,8 +72,48 @@ public class MainWindow{
 	 * Create the application.
 	 */
 	public MainWindow() {
+		
+		/*ShoppingList l = ShoppingListController.getInstance().create();
+		l.setTitle("Åh va götte.");
+		l.setDescription("En Fasinerande beskrivning HURRA.");
+		l.getList().add(new ShoppingListItem(50,2));
+		l.getList().add(new ShoppingListItem(30,3));
+		l.getList().add(new ShoppingListItem(6,1));
+		ShoppingListController.getInstance().save();*/
+		
 		this.editDetails = editDetails;
+		leftMenuItems = new ArrayList<NavigationLink>();
+		fillMenu();
 		initialize();
+		
+		
+	}
+	
+	private void fillMenu() {
+		
+		leftMenuItems.add(new NavigationLink("Start", "StartPage"));
+		//leftMenuItems.add(new NavigationLink("History", history));
+		leftMenuItems.add(new NavigationLink("Settings", "Settings"));
+		leftMenuItems.add(new NavigationLink("Checkout", "CheckOut"));
+		leftMenuItems.add(new SeparationLink());
+		leftMenuItems.add(new CategoryLink(ProductCategory.BERRY));
+		leftMenuItems.add(new CategoryLink(ProductCategory.BREAD));
+		leftMenuItems.add(new CategoryLink(ProductCategory.CABBAGE));
+		leftMenuItems.add(new CategoryLink(ProductCategory.CITRUS_FRUIT));
+		leftMenuItems.add(new CategoryLink(ProductCategory.COLD_DRINKS));
+		leftMenuItems.add(new CategoryLink(ProductCategory.DAIRIES));
+		leftMenuItems.add(new CategoryLink(ProductCategory.EXOTIC_FRUIT));
+		leftMenuItems.add(new CategoryLink(ProductCategory.FISH));
+		leftMenuItems.add(new CategoryLink(ProductCategory.FLOUR_SUGAR_SALT));
+		leftMenuItems.add(new CategoryLink(ProductCategory.FRUIT));
+		leftMenuItems.add(new CategoryLink(ProductCategory.HERB));
+		leftMenuItems.add(new CategoryLink(ProductCategory.HOT_DRINKS));
+		leftMenuItems.add(new SeparationLink());
+		leftMenuItems.add(new NewListLink());
+		for(ShoppingList l : ShoppingListController.getInstance().getAll()) {
+			leftMenuItems.add(new ListLink(l.getTitle(), l));
+		}
+		//new NewListLink()
 	}
 
 	/**
@@ -192,32 +247,54 @@ public class MainWindow{
 		JPanel eastPanel = new JPanel();
 		panelTop.add(eastPanel, BorderLayout.EAST);
 		
+		JPanel navPanel = new JPanel();
+		frame.getContentPane().add(navPanel, BorderLayout.WEST);
+		navPanel.setPreferredSize(new Dimension(100, 10));
+		navPanel.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panelLeftMenu = new JPanel();
-		frame.getContentPane().add(panelLeftMenu, BorderLayout.WEST);
-		panelLeftMenu.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		list = new JList();
-		list.addMouseListener(new MouseAdapter() {
-			/**
-			 * List item clicked
-			 */
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				System.out.println(list.getSelectedValue());
+		navlist = new JList();
+		navlist.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		navlist.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				if (e.getValueIsAdjusting() == false) {
+					int selectedIndex = navlist.getSelectedIndex();
+					Object o = navlist.getSelectedValue();
+					if(o instanceof CategoryLink) {
+						CategoryLink l = (CategoryLink)o;
+						categoryView.LoadCategory(l.getCategory());
+						setCard("Category");
+					} 
+					else if(o instanceof SeparationLink) {
+						// no thing
+						navlist.setSelectedIndex(-1);
+					} 
+					else if(o instanceof ListLink)
+					{
+						// Load list
+						ListLink l = (ListLink)o;
+						listView.setShoppingList(l.getList());
+						setCard("List");
+					}
+					else {
+						NavigationLink link = (NavigationLink) o; 
+						setCard(link.getValue());
+					}
+					panelMainStage.updateUI();
+			    }
 			}
 		});
-		list.setSize(500, 100);
-		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Test1 längre text...", "Test2", "Test3", "Test4"};
+		navlist.setModel(new AbstractListModel() {
+			
 			public int getSize() {
-				return values.length;
+				return leftMenuItems.size();
 			}
 			public Object getElementAt(int index) {
-				return values[index];
+				return leftMenuItems.get(index);
 			}
 		});
-		panelLeftMenu.add(list);
+		navlist.setListData(leftMenuItems.toArray());
+		
+		navPanel.add(navlist);
 		
 		JPanel ShoppingCartPanel = new JPanel();
 		frame.getContentPane().add(ShoppingCartPanel, BorderLayout.EAST);
@@ -262,16 +339,17 @@ public class MainWindow{
 		cards = (CardLayout) panelMainStage.getLayout();
 		
 		
-		
-
-		
-		SettingsView settingsView = new SettingsView();
+		settingsView = new SettingsView();
 		panelMainStage.add(settingsView, "Settings");
 		
-		CheckOutView checkOutView = new CheckOutView();
+		checkOutView = new CheckOutView();
 		panelMainStage.add(checkOutView, "CheckOut");
 		
-
+		categoryView = new CategoryView();
+		panelMainStage.add(categoryView, "Category");
+		
+		listView = new ListView();
+		panelMainStage.add(listView, "List");
 
 		
 		
@@ -283,7 +361,7 @@ public class MainWindow{
 		
 		JLabel label_3 = new JLabel("");
 		
-		StartPage startPage = new StartPage();
+		startPage = new StartPage();
 
 		startPage.setPreferredSize(new Dimension(1000, 1000));
 		startPage.setMinimumSize(new Dimension(1000, 1000));
@@ -300,6 +378,9 @@ public class MainWindow{
 		
 		setCard("StartPage");
 		
+		
+		
+		
 	}
 
 	public static void setCard(String cardID){
@@ -315,5 +396,8 @@ public class MainWindow{
 	}
 	public JButton getBtnBack() {
 		return btnBack;
+	}
+	public JList getNavlist() {
+		return navlist;
 	}
 }
