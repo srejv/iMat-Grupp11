@@ -38,6 +38,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import se.grupp11.imat.views.ProductView;
 import se.chalmers.ait.dat215.project.Product;
+import se.grupp11.imat.views.HistoryView;
 
 public class MainWindow{
 
@@ -209,11 +210,12 @@ public class MainWindow{
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				System.out.println(list.getSelectedValue());
+				MainWindow.setCard("HistoryPanel");
 			}
 		});
 		list.setSize(500, 100);
 		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Test1 längre text...", "Test2", "Test3", "Test4"};
+			String[] values = new String[] {"Test1 längre text...", "Test2", "Test3", "Test4", "Tidigare Köp"};
 			public int getSize() {
 				return values.length;
 			}
@@ -301,6 +303,9 @@ public class MainWindow{
 		
 		Color c=new Color(255, 250, 250);
 		startPage.setBackground(c);
+		
+		HistoryView historyView = new HistoryView();
+		panelMainStage.add(historyView, "HistoryView");
 		
 		
 		setCard("StartPage");
