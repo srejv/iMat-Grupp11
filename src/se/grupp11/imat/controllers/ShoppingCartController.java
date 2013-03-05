@@ -106,6 +106,7 @@ public class ShoppingCartController implements ActionListener{
 			for(ShoppingListItem item : _list.getList()) {
 				newList.addItem(item);
 			}
+<<<<<<< HEAD
 
 		}
 	}
@@ -117,5 +118,22 @@ public class ShoppingCartController implements ActionListener{
 			MainWindow.setCard("CheckOut");
 		}
 
+=======
+			
+
+		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		if(arg0.getActionCommand() == "erase"){
+			MainWindow.eraseShoppingCart();
+		}
+		else if(arg0.getActionCommand() == "buy"){
+			MainWindow.setCard("CheckOut");
+		}
+
+		
+>>>>>>> origin/nuclear--markus
 	}
 }

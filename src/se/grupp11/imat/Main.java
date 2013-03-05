@@ -2,6 +2,8 @@ package se.grupp11.imat;
 
 import java.awt.EventQueue;
 
+import se.chalmers.ait.dat215.project.IMatDataHandler;
+
 public class Main {
 
 	/**
