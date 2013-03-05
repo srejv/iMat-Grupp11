@@ -12,8 +12,12 @@ import javax.swing.JSpinner;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.TransferHandler;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagLayout;
@@ -24,8 +28,10 @@ import java.awt.Dimension;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.DragGestureListener;
+import java.awt.dnd.DragSource;
 import java.awt.dnd.DragSourceDragEvent;
 import java.awt.dnd.DragSourceDropEvent;
 import java.awt.dnd.DragSourceEvent;
@@ -47,12 +53,16 @@ import java.io.IOException;
 
 import javax.swing.border.LineBorder;
 import javax.swing.SpringLayout;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 public class ProductSquareItem extends JPanel implements Transferable, 
-				DragSourceListener, DragGestureListener {
+				DragSourceListener, DragGestureListener, ActionListener, ChangeListener {
 
 	
 	private Product item;
-	
+	private int amount;
+	private DragSource source;
+	private TransferHandler t;
 
 	/**
 	 * 
@@ -63,7 +73,8 @@ public class ProductSquareItem extends JPanel implements Transferable,
 	/**
 	 * Create the panel.
 	 */
-	public ProductSquareItem(Product item2) {
+	public ProductSquareItem(Product item2, int amount) {
+		this.amount = amount;
 		setPreferredSize(new Dimension(160, 246));
 		addMouseListener(new MouseAdapter() {
 			@Override
@@ -111,7 +122,9 @@ public class ProductSquareItem extends JPanel implements Transferable,
 		springLayout.putConstraint(SpringLayout.EAST, lblJmfPrisper, -36, SpringLayout.EAST, this);
 		add(lblJmfPrisper);
 		
-		spinner = new JSpinner();
+		spinner = new JSpinner(new SpinnerNumberModel(0, 0, 30, 1));
+		spinner.addChangeListener(this);
+		spinner.setValue(this.amount);
 		springLayout.putConstraint(SpringLayout.SOUTH, lblJmfPrisper, -6, SpringLayout.NORTH, spinner);
 		springLayout.putConstraint(SpringLayout.EAST, spinner, 58, SpringLayout.WEST, this);
 		springLayout.putConstraint(SpringLayout.SOUTH, spinner, -10, SpringLayout.SOUTH, this);
@@ -129,19 +142,22 @@ public class ProductSquareItem extends JPanel implements Transferable,
 		springLayout.putConstraint(SpringLayout.WEST, btnLggTillI, 6, SpringLayout.EAST, spinner);
 		springLayout.putConstraint(SpringLayout.SOUTH, btnLggTillI, -10, SpringLayout.SOUTH, this);
 		springLayout.putConstraint(SpringLayout.EAST, btnLggTillI, 92, SpringLayout.EAST, spinner);
-		btnLggTillI.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent arg0) {
-				Product p = item;
-				int amount = Integer.parseInt(spinner.getValue().toString());
-				ShoppingListItem i = new ShoppingListItem(p, amount);
-				ShoppingCartController.getInstance().addItem(i);
-				ShoppingCartController.getInstance().getShoppingCartView().updateUI();
-			}
-		});
+		btnLggTillI.addActionListener(this);
 		add(btnLggTillI);
 		
+		t = new TransferHandler() {
+			public Transferable createTransferable(JComponent c) {
+				return new ProductSquareItem(item, (Integer)spinner.getValue()); 
+			}
+		};
+		setTransferHandler(t);
 		
+		source = new DragSource();
+		source.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY, this);
+		
+	}
+	public ProductSquareItem(Product product) {
+		this(product, 1);
 	}
 	public Dimension getThisSize() {
 		return getSize();
@@ -159,7 +175,7 @@ public class ProductSquareItem extends JPanel implements Transferable,
 	@Override
 	public void dragGestureRecognized(DragGestureEvent arg0) {
 		// TODO Auto-generated method stub
-		
+		source.startDrag(arg0, DragSource.DefaultCopyDrop, new ProductSquareItem(item, (Integer)spinner.getValue()), this);
 	}
 	@Override
 	public void dragDropEnd(DragSourceDropEvent arg0) {
@@ -179,17 +195,30 @@ public class ProductSquareItem extends JPanel implements Transferable,
 	@Override
 	public Object getTransferData(DataFlavor arg0)
 			throws UnsupportedFlavorException, IOException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		String s = item.getProductId()+"|"+spinner.getValue().toString();
+		return s;
 	}
 	@Override
 	public DataFlavor[] getTransferDataFlavors() {
-		// TODO Auto-generated method stub
-		return null;
+		return new DataFlavor[] { DataFlavor.stringFlavor };
 	}
 	@Override
 	public boolean isDataFlavorSupported(DataFlavor arg0) {
+		return arg0 == DataFlavor.stringFlavor;
+	}
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		return false;
+		Product p = item;
+		int amount = Integer.parseInt(spinner.getValue().toString());
+		ShoppingListItem i = new ShoppingListItem(p, amount);
+		ShoppingCartController.getInstance().addItem(i);
+		ShoppingCartController.getInstance().getShoppingCartView().updateUI();
+	}
+	@Override
+	public void stateChanged(ChangeEvent e) {
+		JSpinner s = (JSpinner)e.getSource();
+		amount = (Integer)s.getValue();
 	}
 }

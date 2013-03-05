@@ -26,6 +26,10 @@ import se.grupp11.imat.models.ShoppingListItem;
 
 public class ListView extends JPanel  {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8004426289087487059L;
 	private ShoppingList list;
 	private JLabel lblListTitle;
 	private JList list_1;
@@ -109,7 +113,7 @@ public class ListView extends JPanel  {
 		lblDescription.setText(list.getDescription());
 		list_data.clear();
 		for(ShoppingListItem i : list.getList()) {
-			ListRowItem o = new ListRowItem(i.getItem());
+			ListRowItem o = new ListRowItem(i);
 			list_data.add(o);
 		}
 		list_1.setListData(list_data);

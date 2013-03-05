@@ -13,33 +13,39 @@ import java.awt.GridLayout;
 import javax.swing.Box;
 
 import se.chalmers.ait.dat215.project.Product;
+import se.grupp11.imat.models.ShoppingListItem;
 
 public class ListRowItem extends JPanel {
 	private JLabel lblProductname;
 	private JLabel lblAmount;
 	private JLabel lblPrice;	
-	private Product prod;
+	private ShoppingListItem item;
 	/**
 	 * Create the panel.
 	 */
-	public ListRowItem(Product p) {
-		prod = p;
+	public ListRowItem(ShoppingListItem p) {
+		item = p;
 		initialize();
 		updateLabels();
 	}
 	
 	public Product getProduct() {
-		return prod;
+		return item.getItem();
+	}
+	
+	public void addAmount() {
+		//
 	}
 	
 	private void updateLabels() {
-		if(prod == null) {
+		if(item == null) {
 			return;
 		}
-		
-		lblPrice.setText(prod.getPrice() + ":-");
-		lblAmount.setText("1");
-		lblProductname.setText(prod.getName());
+		int amount =  item.getAmount();
+		double price = item.getItem().getPrice();
+		lblPrice.setText( (amount * price) + ":-");
+		lblAmount.setText(amount + "");
+		lblProductname.setText(item.getItem().getName());
 	}
 	
 	public void initialize() {

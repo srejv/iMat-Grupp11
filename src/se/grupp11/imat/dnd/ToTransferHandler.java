@@ -11,6 +11,8 @@ import javax.swing.JList;
 import javax.swing.TransferHandler;
 
 import se.chalmers.ait.dat215.project.IMatDataHandler;
+import se.grupp11.imat.controllers.ShoppingCartController;
+import se.grupp11.imat.models.ShoppingListItem;
 import se.grupp11.imat.views.ListRowItem;
 
 public class ToTransferHandler extends TransferHandler {
@@ -71,7 +73,12 @@ public class ToTransferHandler extends TransferHandler {
         }
         int pid = Integer.parseInt(d[0]);
         int amount = Integer.parseInt(d[1]);
-        ListRowItem i = new ListRowItem(IMatDataHandler.getInstance().getProduct(pid));
+        ShoppingListItem li = new ShoppingListItem(pid, amount);
+        ShoppingCartController.getInstance().addItem(li);
+        
+        /*
+         * Kanske för andra listor.
+		ListRowItem i = new ListRowItem(li);
         
         JList list = (JList)support.getComponent();
         data2.insertElementAt(i, index);
@@ -80,7 +87,7 @@ public class ToTransferHandler extends TransferHandler {
         Rectangle rect = list.getCellBounds(index, index);
         list.scrollRectToVisible(rect);
         list.setSelectedIndex(index);
-        list.requestFocusInWindow();
+        list.requestFocusInWindow()*/
 
         return true;
     }  

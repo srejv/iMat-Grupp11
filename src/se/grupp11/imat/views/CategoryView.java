@@ -69,7 +69,7 @@ public class CategoryView extends JPanel  {
 			//JPanel p = new JPanel();
 			//p.add(new JLabel(product.getName()));
 			//productVector.add(p);
-			ProductSquareItem i = new ProductSquareItem(product);
+			ProductSquareItem i = new ProductSquareItem(product, 1);
 			productVector.add(i);
 		}
 		list_1.setListData(productVector);

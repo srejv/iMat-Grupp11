@@ -50,4 +50,13 @@ public class ShoppingListItem extends Observable {
 	public String toString() {
 		return String.format("id:%d,amount:%d", _item.getProductId(), _amount);	
 	}
+	
+	@Override 
+	public boolean equals(Object arg0) {
+		if(arg0 instanceof ShoppingListItem) {
+			ShoppingListItem o = (ShoppingListItem)arg0;
+			return (o.getItem().getProductId() == this.getItem().getProductId()); 
+		}
+		return false;
+	}
 }
