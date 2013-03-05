@@ -52,7 +52,6 @@ public class MainWindow{
 	private static JPanel panelMainStage;
 	private JButton btnBack;
 	private JButton editDetails;
-	private static JList shoppingCartList;
 	private ShoppingCartController scc;
 	private JList navlist;
 	private List<NavigationLink> leftMenuItems;
@@ -63,6 +62,7 @@ public class MainWindow{
 	private CheckOutView checkOutView;
 	private CategoryView categoryView;
 	private ListView listView;
+	private ListView shoppingCartView;
 	
 
 	private JTextField txtSk;
@@ -86,7 +86,9 @@ public class MainWindow{
 		fillMenu();
 		initialize();
 		
-		
+		ShoppingList list = new ShoppingList();
+		list.setTitle("Shopping Cart");
+		shoppingCartView.setShoppingList(list);
 	}
 	
 	private void fillMenu() {
@@ -263,6 +265,7 @@ public class MainWindow{
 						CategoryLink l = (CategoryLink)o;
 						categoryView.LoadCategory(l.getCategory());
 						setCard("Category");
+						categoryView.updateUI();
 					} 
 					else if(o instanceof SeparationLink) {
 						// no thing
@@ -303,17 +306,8 @@ public class MainWindow{
 		JScrollPane scrollPane = new JScrollPane();
 		ShoppingCartPanel.add(scrollPane);
 		
-		shoppingCartList = new JList();
-		scrollPane.setViewportView(shoppingCartList);
-		shoppingCartList.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Testitem 1\t|\tprice", "Testitem 2\t|\tprice", "Testitem 3\t|\tprice", "Testitem 4\t|\tprice", "Testitem 1\t|\tprice", "Testitem 2\t|\tprice", "Testitem 3\t|\tprice", "Testitem 4\t|\tpriceTestitem 1\t|\tprice", "Testitem 2\t|\tprice", "Testitem 3\t|\tprice", "Testitem 4\t|\tpriceTestitem 1\t|\tprice", "Testitem 2\t|\tprice", "Testitem 3\t|\tprice", "Testitem 4\t|\tpriceTestitem 1\t|\tprice", "Testitem 2\t|\tprice", "Testitem 3\t|\tprice", "Testitem 4\t|\tpriceTestitem 1\t|\tprice", "Testitem 2\t|\tprice", "Testitem 3\t|\tprice", "Testitem 4\t|\tpriceTestitem 1\t|\tprice", "Testitem 2\t|\tprice", "Testitem 3\t|\tprice", "Testitem 4\t|\tprice"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
+		shoppingCartView = new ListView();
+		scrollPane.setViewportView(shoppingCartView);
 		
 		JPanel southPanelShoppingCart = new JPanel();
 		southPanelShoppingCart.setBackground(new Color(255, 255, 255));
@@ -388,7 +382,7 @@ public class MainWindow{
 	}
 	
 	public static void eraseShoppingCart(){
-		shoppingCartList.removeAll();
+		//shoppingCartView.removeAll();
 	}
 
 	public JFrame getFrame() {
