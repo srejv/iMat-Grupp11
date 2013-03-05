@@ -21,13 +21,20 @@ import se.grupp11.imat.models.ShoppingListItem;
 
 public class ShoppingCartController implements ActionListener{
 
+	private static ShoppingCartController scc;
 	private ShoppingList _list; 		// Model
 	//private ShoppingCartView _view;		// View
 	// need selected products list
 	
 	
-	public ShoppingCartController() {
+	ShoppingCartController() {
 		_list = new ShoppingList("Shopping Cart");
+	}
+	
+	public static ShoppingCartController getInstance(){
+		if(scc == null) scc = new ShoppingCartController();
+		return scc;
+		
 	}
 	
 	public void addList(ShoppingList list) { 
@@ -99,13 +106,6 @@ public class ShoppingCartController implements ActionListener{
 			for(ShoppingListItem item : _list.getList()) {
 				newList.addItem(item);
 			}
-			
-			if(arg0.getActionCommand() == "erase"){
-				MainWindow.eraseShoppingCart();
-			}
-			else if(arg0.getActionCommand() == "buy"){
-				MainWindow.setCard("CheckOut");
-			}
 
 		}
 	}
@@ -113,10 +113,7 @@ public class ShoppingCartController implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		
-		if(arg0.getActionCommand() == "erase"){
-			MainWindow.eraseShoppingCart();
-		}
-		else if(arg0.getActionCommand() == "buy"){
+		if(arg0.getActionCommand() == "buy"){
 			MainWindow.setCard("CheckOut");
 		}
 
