@@ -1,12 +1,15 @@
 package se.grupp11.imat;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GridLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
+import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
 
 import java.awt.BorderLayout;
@@ -25,6 +28,8 @@ import se.chalmers.ait.dat215.project.ShoppingItem;
 import se.grupp11.imat.controllers.*;
 import se.grupp11.imat.models.ShoppingList;
 import se.grupp11.imat.models.ShoppingListItem;
+import se.grupp11.imat.views.nav.NavigationLink;
+import se.grupp11.imat.views.nav.NavigationLink.NavType;
 import se.grupp11.imat.views.nav.*;
 import se.grupp11.imat.views.StartPage;
 
@@ -296,6 +301,7 @@ public class MainWindow{
 				return leftMenuItems.get(index);
 			}
 		});
+		navlist.setCellRenderer(new NavigationRenderer());
 		navlist.setListData(leftMenuItems.toArray());
 		
 		navPanel.add(navlist);
@@ -307,14 +313,14 @@ public class MainWindow{
 		JScrollPane scrollPane = new JScrollPane();
 		ShoppingCartPanel.add(scrollPane);
 		
-		shoppingCartView = new ListView();
+		shoppingCartView = ShoppingCartController.getInstance().getShoppingCartView();
 		scrollPane.setViewportView(shoppingCartView);
 		
 		JPanel southPanelShoppingCart = new JPanel();
 		southPanelShoppingCart.setBackground(new Color(255, 255, 255));
 		ShoppingCartPanel.add(southPanelShoppingCart);
 		
-		scc = new ShoppingCartController();
+		scc = ShoppingCartController.getInstance();
 		JButton btnRensa = new JButton("Rensa");
 		southPanelShoppingCart.add(btnRensa);
 		btnRensa.addActionListener(scc);
@@ -384,5 +390,42 @@ public class MainWindow{
 	}
 	public JList getNavlist() {
 		return navlist;
+	}
+	
+	class NavigationRenderer implements ListCellRenderer {
+
+		@Override
+		public Component getListCellRendererComponent(JList list, Object value,
+				int index, boolean isSelected, boolean cellHasFocus) {
+			NavigationLink c = (NavigationLink)value;
+			System.out.println(c.type);
+			// TODO Auto-generated method stub
+			if (c.type == NavType.Separation) {
+				JLabel lblSeparator = new JLabel( );
+				lblSeparator.setBorder( 
+					BorderFactory.createLineBorder(Color.black ) );
+					lblSeparator.setPreferredSize( new Dimension( 20, 2 ) );
+				return lblSeparator ;
+			} else if(c.type == NavType.CategoryLink) {
+				c.setBackground(Color.BLACK);
+			} else if(c.type == NavType.ListLink) {
+				c.setBackground(Color.GREEN);
+			} else if (value instanceof NewListLink)  {
+				c.setBackground(Color.GREEN);
+			} else if(c.type == NavType.NavLink)   {
+				c.setBackground(Color.RED);
+			}
+			
+			if(isSelected) {
+				if(c.type == NavType.NewListLink) {
+					JTextField shoppingListName = new JTextField();
+					shoppingListName.setFocusable(true);
+					return shoppingListName;
+				}
+				c.setBackground(Color.getHSBColor(0.f, 0.f, 0.9f));
+			}
+			
+			return c;
+		}
 	}
 }

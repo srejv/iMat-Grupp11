@@ -42,6 +42,7 @@ public class ListView extends JPanel  {
 		return this.list;
 	}
 	
+	
 	public ListView() {
 		list_data = new Vector();
 		

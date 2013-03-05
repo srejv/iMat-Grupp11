@@ -4,5 +4,6 @@ public class NewListLink extends NavigationLink {
 
 	public NewListLink() {
 		super("New List", "StartPage");
+		type = NavType.NewListLink;
 	}
 }

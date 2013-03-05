@@ -10,7 +10,7 @@ public class NavigationLink extends JLabel {
 	 */
 	private static final long serialVersionUID = 2073622911797281209L;
 
-	public enum NavType { NavLink, Separation, CategoryLink, ListLink };
+	public enum NavType { NavLink, Separation, CategoryLink, ListLink, NewListLink };
 	public NavType type;
 	
 	String value;

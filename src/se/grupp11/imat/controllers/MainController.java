@@ -11,7 +11,7 @@ public class MainController {
 	
 	
 	public MainController() {
-		cartController = new ShoppingCartController();
+		cartController = ShoppingCartController.getInstance();
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

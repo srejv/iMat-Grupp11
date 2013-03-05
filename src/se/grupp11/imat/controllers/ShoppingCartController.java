@@ -18,34 +18,56 @@ import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Product;
 import se.grupp11.imat.models.ShoppingList;
 import se.grupp11.imat.models.ShoppingListItem;
+import se.grupp11.imat.views.ListView;
 
 public class ShoppingCartController implements ActionListener{
 
 	private ShoppingList _list; 		// Model
-	//private ShoppingCartView _view;		// View
-	// need selected products list
+	private ListView _view;
 	
-	
-	public ShoppingCartController() {
+	private ShoppingCartController() {
 		_list = new ShoppingList("Shopping Cart");
+		_view = new ListView();
+		_view.setShoppingList(_list);
+	}
+	
+	private static ShoppingCartController _instance;
+	public static ShoppingCartController getInstance() {
+		if(_instance == null) {
+			_instance = new ShoppingCartController();
+		}
+		return _instance;
+	}
+	
+	public ListView getShoppingCartView() {
+		return _view;
 	}
 	
 	public void addList(ShoppingList list) { 
+		_list = _view.getShoppingList();
 		for(ShoppingListItem item : list.getList()) {
 			_list.addItem(item);
 		}
+		_view.setShoppingList(_list);
+		_view.updateUI();
 	}
 	
 	public void addItem(ShoppingListItem item) {
+		_list = _view.getShoppingList();
 		_list.addItem(item);
+		_view.setShoppingList(_list);
+		_view.updateUI();
 	}
 	
 	public void deleteItem(ShoppingListItem item) {
 		_list.removeItem(item);
 	}
 	
-
+	public ShoppingList getList() {
+		return _list;
+	}
 	
+
 	class AddAction extends AbstractAction {
 		public AddAction(String text, ImageIcon icon, String desc, Integer mnemonic) {
 			super(text, icon);
