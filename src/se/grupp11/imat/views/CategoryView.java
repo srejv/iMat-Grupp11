@@ -19,6 +19,7 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.BorderLayout;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 public class CategoryView extends JPanel  {
 	
@@ -72,6 +73,7 @@ public class CategoryView extends JPanel  {
 			productVector.add(i);
 		}
 		list_1.setListData(productVector);
+		list_1.setVisibleRowCount(-1);
 		
 		this.updateUI();
 	}
