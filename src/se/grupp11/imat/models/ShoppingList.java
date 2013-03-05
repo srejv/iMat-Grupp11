@@ -55,7 +55,7 @@ public class ShoppingList {
 	
 	public void removeItem(ShoppingListItem item) {
 		for(ShoppingListItem listitem : _listitems) {
-			if(item.getItem().getProductId() == listitem.getItem().getProductId()) {
+			if(item.getItem().equals(listitem.getItem())) {
 				listitem.addAmount(-item.getAmount());
 				
 				if(listitem.getAmount() < 0) {

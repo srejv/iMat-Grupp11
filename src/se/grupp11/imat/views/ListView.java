@@ -20,6 +20,8 @@ import java.util.Vector;
 import javax.swing.DropMode;
 
 import se.chalmers.ait.dat215.project.IMatDataHandler;
+import se.grupp11.imat.controllers.ShoppingCartController;
+import se.grupp11.imat.controllers.ShoppingListController;
 import se.grupp11.imat.dnd.ToShoppingCartTransferHandler;
 import se.grupp11.imat.models.ShoppingList;
 import se.grupp11.imat.models.ShoppingListItem;
@@ -89,9 +91,16 @@ public class ListView extends JPanel  {
 					int[] indx = list_1.getSelectedIndices();
 					if(indx.length > 0) {
 						for(int i = indx.length - 1; i >= 0; i-- ) {
+							ListRowItem li = (ListRowItem)list_data.get(indx[i]);
+							if(list.getTitle().equals("Shopping Cart")) {
+								ShoppingCartController.getInstance().deleteItem(li.getShoppingListItem());
+							} else {
+								ShoppingListController.getInstance().getList(list.getId().toString()).removeItem(li.getShoppingListItem());
+							}
 							list_data.remove(indx[i]);
 						}
 						
+					
 						list_1.setListData(list_data);
 						list_1.setSelectedIndex(-1);
 					}
@@ -132,6 +141,11 @@ public class ListView extends JPanel  {
 	class CustomCellRenderer implements ListCellRenderer {
 		public Component getListCellRendererComponent(JList list, Object value,
 				int index, boolean isSelected, boolean cellHasFocus) {
+			ListRowItem l = (ListRowItem)value;
+			if(Integer.parseInt(l.getAmount().getText()) <= 0) {
+				return new JLabel("");
+			}
+			
 			Component c = (Component)value;
 			if(!isSelected) {
 				c.setBackground((index % 2 == 1) ? altRow : row);

@@ -33,6 +33,10 @@ public class ListRowItem extends JPanel {
 		return item.getItem();
 	}
 	
+	public ShoppingListItem getShoppingListItem() {
+		return item;
+	}
+	
 	public void addAmount() {
 		//
 	}

@@ -49,6 +49,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 
 import javax.swing.border.LineBorder;
@@ -56,7 +57,7 @@ import javax.swing.SpringLayout;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 public class ProductSquareItem extends JPanel implements Transferable, 
-				DragSourceListener, DragGestureListener, ActionListener, ChangeListener {
+				DragSourceListener, DragGestureListener, ActionListener, ChangeListener, MouseListener {
 
 	
 	private Product item;
@@ -155,6 +156,7 @@ public class ProductSquareItem extends JPanel implements Transferable,
 		source = new DragSource();
 		source.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY, this);
 		
+		addMouseListener(this);
 	}
 	public ProductSquareItem(Product product) {
 		this(product, 1);
@@ -220,5 +222,34 @@ public class ProductSquareItem extends JPanel implements Transferable,
 	public void stateChanged(ChangeEvent e) {
 		JSpinner s = (JSpinner)e.getSource();
 		amount = (Integer)s.getValue();
+	}
+	@Override
+	public void mouseClicked(MouseEvent event) {
+		// TODO Auto-generated method stub
+	    
+	}
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mousePressed(MouseEvent event) {
+		// TODO Auto-generated method stub
+		int onmask = MouseEvent.CTRL_DOWN_MASK | MouseEvent.BUTTON1_DOWN_MASK;
+	    int offmask = MouseEvent.SHIFT_DOWN_MASK;
+	    if ((event.getModifiersEx() & (onmask | offmask)) == onmask) {
+	        ShoppingCartController.getInstance().addItem(item, amount);
+	    }
+	}
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -60,7 +60,10 @@ public class ShoppingCartController implements ActionListener{
 	}
 	
 	public void deleteItem(ShoppingListItem item) {
+		_list = _view.getShoppingList();
 		_list.removeItem(item);
+		_view.setShoppingList(_list);
+		_view.updateUI();
 	}
 	
 	public ShoppingList getList() {
@@ -123,8 +126,6 @@ public class ShoppingCartController implements ActionListener{
 			for(ShoppingListItem item : _list.getList()) {
 				newList.addItem(item);
 			}
-			
-
 		}
 	}
 
@@ -138,5 +139,10 @@ public class ShoppingCartController implements ActionListener{
 		}
 
 		
+	}
+
+	public void addItem(Product item, int amount) {
+		// TODO Auto-generated method stub
+		addItem(new ShoppingListItem(item, amount));
 	}
 }

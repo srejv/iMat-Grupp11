@@ -20,6 +20,7 @@ import java.awt.Font;
 import java.awt.BorderLayout;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import java.awt.GridLayout;
 
 public class CategoryView extends JPanel  {
 	
@@ -37,86 +38,32 @@ public class CategoryView extends JPanel  {
 		lblCategory.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		add(lblCategory, BorderLayout.NORTH);
 		
-		productVector = new Vector();
-		
-		productVector.clear();
-		
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane, BorderLayout.CENTER);
 		
-		JPanel panel = new JPanel();
-		scrollPane.setViewportView(panel);
-		panel.setLayout(new BorderLayout(0, 0));
-		
-		list_1 = new JList();
-		panel.add(list_1);
-		list_1.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-		list_1.setDragEnabled(true);
-		list_1.setBackground(Color.WHITE);
-		list_1.setCellRenderer(new CustomCellRenderer());
-		AbstractListModelExtension e = new AbstractListModelExtension();
-		list_1.setModel(e);
-		list_1.setTransferHandler(new FromTransferHandler(list_1, e));
-
+		productGrid = new JPanel();
+		scrollPane.setViewportView(productGrid);
+		productGrid.setLayout(new GridLayout(3, 4, 0, 0));
 	}
 	
 	
 	public void LoadCategory(ProductCategory category) {
 		
-		productVector.clear();
 		List<Product> prodList = IMatDataHandler.getInstance().getProducts(category);
+		int rows = prodList.size() / 4;
+		productGrid.setLayout(new GridLayout(rows,4,0,0));
+		
 		for (Product product : prodList) {
-			//JPanel p = new JPanel();
-			//p.add(new JLabel(product.getName()));
-			//productVector.add(p);
 			ProductSquareItem i = new ProductSquareItem(product, 1);
-			productVector.add(i);
+			productGrid.add(i);
 		}
-		list_1.setListData(productVector);
-		list_1.setVisibleRowCount(-1);
 		
 		this.updateUI();
 	}
 	
-	private Vector productVector;
-	private JList list_1;
-	private final class AbstractListModelExtension extends AbstractListModel {
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 6801474331410870270L;
+	private JPanel productGrid;
 
-		@Override
-		public Object getElementAt(int arg0) {
-			return productVector.get(arg0);
-		}
-
-		@Override
-		public int getSize() {
-			return productVector.size();
-		}
-	}
-
-
-	class CustomCellRenderer implements ListCellRenderer {
-		public Component getListCellRendererComponent(JList list, Object value,
-				int index, boolean isSelected, boolean cellHasFocus) {
-			Component c = (Component)value;
-			if(!isSelected) {
-				c.setBackground((index % 2 == 1) ? altRow : row);
-			} else {
-				c.setBackground(sel);
-			}
-				
-			return c;
-		}
-		private Color row = Color.getHSBColor(0.f, 0.f, 1.f);
-		private Color altRow = Color.getHSBColor(0.f, 0.f, 0.9f);
-		private Color sel = Color.getHSBColor(0.3f, 0.1f, 0.9f);
-	}
-
-	
-	public JList getList() {
-		return list_1;
+	public JPanel getProductGrid() {
+		return productGrid;
 	}
 }
