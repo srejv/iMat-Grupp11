@@ -44,14 +44,13 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 
 import se.chalmers.ait.dat215.project.*;
-<<<<<<< HEAD
+
 import se.grupp11.imat.controllers.ShoppingCartController;
 import se.grupp11.imat.controllers.ShoppingListController;
 import se.grupp11.imat.models.ShoppingList;
 import se.grupp11.imat.models.ShoppingListItem;
-=======
+
 import se.grupp11.imat.MainWindow;
->>>>>>> nuclear--markus
 
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
@@ -75,6 +74,7 @@ public class ProductSquareItem extends JPanel implements Transferable,
 	private DragSource source;
 	private TransferHandler t;
 	private JPopupMenu _popupMenu;
+	private SpringLayout springLayout;
 
 	/**
 	 * 
@@ -82,41 +82,32 @@ public class ProductSquareItem extends JPanel implements Transferable,
 	private static final long serialVersionUID = -4434560229573347151L;
 	private JSpinner spinner;
 	
-	private void fillPopupMenu() {
-		JMenuItem menuItem = new JMenuItem("Add to cart");
-		menuItem.addActionListener(this);
-		_popupMenu.add(menuItem);
-		
-		for(ShoppingList l : ShoppingListController.getInstance().getAll()) {
-			menuItem = new JMenuItem("Add to: " + l.getTitle());
-			menuItem.setActionCommand(l.getId().toString());
-			menuItem.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// Shopping cart
-					ShoppingListController.getInstance()
-						.getList(e.getActionCommand())
-						.addItem(new ShoppingListItem(item, amount));
-				}
-			});
-			_popupMenu.add(menuItem);
-		}
-	}
+
 	/**
 	 * Create the panel.
 	 */
-<<<<<<< HEAD
+
 	public ProductSquareItem(Product item2, int amount) {
+		this(item2);
 		this.amount = amount;
+	}
+	
+	
+	/**
+	 * @wbp.parser.constructor
+	 */
+	public ProductSquareItem(final Product item) {
+		this.amount=1;
+		
 		_popupMenu = new JPopupMenu();
 		fillPopupMenu();
 		MouseListener popupListener = new PopupListener();
 		this.addMouseListener(popupListener);
 		
 		setPreferredSize(new Dimension(160, 246));
-=======
-	public ProductSquareItem(final Product item) {
->>>>>>> nuclear--markus
+		
+		
+		// Hover-effect
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -127,19 +118,49 @@ public class ProductSquareItem extends JPanel implements Transferable,
 				setBorder(null);
 			}
 		});
+		
+		//sizes
 		setMaximumSize(new Dimension(170, 300));
 		setMinimumSize(new Dimension(170, 300));
 		setRequestFocusEnabled(false);
 		
-<<<<<<< HEAD
-		item=item2;
-		SpringLayout springLayout = new SpringLayout();
+		//	TODO
+		//item=item2;
+		springLayout = new SpringLayout();
 		setLayout(springLayout);
-=======
+
 		this.setItem(item);
->>>>>>> nuclear--markus
+
+		setLbls();
 		
+		setBorder(null);
+		this.setOpaque(false);
+
 		
+
+		t = new TransferHandler() {
+			public Transferable createTransferable(JComponent c) {
+				return new ProductSquareItem(item, (Integer)spinner.getValue()); 
+			}
+		};
+		setTransferHandler(t);
+		
+		source = new DragSource();
+		source.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY, this);
+		
+		this.addMouseListener(new MouseAdapter() {
+	    public void mouseClicked(MouseEvent evt) {
+	        if (evt.getClickCount() == 2) {
+	            MainWindow.setProductView(item);
+	            MainWindow.setCard("productView");
+	        }
+	    }
+	});
+	}
+
+	private void setLbls() {
+		// Labels
+		// TODO jmf-pris??
 		JLabel lblImage = new JLabel("");
 		springLayout.putConstraint(SpringLayout.NORTH, lblImage, 10, SpringLayout.NORTH, this);
 		springLayout.putConstraint(SpringLayout.WEST, lblImage, 10, SpringLayout.WEST, this);
@@ -177,8 +198,6 @@ public class ProductSquareItem extends JPanel implements Transferable,
 		springLayout.putConstraint(SpringLayout.NORTH, spinner, 212, SpringLayout.NORTH, this);
 		add(spinner);
 		
-		setBorder(null);
-		this.setOpaque(false);
 		
 		lblImage.setIcon(new ImageIcon(((new ImageIcon(System.getProperty("user.home") + "/.dat215/imat/images/" + item.getImageName())).getImage()).getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
 		
@@ -190,31 +209,6 @@ public class ProductSquareItem extends JPanel implements Transferable,
 		btnLggTillI.addActionListener(this);
 		add(btnLggTillI);
 		
-<<<<<<< HEAD
-		t = new TransferHandler() {
-			public Transferable createTransferable(JComponent c) {
-				return new ProductSquareItem(item, (Integer)spinner.getValue()); 
-			}
-		};
-		setTransferHandler(t);
-		
-		source = new DragSource();
-		source.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY, this);
-		
-		addMouseListener(this);
-	}
-	public ProductSquareItem(Product product) {
-		this(product, 1);
-=======
-		this.addMouseListener(new MouseAdapter() {
-		    public void mouseClicked(MouseEvent evt) {
-		        if (evt.getClickCount() == 2) {
-		            MainWindow.setProductView(item);
-		            MainWindow.setCard("productView");
-		        }
-		    }
-		});
->>>>>>> nuclear--markus
 	}
 	public Dimension getThisSize() {
 		return getSize();
@@ -222,7 +216,7 @@ public class ProductSquareItem extends JPanel implements Transferable,
 	public void setThisSize(Dimension size) {
 		setSize(size);
 	}
-<<<<<<< HEAD
+
 	
 	public Product getProduct() {
 		return item;
@@ -326,12 +320,32 @@ public class ProductSquareItem extends JPanel implements Transferable,
 	    }
 	}
 
-=======
 	public Product getItem() {
 		return item;
 	}
 	public void setItem(Product item) {
 		this.item = item;
 	}
->>>>>>> nuclear--markus
+	
+	private void fillPopupMenu() {
+		JMenuItem menuItem = new JMenuItem("Add to cart");
+		menuItem.addActionListener(this);
+		_popupMenu.add(menuItem);
+		
+		for(ShoppingList l : ShoppingListController.getInstance().getAll()) {
+			menuItem = new JMenuItem("Add to: " + l.getTitle());
+			menuItem.setActionCommand(l.getId().toString());
+			menuItem.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// Shopping cart
+					ShoppingListController.getInstance()
+						.getList(e.getActionCommand())
+						.addItem(new ShoppingListItem(item, amount));
+				}
+			});
+			_popupMenu.add(menuItem);
+		}
+	}
+
 }
