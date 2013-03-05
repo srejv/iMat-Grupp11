@@ -35,10 +35,10 @@ public class HistoryView extends JPanel {
 		
 		
 		for(int i=0; i<ordersList.size(); i++){
-			arr[i]=((Order)ordersList.get(i))).getOrderNumber();
+			//arr[i]=((Order)ordersList.get(i))).getOrderNumber();
 		}
 		
-		add(ordersList, BorderLayout.CENTER);
+		//add(ordersList, BorderLayout.CENTER);
 		
 
 		
