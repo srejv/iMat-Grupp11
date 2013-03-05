@@ -20,7 +20,7 @@ import java.util.Vector;
 import javax.swing.DropMode;
 
 import se.chalmers.ait.dat215.project.IMatDataHandler;
-import se.grupp11.imat.dnd.ToTransferHandler;
+import se.grupp11.imat.dnd.ToShoppingCartTransferHandler;
 import se.grupp11.imat.models.ShoppingList;
 import se.grupp11.imat.models.ShoppingListItem;
 
@@ -60,7 +60,7 @@ public class ListView extends JPanel  {
 		
 		list_1 = new JList();
 		list_1.setDropMode(DropMode.INSERT);
-		list_1.setTransferHandler(new ToTransferHandler(TransferHandler.COPY, list_1, list_data));
+		list_1.setTransferHandler(new ToShoppingCartTransferHandler(TransferHandler.COPY, list_1, list_data));
 		list_1.setPreferredSize(new Dimension(200, 500));
 		springLayout.putConstraint(SpringLayout.SOUTH, list_1, -10, SpringLayout.SOUTH, this);
 		list_1.setDragEnabled(true);

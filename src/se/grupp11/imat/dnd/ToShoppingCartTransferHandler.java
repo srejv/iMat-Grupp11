@@ -15,12 +15,12 @@ import se.grupp11.imat.controllers.ShoppingCartController;
 import se.grupp11.imat.models.ShoppingListItem;
 import se.grupp11.imat.views.ListRowItem;
 
-public class ToTransferHandler extends TransferHandler {
+public class ToShoppingCartTransferHandler extends TransferHandler {
     int action;
     JList target;
     Vector data2;
     
-    public ToTransferHandler(int action, JList listtarget, Vector listdata) {
+    public ToShoppingCartTransferHandler(int action, JList listtarget, Vector listdata) {
         this.action = action;
         this.target = listtarget;
         this.data2 = listdata;
