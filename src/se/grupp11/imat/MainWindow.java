@@ -20,6 +20,7 @@ import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
 import javax.swing.BoxLayout;
 
+import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.ShoppingItem;
 import se.grupp11.imat.controllers.ShoppingCartController;
 import se.grupp11.imat.views.StartPage;
@@ -35,6 +36,8 @@ import se.grupp11.imat.views.SettingsView;
 import se.grupp11.imat.views.CheckOutView;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import se.grupp11.imat.views.ProductView;
+import se.chalmers.ait.dat215.project.Product;
 
 public class MainWindow{
 
@@ -48,6 +51,8 @@ public class MainWindow{
 	private JButton editDetails;
 	private static JList shoppingCartList;
 	private ShoppingCartController scc;
+	
+	private static ProductView productView;
 	
 
 	private JTextField txtSk;
@@ -298,7 +303,11 @@ public class MainWindow{
 		Color c=new Color(255, 250, 250);
 		startPage.setBackground(c);
 		
+		
 		setCard("StartPage");
+		
+	
+		
 		
 	}
 
@@ -316,4 +325,9 @@ public class MainWindow{
 	public JButton getBtnBack() {
 		return btnBack;
 	}
+	
+	public static void setProductView(Product item){
+		productView=new ProductView(item);
+		panelMainStage.add(productView, "productView");
+		}
 }
