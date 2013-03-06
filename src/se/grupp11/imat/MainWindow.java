@@ -42,6 +42,7 @@ import java.awt.Dimension;
 import se.grupp11.imat.views.CategoryView;
 import se.grupp11.imat.views.ListView;
 import se.grupp11.imat.views.ListViewEdit;
+import se.grupp11.imat.views.SearchView;
 import se.grupp11.imat.views.SettingsView;
 import se.grupp11.imat.views.CheckOutView;
 import java.awt.event.ActionListener;
@@ -61,6 +62,10 @@ import javax.swing.event.ListSelectionListener;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class MainWindow{
 	private JFrame frame;
@@ -78,6 +83,7 @@ public class MainWindow{
 	private SettingsView settingsView;
 	private CheckOutView checkOutView;
 	private CategoryView categoryView;
+	private SearchView searchView;
 	private static ListView listView;
 	private static ListViewEdit editListView;
 	private static ListView shoppingCartView;
@@ -259,6 +265,26 @@ public class MainWindow{
 		panelTop.add(centerPanel, BorderLayout.CENTER);
 		
 		txtSk = new JTextField();
+		txtSk.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					searchView.search(txtSk.getText());
+					setCard("Search");
+				}
+			}
+		});
+		txtSk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		txtSk.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				txtSk.selectAll();
+			}
+		});
 		txtSk.setText("Sök…");
 		centerPanel.add(txtSk);
 
@@ -434,6 +460,9 @@ public class MainWindow{
 
 		editListView = new ListViewEdit();
 		panelMainStage.add(editListView, "EditList");
+		
+		searchView = new SearchView();
+		panelMainStage.add(searchView, "Search");
 		
 		startPage = new StartPage();
 

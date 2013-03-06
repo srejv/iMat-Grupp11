@@ -28,36 +28,38 @@ public class SearchView extends JPanel  {
 	 * 
 	 */
 	private static final long serialVersionUID = -4395863302776044571L;
+	private JLabel lblTitle; 
 	/**
 	 * Create the panel.
 	 */
 	public SearchView() {
 		setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblCategory = new JLabel("Category");
-		lblCategory.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		add(lblCategory, BorderLayout.NORTH);
+		lblTitle = new JLabel("Sökning");
+		lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		add(lblTitle, BorderLayout.NORTH);
 		
 		productGrid = new JPanel();
-		add(productGrid, BorderLayout.SOUTH);
+		add(productGrid, BorderLayout.CENTER);
 		productGrid.setBackground(new Color(255, 250, 250));
-		productGrid.setLayout(new GridLayout(4, 4, 0, 0));
-		
-
+		productGrid.setLayout(new GridLayout(0, 4, 0, 0));
 	}
 	
 	
-	public void LoadCategory(ProductCategory category) {
+	public void search(String search) {
 		
+		lblTitle.setText("<html>Sökning på <b>" + search + "</b></html>");
 		productGrid.removeAll();
-		List<Product> prodList = IMatDataHandler.getInstance().getProducts(category);
-		//int rows = prodList.size() / 4;
-		productGrid.setLayout(new GridLayout(4,4,0,0));
+		List<Product> prodList = IMatDataHandler.getInstance().findProducts(search);
 		
 		for (Product product : prodList) {
 			ProductSquareItem i = new ProductSquareItem(product, 1);
 			productGrid.add(i);
 		}
+		for(int i = prodList.size(); i<16; i++){
+			productGrid.add(new JLabel(""));
+		}
+		productGrid.setLayout(new GridLayout(0,4));
 		
 		this.updateUI();
 	}
