@@ -15,7 +15,11 @@ import javax.swing.table.TableModel;
 
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Order;
+import se.grupp11.imat.MainWindow;
+
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class HistoryView extends JPanel {
 	private JTable table;
@@ -38,26 +42,20 @@ public class HistoryView extends JPanel {
 		lblHistory.setFont(new Font("Tahoma", Font.BOLD, 30));
 		add(lblHistory, BorderLayout.NORTH);
 
-		IMatDataHandler handler = IMatDataHandler.getInstance();
-		JList list = new JList();
 
-		ordersList = handler.getOrders();
 
-		model = new String[ordersList.size()][2];
 
-		for (int i = 0; i < ordersList.size(); i++) {
-			model[i][0] = ordersList.get(i).getDate().toString();
-			model[i][1] = "" + ordersList.get(i).getOrderNumber();
-		}
-		Object[] names = { "Datum", "OrderNr" };
-
-		table = new JTable((Object[][]) (model), names);
-		table.setFont(new Font("Tahoma", Font.BOLD, 14));
-		add(table, BorderLayout.CENTER);
+		updateView();
 		
-	}
 
-	public void updateView() {		
+		 
+
+	}
+	
+
+
+	public void updateView() {	
+		// Gettings data to model [][] and names[]
 		ordersList = IMatDataHandler.getInstance().getOrders();
 		
 		model = new String[ordersList.size()][2];
@@ -65,14 +63,47 @@ public class HistoryView extends JPanel {
 			model[i][0] = ordersList.get(i).getDate().toString();
 			model[i][1] = "" + ordersList.get(i).getOrderNumber();
 		}
-		this.remove(table);
+		if(table != null)
+			this.remove(table);
 		
 		Object[] names = { "Datum", "OrderNr" };
+		
+		DefaultTableModel tableModel = new DefaultTableModel(model, names);
+		
+		table = new JTable(tableModel){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
-		table = new JTable((Object[][]) (model), names);
+			@Override
+			  public boolean isCellEditable(int rowIndex, int colIndex) {
+				  return false;
+			  }
+		};
+		
+
+
 		table.setFont(new Font("Tahoma", Font.BOLD, 14));
 		add(table, BorderLayout.CENTER);
+
 		
+		System.out.println(""+ tableModel.isCellEditable(1,1));
+		
+		 table.addMouseListener(new MouseAdapter(){
+			   public void mouseClicked(MouseEvent e) {
+			      if (e.getClickCount() == 2) {
+			         JTable target = (JTable)e.getSource();
+			         int row = target.getSelectedRow();
+			         int o=Integer.parseInt((String) table.getValueAt(row, 1));
+			         MainWindow.setReceiptView(new ReceiptView(o));
+			         MainWindow.setCard("ReceiptView");
+
+			      }
+			   }
+		 });
+		
+	
 		this.updateUI();
 	}
 

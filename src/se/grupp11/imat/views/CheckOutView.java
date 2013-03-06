@@ -52,11 +52,15 @@ public class CheckOutView extends JPanel{
 		
 		CheckoutCardView checkoutCardView = new CheckoutCardView();
 		checkoutCardView.setBounds(6, 158, 484, 102);
+		CheckoutCardView.updateCardView();
 		panel.add(checkoutCardView);
 		
 		CheckoutAdressView checkoutAdressView = new CheckoutAdressView();
 		checkoutAdressView.setBounds(6, 6, 484, 140);
+		CheckoutAdressView.updateAdressCard();
 		panel.add(checkoutAdressView);
+		
+		
 	}
 
 	public static void updateView(){

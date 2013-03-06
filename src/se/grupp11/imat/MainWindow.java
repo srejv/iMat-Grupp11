@@ -72,6 +72,7 @@ import java.awt.Font;
 import javax.swing.border.LineBorder;
 import javax.swing.KeyStroke;
 import java.awt.event.InputEvent;
+import se.grupp11.imat.views.ReceiptView;
 
 
 public class MainWindow{
@@ -99,6 +100,7 @@ public class MainWindow{
 	private static HistoryView historyView;
 	private static ProductView productView;
 	private JTextField txtSk;
+	private static JPanel receiptView;
 
 	/**
 	 * Create the application.
@@ -522,6 +524,9 @@ public class MainWindow{
 		historyView = new HistoryView();
 		panelMainStage.add(historyView, "HistoryView");
 		
+		receiptView =  new JPanel();
+		panelMainStage.add(receiptView, "ReceiptView");
+		
 		
 		setCard("StartPage");
 		
@@ -606,5 +611,14 @@ public class MainWindow{
 	
 	public static HistoryView getHistory() {
 		return historyView;
+	}
+
+	public static JPanel getReceiptView() {
+		return receiptView;
+	}
+
+	public static void setReceiptView(ReceiptView receiptView) {
+		MainWindow.receiptView = receiptView;
+		panelMainStage.add(receiptView, "ReceiptView");
 	}
 }
