@@ -38,12 +38,9 @@ public class CategoryView extends JPanel  {
 		lblCategory.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		add(lblCategory, BorderLayout.NORTH);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		add(scrollPane, BorderLayout.CENTER);
-		
 		productGrid = new JPanel();
+		add(productGrid, BorderLayout.SOUTH);
 		productGrid.setBackground(new Color(255, 250, 250));
-		scrollPane.setViewportView(productGrid);
 		productGrid.setLayout(new GridLayout(4, 4, 0, 0));
 		
 

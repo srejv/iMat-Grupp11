@@ -56,6 +56,9 @@ import se.grupp11.imat.views.HistoryView;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
 
 public class MainWindow{
 	private JFrame frame;
@@ -311,20 +314,8 @@ public class MainWindow{
 		});
 
 
-<<<<<<< HEAD
-//		list.setModel(new AbstractListModel() {
-//			String[] values = new String[] {"Test1 längre text...", "Test2", "Test3", "Test4", "Tidigare Köp"};
-//			public int getSize() {
-//				return leftMenuItems.size();
-//			}
-//			public Object getElementAt(int index) {
-//				return leftMenuItems.get(index);
-//			}
-//		});
-		
-	//	list.setSize(500, 100);
-=======
->>>>>>> NYYY
+
+
 		navlist.setCellRenderer(new NavigationRenderer());
 		navlist.setListData(leftMenuItems.toArray());
 		
@@ -332,17 +323,23 @@ public class MainWindow{
 		
 		JPanel ShoppingCartPanel = new JPanel();
 		frame.getContentPane().add(ShoppingCartPanel, BorderLayout.EAST);
-		ShoppingCartPanel.setLayout(new GridLayout(2, 1, 0, 0));
+		ShoppingCartPanel.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("208px"),},
+			new RowSpec[] {
+				RowSpec.decode("570px"),
+				RowSpec.decode("42px"),
+				}));
 		
 		JScrollPane scrollPane = new JScrollPane();
-		ShoppingCartPanel.add(scrollPane);
+		ShoppingCartPanel.add(scrollPane, "1, 1, fill, fill");
+		scrollPane.setBackground(Color.WHITE);
 		
 		shoppingCartView = ShoppingCartController.getInstance().getShoppingCartView();
 		scrollPane.setViewportView(shoppingCartView);
 		
 		JPanel southPanelShoppingCart = new JPanel();
 		southPanelShoppingCart.setBackground(new Color(255, 255, 255));
-		ShoppingCartPanel.add(southPanelShoppingCart);
+		ShoppingCartPanel.add(southPanelShoppingCart, "1, 2, fill, fill");
 		
 		scc = ShoppingCartController.getInstance();
 		JButton btnRensa = new JButton("Rensa");

@@ -1,5 +1,7 @@
 package se.grupp11.imat.controllers;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -25,10 +27,13 @@ public class ShoppingCartController implements ActionListener{
 	private ShoppingList _list; 		// Model
 	private ListView _view;
 	
+	
 	private ShoppingCartController() {
 		_list = new ShoppingList("Shopping Cart");
 		_view = new ListView();
 		_view.setShoppingList(_list);
+		_view.setBackground(Color.WHITE);
+		_view.setFont(new Font("Tahoma", Font.BOLD, 15));
 	}
 	
 	private static ShoppingCartController _instance;
@@ -139,8 +144,8 @@ public class ShoppingCartController implements ActionListener{
 
 			_view.setShoppingList(_list);
 			_view.updateUI();
-			//MainWindow.eraseShoppingCart();
 		}
+		
 		else if(arg0.getActionCommand() == "buy"){
 			MainWindow.setCard("CheckOut");
 		}
@@ -149,7 +154,6 @@ public class ShoppingCartController implements ActionListener{
 	}
 
 	public void addItem(Product item, int amount) {
-		// TODO Auto-generated method stub
 		addItem(new ShoppingListItem(item, amount));
 	}
 }
