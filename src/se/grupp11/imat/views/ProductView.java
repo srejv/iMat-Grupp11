@@ -4,6 +4,7 @@ import java.awt.Dimension;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.SpinnerNumberModel;
 
 import se.chalmers.ait.dat215.project.Product;
 import se.grupp11.imat.controllers.ShoppingCartController;
@@ -24,13 +25,13 @@ import java.awt.event.ActionEvent;
 public class ProductView extends JPanel {
 
 	
-	JSpinner spinner = new JSpinner();
+	JSpinner spinner = new JSpinner(new SpinnerNumberModel(0, 0, 30, 1));
 	
 	/**
 	 * Create the panel.
 	 */
 	public ProductView(final Product product) {
-
+		spinner.setValue(1);
 		
 		setMaximumSize(new Dimension(680, 1200));
 		setMinimumSize(new Dimension(680, 1200));
