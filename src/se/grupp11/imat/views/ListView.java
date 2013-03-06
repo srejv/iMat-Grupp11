@@ -112,7 +112,40 @@ public class ListView extends JPanel  {
 			
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_DELETE) {
+				if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+					
+					int[] indx = list_1.getSelectedIndices();
+					if(indx.length > 0) {
+						for(int i = 0; i < indx.length; i++) {
+							ListRowItem li = (ListRowItem)list_data.get(indx[i]);
+							if(list.getTitle().equals("Shopping Cart")) {
+								ShoppingCartController.getInstance().addItem(li.getProduct(), -1);
+							} else {
+								list.addItem(new ShoppingListItem(li.getProduct().getProductId(), -1));
+								LoadShoppingList(list);
+							}							
+						}
+						
+						list_1.setSelectedIndices(indx);
+					}
+				}
+				if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+					int[] indx = list_1.getSelectedIndices();
+					if(indx.length > 0) {
+						for(int i = 0; i < indx.length; i++) {
+							ListRowItem li = (ListRowItem)list_data.get(indx[i]);
+							if(list.getTitle().equals("Shopping Cart")) {
+								ShoppingCartController.getInstance().addItem(li.getProduct(), 1);
+							} else {
+								list.addItem(new ShoppingListItem(li.getProduct().getProductId(), 1));
+								LoadShoppingList(list);
+							}
+						}
+						list_1.setSelectedIndices(indx);
+					}
+				}
+				
+				if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
 					int[] indx = list_1.getSelectedIndices();
 					if(indx.length > 0) {
 						for(int i = indx.length - 1; i >= 0; i-- ) {

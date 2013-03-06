@@ -11,8 +11,15 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+			public void run() {
+				ShoppingListController.getInstance().save();
+				IMatDataHandler.getInstance().shutDown();
+			}
+		});
+		
 		EventQueue.invokeLater(new Runnable() {
+			
 			public void run() {
 				try {
 					MainWindow window = new MainWindow();
@@ -20,9 +27,6 @@ public class Main {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
-				ShoppingListController.getInstance().save();
-				IMatDataHandler.getInstance().shutDown();
 			}
 		});
 	}

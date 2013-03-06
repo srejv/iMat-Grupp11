@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
 
@@ -46,6 +47,7 @@ import se.grupp11.imat.views.CheckOutView;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,15 +64,14 @@ import com.jgoodies.forms.layout.RowSpec;
 
 public class MainWindow{
 	private JFrame frame;
-
-
+	
 	private static CardLayout cards;
 	private static JPanel panelMainStage;
 	private JButton btnBack;
 	private JButton editDetails;
 	private ShoppingCartController scc;
-	private JList navlist;
-	private List<NavigationLink> leftMenuItems;
+	private static JList navlist;
+	private static List<NavigationLink> leftMenuItems;
 	
 	// Main stage pages
 	private StartPage startPage;
@@ -81,16 +82,8 @@ public class MainWindow{
 	private static ListViewEdit editListView;
 	private static ListView shoppingCartView;
 	private static HistoryView historyView;
-
-	
 	private static ProductView productView;
-	
-
 	private JTextField txtSk;
-
-
-
-
 
 	/**
 	 * Create the application.
@@ -106,9 +99,17 @@ public class MainWindow{
 		ShoppingList list = new ShoppingList();
 		list.setTitle("Shopping Cart");
 		shoppingCartView.setShoppingList(list);
+		
+		
 	}
 	
-	private void fillMenu() {
+	public static void fillMenuAndRefresh() {
+		fillMenu();
+		navlist.setListData(leftMenuItems.toArray());
+	}
+	
+	private static void fillMenu() {
+		leftMenuItems.clear();
 		
 		leftMenuItems.add(new NavigationLink("Start", "StartPage"));
 		leftMenuItems.add(new NavigationLink("HistoryView", "HistoryView"));
@@ -305,6 +306,71 @@ public class MainWindow{
 			    }
 			}
 		});
+		
+		navlist.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if (e.getButton() == MouseEvent.BUTTON3) {
+					int idx = navlist.locationToIndex(e.getPoint());
+					navlist.setSelectedIndex(idx);
+					
+					NavigationLink sel = (NavigationLink)navlist.getSelectedValue();
+					if(sel.type == NavType.ListLink) {
+						String listid = ((ListLink)sel).getList().getId().toString();
+						JPopupMenu contextMenu = new JPopupMenu();
+						JMenuItem menuItem = new JMenuItem("Add to cart");
+						menuItem.setActionCommand(listid);
+						menuItem.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent ae) {
+								ShoppingCartController.getInstance()
+									.addList(ShoppingListController.getInstance().getList(ae.getActionCommand()));
+							}
+						});
+						contextMenu.add(menuItem);
+						menuItem = new JMenuItem("Delete list");
+						menuItem.setActionCommand(listid);
+						menuItem.addActionListener(new ActionListener() {
+							
+							@Override
+							public void actionPerformed(ActionEvent ae) {
+								ShoppingListController.getInstance().delete(ae.getActionCommand());
+								fillMenu();
+								navlist.setListData(leftMenuItems.toArray());
+							}
+						});
+						contextMenu.add(menuItem);
+						contextMenu.show(e.getComponent(), e.getX(), e.getY());
+					}
+				}
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 
 
 
@@ -422,26 +488,33 @@ public class MainWindow{
 	}
 	
 	class NavigationRenderer implements ListCellRenderer {
-
+		private Color category = Color.getHSBColor(22.0f/360.0f, 0.84f, 1.f);
+		private Color selection = new Color(255,250,250);
 		@Override
 		public Component getListCellRendererComponent(JList list, Object value,
 				int index, boolean isSelected, boolean cellHasFocus) {
 			NavigationLink c = (NavigationLink)value;
 			if (c.type == NavType.Separation) {
 				JLabel lblSeparator = new JLabel( );
+				lblSeparator.setOpaque(true);
 				lblSeparator.setBorder( 
 					BorderFactory.createLineBorder(Color.black ) );
 					lblSeparator.setPreferredSize( new Dimension( 20, 2 ) );
 				return lblSeparator ;
 			} else if(c.type == NavType.CategoryLink) {
-				c.setBackground(Color.BLACK);
+				c.setBackground(category);
 			} else if(c.type == NavType.ListLink) {
-				c.setBackground(Color.getHSBColor(0.4f, 0.3f, 0.5f));
+				c.setBackground(category);
 			} else if (c.type == NavType.NewListLink)  {
-				c.setBackground(Color.GREEN);
+				c.setBackground(category);
 
 			} else if(c.type == NavType.NavLink)   {
-				c.setBackground(Color.RED);
+				c.setBackground(category);
+			}
+			
+			if(index % 2 == 1) {
+				Color g = c.getBackground();
+				c.setBackground(g.brighter());
 			}
 			
 			if(isSelected) {
@@ -454,7 +527,7 @@ public class MainWindow{
 					navlist.repaint();
 					return new JLabel("");
 				}
-				c.setBackground(Color.getHSBColor(0.f, 0.f, 0.9f));
+				c.setBackground(selection);
 			}
 			
 			return c;

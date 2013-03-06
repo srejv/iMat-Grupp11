@@ -83,6 +83,7 @@ public class ListViewEdit extends JPanel  {
 				list.setTitle(textTitle.getText());
 				list.setDescription(txtDescription.getText());
 				l.setShoppingList(list);
+				MainWindow.fillMenuAndRefresh();
 				MainWindow.setCard("List");
 			}
 		});

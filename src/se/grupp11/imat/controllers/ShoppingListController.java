@@ -30,7 +30,7 @@ public class ShoppingListController implements Observer {
 		return list;
 	}
 	
-	public void delete(String id) throws Exception {
+	public void delete(String id) {
 		_lists.remove(id);
 	}
 	
