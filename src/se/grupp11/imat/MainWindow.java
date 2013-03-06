@@ -84,7 +84,7 @@ public class MainWindow{
 	private JTextField txtSk;
 
 
-	private JList list;
+
 
 
 	/**
@@ -310,16 +310,7 @@ public class MainWindow{
 			}
 		});
 
-		list.setSize(500, 100);
-		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Test1 längre text...", "Test2", "Test3", "Test4", "Tidigare Köp"};
-			public int getSize() {
-				return leftMenuItems.size();
-			}
-			public Object getElementAt(int index) {
-				return leftMenuItems.get(index);
-			}
-		});
+
 		navlist.setCellRenderer(new NavigationRenderer());
 		navlist.setListData(leftMenuItems.toArray());
 		
@@ -388,6 +379,10 @@ public class MainWindow{
 		
 		Color c=new Color(255, 250, 250);
 		startPage.setBackground(c);
+		panelMainStage.setBackground(c);
+		this.categoryView.setBackground(c);
+		this.checkOutView.setBackground(c);
+		this.settingsView.setBackground(c);
 		
 		HistoryView historyView = new HistoryView();
 		panelMainStage.add(historyView, "HistoryView");
