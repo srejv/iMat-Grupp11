@@ -6,6 +6,7 @@ import javax.swing.JRadioButton;
 import java.awt.BorderLayout;
 import javax.swing.BoxLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 
 public class DeliverTimeView extends JPanel {
 
@@ -17,7 +18,7 @@ public class DeliverTimeView extends JPanel {
 		setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(6, 107, 390, 33);
+		panel.setBounds(6, 128, 390, 33);
 		add(panel);
 		
 		JRadioButton radioButton = new JRadioButton("12-16");
@@ -36,32 +37,37 @@ public class DeliverTimeView extends JPanel {
 		panel.add(rdbtnNewRadioButton_1);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(6, 6, 438, 89);
+		panel_1.setBounds(6, 27, 438, 89);
 		add(panel_1);
 		
-		JLabel lblDeliveryTime = new JLabel("Delivery Time");
-		panel_1.add(lblDeliveryTime);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Today");
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("Idag");
 		panel_1.add(rdbtnNewRadioButton);
 		
-		JRadioButton rdbtnToday = new JRadioButton("Today + 1");
+		JRadioButton rdbtnToday = new JRadioButton("Idag + 1");
 		panel_1.add(rdbtnToday);
 		
-		JRadioButton rdbtnToday_1 = new JRadioButton("Today + 2");
+		JRadioButton rdbtnToday_1 = new JRadioButton("Idag + 2");
 		panel_1.add(rdbtnToday_1);
 		
-		JRadioButton rdbtnToday_2 = new JRadioButton("Today + 3");
+		JRadioButton rdbtnToday_2 = new JRadioButton("Idag + 3");
 		panel_1.add(rdbtnToday_2);
 		
-		JRadioButton rdbtnToday_3 = new JRadioButton("Today + 4");
+		JRadioButton rdbtnToday_3 = new JRadioButton("Idag + 4");
 		panel_1.add(rdbtnToday_3);
 		
-		JRadioButton rdbtnToday_4 = new JRadioButton("Today + 5");
+		JRadioButton rdbtnToday_4 = new JRadioButton("Idag + 5");
 		panel_1.add(rdbtnToday_4);
 		
-		JRadioButton rdbtnToday_5 = new JRadioButton("Today + 6");
+		JRadioButton rdbtnToday_5 = new JRadioButton("Idag + 6");
 		panel_1.add(rdbtnToday_5);
+		
+		
+		
+		JLabel lblDeliveryTime = new JLabel("Leveranstid");
+		lblDeliveryTime.setFont(new Font("Lucida Grande", Font.BOLD, 15));
+		lblDeliveryTime.setBounds(6, 6, 109, 16);
+		add(lblDeliveryTime);
 
 	}
 
