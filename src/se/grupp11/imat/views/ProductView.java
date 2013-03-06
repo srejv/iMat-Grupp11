@@ -97,7 +97,7 @@ public class ProductView extends JPanel {
 		btnNewButton.setBounds(556, 28, 220, 29);
 		add(btnNewButton);
 		
-		label.setIcon(new ImageIcon(((new ImageIcon("/Users/Markus/.dat215/imat/images/" + product.getImageName())).getImage()).getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH)));
+		label.setIcon(new ImageIcon(((new ImageIcon(System.getProperty("user.home") + "/.dat215/imat/images/" + product.getImageName())).getImage()).getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH)));
 		
 		this.setBackground(new Color(255,250,250));
 		westPanel.setOpaque(false);

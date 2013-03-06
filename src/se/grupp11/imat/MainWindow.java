@@ -576,4 +576,8 @@ public class MainWindow{
 		productView=new ProductView(item);
 		panelMainStage.add(productView, "productView");
 	}
+	
+	public static HistoryView getHistory() {
+		return historyView;
+	}
 }

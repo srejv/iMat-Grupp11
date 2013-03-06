@@ -54,7 +54,7 @@ public class SearchView extends JPanel  {
 		List<Product> prodList = IMatDataHandler.getInstance().findProducts(search);
 		
 		for(int i = 0; i < 16; i++) {
-			if(i > prodList.size()) {
+			if(i >= prodList.size()) {
 				productGrid.add(new JLabel(""));
 				continue;
 			}

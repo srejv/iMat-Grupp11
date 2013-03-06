@@ -37,6 +37,7 @@ public class CheckOutController implements ActionListener {
 			
 			IMatDataHandler.getInstance().placeOrder(true);
 			JOptionPane.showMessageDialog(null ,"Köpet slutfört!");
+			MainWindow.getHistory().updateView();
 			MainWindow.setCard("StartPage");
 			
 			System.out.println(IMatDataHandler.getInstance().getOrders().size());
