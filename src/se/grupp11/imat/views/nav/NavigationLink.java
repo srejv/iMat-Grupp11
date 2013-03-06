@@ -1,5 +1,7 @@
 package se.grupp11.imat.views.nav;
 
+import java.awt.Font;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -20,6 +22,8 @@ public class NavigationLink extends JLabel {
 		this.value = value;
 		this.setOpaque(true);
 		type = NavType.NavLink;
+		
+		this.setFont(new Font("Tohoma", Font.PLAIN, 12));
 	}
 	
 	public void setValue(String text) {

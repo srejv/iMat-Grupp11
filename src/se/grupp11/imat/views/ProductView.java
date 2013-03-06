@@ -55,7 +55,7 @@ public class ProductView extends JPanel {
 		
 		JLabel lblHead = new JLabel(product.getName());
 		lblHead.setFont(new Font("Georgia", Font.BOLD, 30));
-		lblHead.setBounds(48, 6, 523, 58);
+		lblHead.setBounds(47, 6, 448, 58);
 		add(lblHead);
 		
 		JPanel eastPanel = new JPanel();
@@ -94,7 +94,7 @@ public class ProductView extends JPanel {
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnNewButton.setBounds(621, 28, 203, 29);
+		btnNewButton.setBounds(556, 28, 220, 29);
 		add(btnNewButton);
 		
 		label.setIcon(new ImageIcon(((new ImageIcon("/Users/Markus/.dat215/imat/images/" + product.getImageName())).getImage()).getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH)));
@@ -104,14 +104,14 @@ public class ProductView extends JPanel {
 		eastPanel.setOpaque(false);
 		
 		
-		spinner.setBounds(556, 28, 37, 28);
+		spinner.setBounds(507, 28, 37, 28);
 		add(spinner);
 		
 		
 		
 		JLabel lblSt = new JLabel("st");
 		lblSt.setFont(new Font("Georgia", Font.PLAIN, 13));
-		lblSt.setBounds(596, 33, 25, 16);
+		lblSt.setBounds(545, 33, 25, 16);
 		add(lblSt);
 		
 		
