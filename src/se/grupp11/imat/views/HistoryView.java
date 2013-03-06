@@ -16,54 +16,46 @@ import java.awt.Font;
 
 public class HistoryView extends JPanel {
 	private JTable table;
+	private Object[][] model;
+	private java.util.List<Order> ordersList;
 
 	/**
 	 * Create the panel.
 	 */
 	public HistoryView() {
 		setLayout(new BorderLayout(0, 0));
-		
+
 		setMaximumSize(new Dimension(680, 1200));
 		setMinimumSize(new Dimension(680, 1200));
-		
-		setBackground(new Color(255,250,250));
-		
+
+		setBackground(new Color(255, 250, 250));
+
 		JLabel lblHistory = new JLabel("Tidigare Köp");
 		lblHistory.setFont(new Font("Tahoma", Font.BOLD, 30));
 		add(lblHistory, BorderLayout.NORTH);
-		
-		
-		
+
 		IMatDataHandler handler = IMatDataHandler.getInstance();
 		JList list = new JList();
-		
-		java.util.List<Order> ordersList=handler.getOrders();
 
+		ordersList = handler.getOrders();
 
+		model = new String[ordersList.size()][2];
 
-		
-		
-		Object [][] model = new String[ordersList.size()][2];
+		updateView();
 
-			
-			for(int i=0; i<ordersList.size(); i++){
-				model[i][0]=ordersList.get(i).getDate().toString();
-				model[i][1]="" +ordersList.get(i).getOrderNumber();
-			}
+		Object[] names = { "Datum", "OrderNr" };
 
-		
+		table = new JTable((Object[][]) (model), names);
+		table.setFont(new Font("Tahoma", Font.BOLD, 14));
+		add(table, BorderLayout.CENTER);
 
-		
-		Object[] names={"Datum","OrderNr"};
-		
-	table = new JTable((Object[][])(model), names);
-	table.setFont(new Font("Tahoma", Font.BOLD, 14));
-	add(table, BorderLayout.CENTER);
-		
+	}
 
-			
-		
-
+	public void updateView() {
+		for (int i = 0; i < ordersList.size(); i++) {
+			model[i][0] = ordersList.get(i).getDate().toString();
+			model[i][1] = "" + ordersList.get(i).getOrderNumber();
+		}
 	}
 
 }

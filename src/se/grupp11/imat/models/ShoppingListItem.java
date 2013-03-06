@@ -2,7 +2,9 @@ package se.grupp11.imat.models;
 
 import java.util.Observable;
 
-import se.chalmers.ait.dat215.project.*;
+import se.chalmers.ait.dat215.project.IMatDataHandler;
+import se.chalmers.ait.dat215.project.Product;
+import se.chalmers.ait.dat215.project.ShoppingItem;
 
 public class ShoppingListItem extends Observable {
 
@@ -58,5 +60,9 @@ public class ShoppingListItem extends Observable {
 			return (o.getItem().getProductId() == this.getItem().getProductId()); 
 		}
 		return false;
+	}
+	
+	public ShoppingItem toShoppingItem(){
+		return new ShoppingItem(_item, _amount);
 	}
 }
