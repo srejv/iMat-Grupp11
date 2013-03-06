@@ -8,6 +8,8 @@ import javax.swing.JOptionPane;
 import se.chalmers.ait.dat215.project.Customer;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.grupp11.imat.MainWindow;
+import se.grupp11.imat.views.CheckOutView;
+import se.grupp11.imat.views.CheckoutAdressView;
 import se.grupp11.imat.views.SettingsView;
 
 public class SettingsController implements ActionListener {
@@ -44,7 +46,9 @@ public class SettingsController implements ActionListener {
 			c.setLastName(lastName);
 			c.setMobilePhoneNumber(cellPhone);
 			c.setPostCode(postCode);
+			imdh.getCreditCard().setCardNumber(cardNumber);
 			
+			CheckOutView.updateView();
 			JOptionPane.showMessageDialog(null, "Inställningar Sparades!");
 			
 			

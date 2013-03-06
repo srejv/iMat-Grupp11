@@ -1,12 +1,15 @@
 package se.grupp11.imat.views;
 
+import java.awt.FlowLayout;
 import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
+import javax.swing.text.*;
 import se.grupp11.imat.controllers.SettingsController;
 
 import com.jgoodies.forms.factories.FormFactory;
@@ -22,7 +25,10 @@ public class SettingsView extends JPanel {
 	private static JTextField textFieldCity;
 	private static JTextField textFieldEmail;
 	private static JTextField textFieldCellphone;
-	private static JTextField textFieldCardNumber;
+	private static JTextField card1;
+	private static JTextField card2;
+	private static JTextField card3;
+	private static JTextField card4;
 
 	/**
 	 * Create the panel.
@@ -30,7 +36,7 @@ public class SettingsView extends JPanel {
 	public SettingsView() {
 		setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("140px"),
-				ColumnSpec.decode("51px:grow"),},
+				ColumnSpec.decode("350px"),},
 			new RowSpec[] {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("16px"),
@@ -121,12 +127,47 @@ public class SettingsView extends JPanel {
 		JLabel lblCardNumber = new JLabel("Card number");
 		add(lblCardNumber, "1, 24, right, default");
 		
-		textFieldCardNumber = new JTextField();
-		add(textFieldCardNumber, "2, 24, fill, default");
-		textFieldCardNumber.setColumns(10);
+		JPanel panel = new JPanel();
+		add(panel, "2, 24, fill, fill");
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		
+		
+		PlainDocument[] pd = new PlainDocument[4];
+		for(int i = 0; i<4; i++){
+			pd[i] = new PlainDocument(){
+				final int limit = 4;
+			    @Override
+			    public void insertString(int offs, String str, AttributeSet a)
+			            throws BadLocationException {
+			        if(getLength() + str.length() <= limit)
+			            super.insertString(offs, str, a);
+			    }
+			};
+		}
+		
+		card1 = new JTextField();
+		card1.setDocument(pd[0]);
+		panel.add(card1);
+		card1.setColumns(4);
+		
+		card2 = new JTextField();
+		card2.setDocument(pd[1]);
+		panel.add(card2);
+		card2.setColumns(4);
+		
+		card3 = new JTextField();
+		card3.setDocument(pd[2]);
+		panel.add(card3);
+		card3.setColumns(4);
+		
+		card4 = new JTextField();
+		card4.setDocument(pd[3]);
+		panel.add(card4);
+		card4.setColumns(4);
 		
 		JButton btnSave = new JButton("Save");
-		add(btnSave, "2, 28");
+		add(btnSave, "2, 28, right, default");
 		btnSave.addActionListener(new SettingsController());
 
 	}
@@ -172,8 +213,10 @@ public class SettingsView extends JPanel {
 	}
 	public static String getCardNumber(){
 		try{
-			Integer.parseInt(textFieldCardNumber.getText());
-			return textFieldCardNumber.getText();
+			
+			String cardNbr = card1.getText() + card2.getText() + card3.getText() + card4.getText();
+			Long.parseLong(cardNbr);
+			return cardNbr;
 		}catch(NumberFormatException e){
 			return null;
 		}
