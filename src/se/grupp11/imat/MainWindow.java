@@ -68,6 +68,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Font;
 import javax.swing.border.LineBorder;
+import javax.swing.KeyStroke;
+import java.awt.event.InputEvent;
 
 public class MainWindow{
 	private JFrame frame;
@@ -149,6 +151,7 @@ public class MainWindow{
 	 */
 	private void initialize() {
 		
+		scc = ShoppingCartController.getInstance();
 		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1193, 696);
@@ -156,90 +159,100 @@ public class MainWindow{
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		
-		JMenu mnFile = new JMenu("File");
+		JMenu mnFile = new JMenu("Arkiv");
 		menuBar.add(mnFile);
 		
-		JMenuItem mntmNewList = new JMenuItem("New List");
-		mnFile.add(mntmNewList);
-		
-		JMenuItem mntmToCheckout = new JMenuItem("To Checkout");
-		mntmToCheckout.addActionListener(new ActionListener() {
+		JMenuItem mntmNewList = new JMenuItem("Ny Lista");
+		mntmNewList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cards.show(panelMainStage, "CheckOut");
+				ShoppingList slist = ShoppingListController.getInstance().create();
+				slist.setTitle("Ny lista");
+				slist.setDescription("En ny härlig lista!");
+				fillMenuAndRefresh();
 			}
 		});
+		mntmNewList.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
+		mnFile.add(mntmNewList);
+		
+		JMenuItem mntmToCheckout = new JMenuItem("Till Kassan");
+		mntmToCheckout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K, InputEvent.CTRL_MASK));
+		mntmToCheckout.addActionListener(scc);
+		mntmToCheckout.setActionCommand("buy");
 		mnFile.add(mntmToCheckout);
 		
-		JMenuItem mntmEmptyShoppingCart = new JMenuItem("Empty Shopping Cart");
+		JMenuItem mntmEmptyShoppingCart = new JMenuItem("Töm Kundvagnen");
+		mntmEmptyShoppingCart.addActionListener(scc);
+		mntmEmptyShoppingCart.setActionCommand("erase");
+		mntmEmptyShoppingCart.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_MASK));
 		mnFile.add(mntmEmptyShoppingCart);
 		
 		JSeparator separator_4 = new JSeparator();
 		mnFile.add(separator_4);
 		
-		JMenuItem mntmSettings = new JMenuItem("Settings\n");
+		JMenuItem mntmSettings = new JMenuItem("Inställningar");
 		mnFile.add(mntmSettings);
 		
 		JSeparator separator = new JSeparator();
 		mnFile.add(separator);
 		
-		JMenuItem mntmExit = new JMenuItem("Exit");
+		JMenuItem mntmExit = new JMenuItem("Avsluta");
 		mnFile.add(mntmExit);
 		
-		JMenu mnEdit = new JMenu("Edit");
+		JMenu mnEdit = new JMenu("Redigera");
 		menuBar.add(mnEdit);
 		
-		JMenuItem mntmUndo = new JMenuItem("Undo");
+		JMenuItem mntmUndo = new JMenuItem("Ångra");
 		mnEdit.add(mntmUndo);
 		
-		JMenuItem mntmRedo = new JMenuItem("Redo");
+		JMenuItem mntmRedo = new JMenuItem("Upprepa");
 		mnEdit.add(mntmRedo);
 		
 		JSeparator separator_1 = new JSeparator();
 		mnEdit.add(separator_1);
 		
-		JMenuItem mntmCut = new JMenuItem("Cut");
+		JMenuItem mntmCut = new JMenuItem("Klipp ut");
 		mnEdit.add(mntmCut);
 		
-		JMenuItem mntmCopy = new JMenuItem("Copy");
+		JMenuItem mntmCopy = new JMenuItem("Kopiera");
 		mnEdit.add(mntmCopy);
 		
-		JMenuItem mntmPaste = new JMenuItem("Paste");
+		JMenuItem mntmPaste = new JMenuItem("Klistra in");
 		mnEdit.add(mntmPaste);
 		
-		JMenuItem mntmDelete = new JMenuItem("Delete");
+		JMenuItem mntmDelete = new JMenuItem("Ta bort");
 		mnEdit.add(mntmDelete);
 		
 		JSeparator separator_2 = new JSeparator();
 		mnEdit.add(separator_2);
 		
-		JMenuItem mntmSelectAll = new JMenuItem("Select All");
+		JMenuItem mntmSelectAll = new JMenuItem("Markera alla");
 		mnEdit.add(mntmSelectAll);
 		
-		JMenuItem mntmDeselectAll = new JMenuItem("Deselect All");
+		JMenuItem mntmDeselectAll = new JMenuItem("Avmarkera alla");
 		mnEdit.add(mntmDeselectAll);
 		
-		JMenu mnView = new JMenu("View");
+		JMenu mnView = new JMenu("Vy");
 		menuBar.add(mnView);
 		
-		JMenuItem mntmMinimize = new JMenuItem("Minimize");
+		JMenuItem mntmMinimize = new JMenuItem("Minimera");
 		mnView.add(mntmMinimize);
 		
-		JMenuItem mntmMaximize = new JMenuItem("Maximize");
+		JMenuItem mntmMaximize = new JMenuItem("Maximera");
 		mnView.add(mntmMaximize);
 		
 		JSeparator separator_3 = new JSeparator();
 		mnView.add(separator_3);
 		
-		JMenuItem mntmForward = new JMenuItem("Forward");
+		JMenuItem mntmForward = new JMenuItem("Framåt");
 		mnView.add(mntmForward);
 		
-		JMenuItem mntmBack = new JMenuItem("Back");
+		JMenuItem mntmBack = new JMenuItem("Bakåt");
 		mnView.add(mntmBack);
 		
-		JMenu mnHelp = new JMenu("Help");
+		JMenu mnHelp = new JMenu("Hjälp");
 		menuBar.add(mnHelp);
 		
-		JMenuItem mntmAbout = new JMenuItem("About...");
+		JMenuItem mntmAbout = new JMenuItem("Om...");
 		mnHelp.add(mntmAbout);
 		
 		JPanel panelTop = new JPanel();
@@ -274,11 +287,6 @@ public class MainWindow{
 					searchView.search(txtSk.getText());
 					setCard("Search");
 				}
-			}
-		});
-		txtSk.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
 			}
 		});
 		txtSk.addFocusListener(new FocusAdapter() {
@@ -431,7 +439,6 @@ public class MainWindow{
 		southPanelShoppingCart.setBackground(new Color(255, 255, 255));
 		ShoppingCartPanel.add(southPanelShoppingCart, "1, 2, fill, fill");
 		
-		scc = ShoppingCartController.getInstance();
 		JButton btnRensa = new JButton("Rensa");
 		southPanelShoppingCart.add(btnRensa);
 		btnRensa.addActionListener(scc);
