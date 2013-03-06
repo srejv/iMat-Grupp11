@@ -104,7 +104,7 @@ public class ProductSquareItem extends JPanel implements Transferable,
 		MouseListener popupListener = new PopupListener();
 		this.addMouseListener(popupListener);
 		
-		setPreferredSize(new Dimension(170, 301));
+			
 		
 		
 		// Hover-effect
