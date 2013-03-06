@@ -46,7 +46,6 @@ public class HistoryView extends JPanel {
 		model = new String[ordersList.size()][2];
 
 		ordersList = IMatDataHandler.getInstance().getOrders();
-		
 		for (int i = 0; i < ordersList.size(); i++) {
 			model[i][0] = ordersList.get(i).getDate().toString();
 			model[i][1] = "" + ordersList.get(i).getOrderNumber();

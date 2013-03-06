@@ -102,4 +102,20 @@ public class ShoppingList {
 		return this._listitems;
 	}
 	
+	public int getAmount() {
+		int size = 0;
+		for(ShoppingListItem item : _listitems) {
+			size += item.getAmount();
+		}
+		
+		return size;
+	}
+	
+	public double getPrice() {
+		double pengs = 0;
+		for(ShoppingListItem item : _listitems) {
+			pengs += item.getAmount() * item.getItem().getPrice();
+		}
+		return pengs;
+	}
 }

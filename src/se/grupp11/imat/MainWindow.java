@@ -126,9 +126,9 @@ public class MainWindow{
 		leftMenuItems.clear();
 		
 		leftMenuItems.add(new NavigationLink("Start", "StartPage"));
-		leftMenuItems.add(new NavigationLink("HistoryView", "HistoryView"));
-		leftMenuItems.add(new NavigationLink("Settings", "Settings"));
-		leftMenuItems.add(new NavigationLink("Checkout", "CheckOut"));
+		leftMenuItems.add(new NavigationLink("Historik", "HistoryView"));
+		leftMenuItems.add(new NavigationLink("Inställningar", "Settings"));
+		leftMenuItems.add(new NavigationLink("Till Kassan", "CheckOut"));
 		leftMenuItems.add(new SeparationLink());
 		leftMenuItems.add(new CategoryLink(ProductCategory.BERRY));
 		leftMenuItems.add(new CategoryLink(ProductCategory.BREAD));
@@ -147,7 +147,6 @@ public class MainWindow{
 		for(ShoppingList l : ShoppingListController.getInstance().getAll()) {
 			leftMenuItems.add(new ListLink(l.getTitle(), l));
 		}
-		//new NewListLink()
 	}
 
 	/**
@@ -552,7 +551,7 @@ public class MainWindow{
 	}
 	
 	class NavigationRenderer implements ListCellRenderer {
-		private Color category = new Color(255, 245,245);
+		private Color category = new Color(255, 119, 41);
 		private Color selection = new Color(255,250,250);
 		@Override
 		public Component getListCellRendererComponent(JList list, Object value,
