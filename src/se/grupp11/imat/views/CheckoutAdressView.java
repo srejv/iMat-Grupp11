@@ -15,6 +15,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class CheckoutAdressView extends JPanel {
 
@@ -37,6 +38,7 @@ public class CheckoutAdressView extends JPanel {
 	 * Create the panel.
 	 */
 	public CheckoutAdressView() {
+		setBackground(new Color(255,250,250));
 		setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("25px"),
 				ColumnSpec.decode("80px"),
@@ -77,12 +79,9 @@ public class CheckoutAdressView extends JPanel {
 		lblAddress.setFont(new Font("Lucida Grande", Font.BOLD, 15));
 		add(lblAddress, "2, 2, left, center");
 		
-		JButton btnEditDetails = new JButton("Ändra");
-		add(btnEditDetails, "6, 2, left, top");
-		btnEditDetails.addActionListener(al);
-		btnEditDetails.setActionCommand("settings");
 		
 		lblYouHavntFilled = new JLabel("Du har inte fyllt i dina uppgifter!");
+		lblYouHavntFilled.setHorizontalAlignment(SwingConstants.CENTER);
 		lblYouHavntFilled.setForeground(Color.RED);
 		add(lblYouHavntFilled, "4, 6, left, center");
 		

@@ -16,6 +16,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 import javax.swing.JTextField;
 import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class CheckoutCardView extends JPanel {
 
@@ -31,18 +32,18 @@ public class CheckoutCardView extends JPanel {
 	 * Create the panel.
 	 */
 	public CheckoutCardView() {
+		setBackground(new Color(255,250,250));
 		setLayout(new FormLayout(new ColumnSpec[] {
-				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("25px"),
+				ColumnSpec.decode("80px"),
+				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
+				ColumnSpec.decode("223px:grow"),
+				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
+				ColumnSpec.decode("116px"),
 				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,},
 			new RowSpec[] {
 				FormFactory.RELATED_GAP_ROWSPEC,
-				
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
@@ -57,21 +58,16 @@ public class CheckoutCardView extends JPanel {
 		lblCardInformation.setFont(new Font("Lucida Grande", Font.BOLD, 15));
 		add(lblCardInformation, "2, 2");
 		
-		JButton btnEditDetails = new JButton("Ändra");
-		add(btnEditDetails, "6, 2");
-		btnEditDetails.addActionListener(al);
-		btnEditDetails.setActionCommand("settings");
-		
-		
 		
 		cardTitle = new JLabel("");
 		cvcTitle = new JLabel("");
 		card = new JLabel("");
 		
 		lblYouHavntAdded = new JLabel("Du har inte anget kortnummer!");
+		lblYouHavntAdded.setHorizontalAlignment(SwingConstants.LEFT);
 		lblYouHavntAdded.setForeground(Color.RED);
 		
-		add(lblYouHavntAdded, "4, 6, center, center");
+		add(lblYouHavntAdded, "4, 6, left, center");
 		add(cardTitle, "2, 4, right, center");
 		add(cvcTitle, "2, 6, right, center");
 		add(card, "4, 4, left, center");

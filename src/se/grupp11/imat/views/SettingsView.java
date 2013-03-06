@@ -1,5 +1,6 @@
 package se.grupp11.imat.views;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
@@ -7,8 +8,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.PlainDocument;
 import javax.swing.text.*;
 import se.grupp11.imat.controllers.SettingsController;
 
@@ -72,10 +71,13 @@ public class SettingsView extends JPanel {
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
+
 		
 		JLabel lblSettingsTitle = new JLabel("Inställningar");
 		lblSettingsTitle.setFont(new Font("Lucida Grande", Font.BOLD, 20));
 		add(lblSettingsTitle, "1, 2, 1, 2, default, top");
+
+		setBackground(new Color(255,250,250));
 		
 		JLabel lblFirstName = new JLabel("Förnamn");
 		add(lblFirstName, "1, 6, right, default");
@@ -138,6 +140,7 @@ public class SettingsView extends JPanel {
 		add(lblCardNumber, "1, 24, right, default");
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255,250,250));
 		add(panel, "2, 24, fill, fill");
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
