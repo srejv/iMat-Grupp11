@@ -36,7 +36,9 @@ public class SettingsView extends JPanel {
 	public SettingsView() {
 		setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("140px"),
-				ColumnSpec.decode("350px"),},
+				ColumnSpec.decode("320px"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,},
 			new RowSpec[] {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("16px"),
@@ -71,60 +73,68 @@ public class SettingsView extends JPanel {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
-		JLabel lblSettingsTitle = new JLabel("Settings");
-		lblSettingsTitle.setFont(new Font("Lucida Grande", Font.BOLD, 24));
-		add(lblSettingsTitle, "1, 2, 1, 2, left, top");
+		JLabel lblSettingsTitle = new JLabel("Inställningar");
+		lblSettingsTitle.setFont(new Font("Lucida Grande", Font.BOLD, 20));
+		add(lblSettingsTitle, "1, 2, 1, 2, default, top");
 		
-		JLabel lblFirstName = new JLabel("First name");
+		JLabel lblFirstName = new JLabel("Förnamn");
 		add(lblFirstName, "1, 6, right, default");
 		
 		textFieldFirstName = new JTextField();
 		add(textFieldFirstName, "2, 6, fill, default");
 		textFieldFirstName.setColumns(10);
 		
-		JLabel lblLastName = new JLabel("Last name");
+		JLabel lblLastName = new JLabel("Efternamn");
 		add(lblLastName, "1, 8, right, default");
 		
 		textFieldLastName = new JTextField();
 		add(textFieldLastName, "2, 8, fill, default");
 		textFieldLastName.setColumns(10);
 		
-		JLabel lblAdress = new JLabel("Adress");
+		JLabel lblAdress = new JLabel("Address");
 		add(lblAdress, "1, 10, right, default");
 		
 		textFieldAdress = new JTextField();
 		add(textFieldAdress, "2, 10, fill, default");
 		textFieldAdress.setColumns(10);
 		
-		JLabel lblPostalCode = new JLabel("Postal Code");
+		JLabel lblPostalCode = new JLabel("Postnummer");
 		add(lblPostalCode, "1, 12, right, default");
 		
 		textFieldPostalCode = new JTextField();
 		add(textFieldPostalCode, "2, 12, fill, default");
 		textFieldPostalCode.setColumns(10);
 		
-		JLabel lblCity = new JLabel("City");
+		JLabel lblCity = new JLabel("Stad");
 		add(lblCity, "1, 14, right, default");
 		
 		textFieldCity = new JTextField();
 		add(textFieldCity, "2, 14, fill, default");
 		textFieldCity.setColumns(10);
 		
-		JLabel lblEmail = new JLabel("Email");
+		JLabel lblEmail = new JLabel("El-post");
 		add(lblEmail, "1, 18, right, default");
 		
 		textFieldEmail = new JTextField();
 		add(textFieldEmail, "2, 18, fill, default");
 		textFieldEmail.setColumns(10);
 		
-		JLabel lblCellphone = new JLabel("Cellphone");
+		JLabel lblDinepostse = new JLabel("din@epost.se");
+		lblDinepostse.setFont(new Font("Lucida Grande", Font.ITALIC, 10));
+		add(lblDinepostse, "4, 18");
+		
+		JLabel lblCellphone = new JLabel("Mobiltelefon");
 		add(lblCellphone, "1, 20, right, default");
 		
 		textFieldCellphone = new JTextField();
 		add(textFieldCellphone, "2, 20, fill, default");
 		textFieldCellphone.setColumns(10);
 		
-		JLabel lblCardNumber = new JLabel("Card number");
+		JLabel label = new JLabel("0703121212");
+		label.setFont(new Font("Lucida Grande", Font.ITALIC, 10));
+		add(label, "4, 20");
+		
+		JLabel lblCardNumber = new JLabel("Kortnummer");
 		add(lblCardNumber, "1, 24, right, default");
 		
 		JPanel panel = new JPanel();
@@ -166,7 +176,7 @@ public class SettingsView extends JPanel {
 		panel.add(card4);
 		card4.setColumns(4);
 		
-		JButton btnSave = new JButton("Save");
+		JButton btnSave = new JButton("Spara");
 		add(btnSave, "2, 28, right, default");
 		btnSave.addActionListener(new SettingsController());
 
