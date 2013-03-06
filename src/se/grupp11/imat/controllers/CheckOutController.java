@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
+import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.grupp11.imat.MainWindow;
 
 public class CheckOutController implements ActionListener {
@@ -25,6 +26,7 @@ public class CheckOutController implements ActionListener {
 			MainWindow.setCard("Settings");
 		}
 		if(arg0.getActionCommand() == "checkout"){
+			IMatDataHandler.getInstance().placeOrder(true);
 			JOptionPane.showMessageDialog(null ,"Köpet slutfört!");
 			MainWindow.setCard("StartPage");
 		}

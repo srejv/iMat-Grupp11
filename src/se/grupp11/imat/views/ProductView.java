@@ -1,20 +1,24 @@
 package se.grupp11.imat.views;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Product;
-import javax.swing.JLabel;
-
-import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.Font;
-import javax.swing.JButton;
+import se.chalmers.ait.dat215.project.ShoppingCart;
+import se.chalmers.ait.dat215.project.ShoppingItem;
 
 public class ProductView extends JPanel {
 
+	private ShoppingCart sc = IMatDataHandler.getInstance().getShoppingCart();
 	/**
 	 * Create the panel.
 	 */
@@ -67,6 +71,13 @@ public class ProductView extends JPanel {
 		
 		JButton btnNewButton = new JButton("Lägg till i Kundvagnen\n");
 		btnNewButton.setBounds(432, 541, 242, 67);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				sc.addProduct(IMatDataHandler.getInstance().getProduct(1));
+				sc.fireShoppingCartChanged(new ShoppingItem(IMatDataHandler.getInstance().getProduct(1)), true);
+				System.out.println(sc.getTotal());
+			}
+		});
 		add(btnNewButton);
 		
 		label.setIcon(new ImageIcon(((new ImageIcon("/Users/Markus/.dat215/imat/images/" + product.getImageName())).getImage()).getScaledInstance(300, 300, java.awt.Image.SCALE_SMOOTH)));

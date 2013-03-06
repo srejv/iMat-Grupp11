@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
+import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.grupp11.imat.controllers.CheckOutController;
 
 import com.jgoodies.forms.layout.FormLayout;
@@ -44,6 +45,12 @@ public class CheckoutAdressView extends JPanel {
 		JLabel lblYouHavntFilled = new JLabel("You havn't filled in your details yet.");
 		add(lblYouHavntFilled, "4, 6, left, center");
 
+	}
+	
+	public void updateAdressCard(){
+		if(IMatDataHandler.getInstance().isCustomerComplete()){
+			//Jlabel name = new Jlabel(IMatDataHandler.getInstance().getCustomer().getFirstName() + " " + IMatDataHandler.getInstance().getCustomer().getFirstName());
+		}
 	}
 
 }
