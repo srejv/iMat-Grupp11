@@ -95,15 +95,6 @@ public class MainWindow{
 	 */
 	public MainWindow() {
 
-		
-		ShoppingList l = ShoppingListController.getInstance().create();
-		l.setTitle("Åh va götte.");
-		l.setDescription("En Fasinerande beskrivning HURRA.");
-		l.getList().add(new ShoppingListItem(50,2));
-		l.getList().add(new ShoppingListItem(30,3));
-		l.getList().add(new ShoppingListItem(6,1));
-		ShoppingListController.getInstance().save();
-		
 		this.editDetails = editDetails;
 		leftMenuItems = new ArrayList<NavigationLink>();
 		fillMenu();
@@ -443,8 +434,8 @@ public class MainWindow{
 			} else if(c.type == NavType.CategoryLink) {
 				c.setBackground(Color.BLACK);
 			} else if(c.type == NavType.ListLink) {
-				c.setBackground(Color.GREEN);
-			} else if (value instanceof NewListLink)  {
+				c.setBackground(Color.getHSBColor(0.4f, 0.3f, 0.5f));
+			} else if (c.type == NavType.NewListLink)  {
 				c.setBackground(Color.GREEN);
 
 			} else if(c.type == NavType.NavLink)   {
@@ -475,6 +466,5 @@ public class MainWindow{
 	public static void setProductView(Product item){
 		productView=new ProductView(item);
 		panelMainStage.add(productView, "productView");
-
 	}
 }

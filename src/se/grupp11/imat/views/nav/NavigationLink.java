@@ -18,6 +18,7 @@ public class NavigationLink extends JLabel {
 	public NavigationLink(String text, String value) {
 		this.setText(text);
 		this.value = value;
+		this.setOpaque(true);
 		type = NavType.NavLink;
 	}
 	

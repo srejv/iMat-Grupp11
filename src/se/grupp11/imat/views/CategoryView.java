@@ -49,6 +49,7 @@ public class CategoryView extends JPanel  {
 	
 	public void LoadCategory(ProductCategory category) {
 		
+		productGrid.removeAll();
 		List<Product> prodList = IMatDataHandler.getInstance().getProducts(category);
 		//int rows = prodList.size() / 4;
 		productGrid.setLayout(new GridLayout(4,4,0,0));
