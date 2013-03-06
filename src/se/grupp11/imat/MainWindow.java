@@ -76,7 +76,7 @@ public class MainWindow{
 	private CategoryView categoryView;
 	private static ListView listView;
 	private static ListViewEdit editListView;
-	private ListView shoppingCartView;
+	private static ListView shoppingCartView;
 	
 	private static ProductView productView;
 	
@@ -310,16 +310,18 @@ public class MainWindow{
 			}
 		});
 
-		list.setSize(500, 100);
-		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Test1 längre text...", "Test2", "Test3", "Test4", "Tidigare Köp"};
-			public int getSize() {
-				return leftMenuItems.size();
-			}
-			public Object getElementAt(int index) {
-				return leftMenuItems.get(index);
-			}
-		});
+
+//		list.setModel(new AbstractListModel() {
+//			String[] values = new String[] {"Test1 längre text...", "Test2", "Test3", "Test4", "Tidigare Köp"};
+//			public int getSize() {
+//				return leftMenuItems.size();
+//			}
+//			public Object getElementAt(int index) {
+//				return leftMenuItems.get(index);
+//			}
+//		});
+		
+	//	list.setSize(500, 100);
 		navlist.setCellRenderer(new NavigationRenderer());
 		navlist.setListData(leftMenuItems.toArray());
 		
@@ -404,7 +406,8 @@ public class MainWindow{
 	}
 	
 	public static void eraseShoppingCart(){
-		//shoppingCartView.removeAll();
+		shoppingCartView.removeAll();
+		//TODO
 	}
 	
 	public static ListView getListPanel() {
