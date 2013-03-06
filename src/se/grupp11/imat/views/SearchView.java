@@ -2,6 +2,7 @@ package se.grupp11.imat.views;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -52,12 +53,13 @@ public class SearchView extends JPanel  {
 		productGrid.removeAll();
 		List<Product> prodList = IMatDataHandler.getInstance().findProducts(search);
 		
-		for (Product product : prodList) {
-			ProductSquareItem i = new ProductSquareItem(product, 1);
-			productGrid.add(i);
-		}
-		for(int i = prodList.size(); i<16; i++){
-			productGrid.add(new JLabel(""));
+		for(int i = 0; i < 16; i++) {
+			if(i > prodList.size()) {
+				productGrid.add(new JLabel(""));
+				continue;
+			}
+			ProductSquareItem s = new ProductSquareItem(prodList.get(i), 1);
+			productGrid.add(s);
 		}
 		productGrid.setLayout(new GridLayout(0,4));
 		

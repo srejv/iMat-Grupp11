@@ -2,6 +2,7 @@ package se.grupp11.imat.views;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -51,9 +52,9 @@ public class CategoryView extends JPanel  {
 		
 		productGrid.removeAll();
 		List<Product> prodList = IMatDataHandler.getInstance().getProducts(category);
-		int rows = (prodList.size() / 4)+1;
-		System.out.println(prodList.size() + "");
-		System.out.println(rows + "");
+		
+
+
 		
 		productGrid.setLayout(new GridLayout(4,4));
 		
