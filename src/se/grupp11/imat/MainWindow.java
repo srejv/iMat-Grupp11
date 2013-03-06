@@ -66,6 +66,8 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.Font;
+import javax.swing.border.LineBorder;
 
 public class MainWindow{
 	private JFrame frame;
@@ -295,11 +297,14 @@ public class MainWindow{
 		
 
 		JPanel navPanel = new JPanel();
+		navPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		frame.getContentPane().add(navPanel, BorderLayout.WEST);
-		navPanel.setPreferredSize(new Dimension(100, 10));
+		navPanel.setPreferredSize(new Dimension(170, 10));
 		navPanel.setLayout(new BorderLayout(0, 0));
 		
 		navlist = new JList();
+		navlist.setForeground(Color.BLACK);
+		navlist.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
 		navlist.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		navlist.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
@@ -517,7 +522,7 @@ public class MainWindow{
 	}
 	
 	class NavigationRenderer implements ListCellRenderer {
-		private Color category = Color.getHSBColor(22.0f/360.0f, 0.84f, 1.f);
+		private Color category = new Color(255, 245,245);
 		private Color selection = new Color(255,250,250);
 		@Override
 		public Component getListCellRendererComponent(JList list, Object value,
