@@ -1,66 +1,67 @@
 package se.grupp11.imat;
 
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.GridLayout;
-
-import javax.swing.BorderFactory;
-import javax.swing.JFrame;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.ListCellRenderer;
-import javax.swing.ListSelectionModel;
-
-import java.awt.BorderLayout;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JMenuItem;
-import javax.swing.JSeparator;
-import java.awt.CardLayout;
-import javax.swing.JList;
-import javax.swing.AbstractListModel;
-import java.awt.FlowLayout;
-import javax.swing.SwingConstants;
-
-
-import se.chalmers.ait.dat215.project.ProductCategory;
-import se.chalmers.ait.dat215.project.IMatDataHandler;
-import se.chalmers.ait.dat215.project.ShoppingItem;
-import se.grupp11.imat.controllers.*;
-import se.grupp11.imat.models.ShoppingList;
-import se.grupp11.imat.models.ShoppingListItem;
-import se.grupp11.imat.views.nav.NavigationLink.NavType;
-import se.grupp11.imat.views.nav.*;
-import se.grupp11.imat.views.StartPage;
-
-import javax.swing.JScrollPane;
-import javax.swing.JLabel;
 import java.awt.Dimension;
-
-import se.grupp11.imat.views.CategoryView;
-import se.grupp11.imat.views.ListView;
-import se.grupp11.imat.views.ListViewEdit;
-import se.grupp11.imat.views.SearchView;
-import se.grupp11.imat.views.SettingsView;
-import se.grupp11.imat.views.CheckOutView;
-import java.awt.event.ActionListener;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
-import se.grupp11.imat.views.ProductView;
-import se.chalmers.ait.dat215.project.Product;
-import se.grupp11.imat.views.HistoryView;
-
-
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
+import javax.swing.ListCellRenderer;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import com.jgoodies.forms.layout.FormLayout;
+
+import se.chalmers.ait.dat215.project.Product;
+import se.chalmers.ait.dat215.project.ProductCategory;
+import se.grupp11.imat.controllers.ShoppingCartController;
+import se.grupp11.imat.controllers.ShoppingListController;
+import se.grupp11.imat.models.ShoppingList;
+import se.grupp11.imat.views.CategoryView;
+import se.grupp11.imat.views.CheckOutView;
+import se.grupp11.imat.views.HistoryView;
+import se.grupp11.imat.views.ListView;
+import se.grupp11.imat.views.ListViewEdit;
+import se.grupp11.imat.views.ProductView;
+import se.grupp11.imat.views.SearchView;
+import se.grupp11.imat.views.SettingsView;
+import se.grupp11.imat.views.StartPage;
+import se.grupp11.imat.views.nav.CategoryLink;
+import se.grupp11.imat.views.nav.ListLink;
+import se.grupp11.imat.views.nav.NavigationLink;
+import se.grupp11.imat.views.nav.NavigationLink.NavType;
+import se.grupp11.imat.views.nav.NewListLink;
+import se.grupp11.imat.views.nav.SeparationLink;
+
 import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -70,6 +71,7 @@ import java.awt.Font;
 import javax.swing.border.LineBorder;
 import javax.swing.KeyStroke;
 import java.awt.event.InputEvent;
+
 
 public class MainWindow{
 	private JFrame frame;
@@ -81,6 +83,8 @@ public class MainWindow{
 	private ShoppingCartController scc;
 	private static JList navlist;
 	private static List<NavigationLink> leftMenuItems;
+	private static List<String> cardIndex;
+	
 	
 	// Main stage pages
 	private StartPage startPage;
@@ -262,16 +266,39 @@ public class MainWindow{
 		JPanel westPanel = new JPanel();
 		panelTop.add(westPanel, BorderLayout.WEST);
 		
-		btnBack = new JButton("Back");
-		
-		JButton btnBack = new JButton("Back");
+		btnBack = new JButton("<");
+		btnBack.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnBack.setPreferredSize(new Dimension(45, 29));
+		btnBack.setFont(new Font("Comic Sans", Font.BOLD, 15));
+		btnBack.addActionListener(new ActionListener(){
 
-		westPanel.add(btnBack);
-		btnBack.setHorizontalAlignment(SwingConstants.RIGHT);
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				cards.previous(panelMainStage);
+				
+			}
+			
+		});
 		
-		JButton btnForward = new JButton("Forward");
+		cardIndex = new LinkedList<String>();
+		
+		westPanel.add(btnBack);
+		
+		
+		JButton btnForward = new JButton(">");
+		btnForward.setPreferredSize(new Dimension(45, 29));
+		btnForward.setFont(new Font("Sens Serif", Font.BOLD, 15));
 		westPanel.add(btnForward);
-		btnForward.setHorizontalAlignment(SwingConstants.LEFT);
+		btnForward.setHorizontalTextPosition(SwingConstants.LEFT);
+		btnForward.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				cards.next(panelMainStage);
+				
+			}
+			
+		});
 		
 		JPanel centerPanel = new JPanel();
 		
@@ -506,12 +533,8 @@ public class MainWindow{
 	}
 
 	public static void setCard(String cardID){
+		//cardIndex.add(cardID);
 		cards.show(panelMainStage, cardID);
-	}
-	
-	public static void eraseShoppingCart(){
-		shoppingCartView.removeAll();
-		//TODO
 	}
 	
 	public static ListView getListPanel() {
