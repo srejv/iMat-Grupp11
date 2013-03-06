@@ -42,16 +42,19 @@ public class CategoryView extends JPanel  {
 		add(scrollPane, BorderLayout.CENTER);
 		
 		productGrid = new JPanel();
+		productGrid.setBackground(new Color(255, 250, 250));
 		scrollPane.setViewportView(productGrid);
-		productGrid.setLayout(new GridLayout(3, 4, 0, 0));
+		productGrid.setLayout(new GridLayout(4, 4, 0, 0));
+		
+
 	}
 	
 	
 	public void LoadCategory(ProductCategory category) {
 		
 		List<Product> prodList = IMatDataHandler.getInstance().getProducts(category);
-		int rows = prodList.size() / 4;
-		productGrid.setLayout(new GridLayout(rows,4,0,0));
+		//int rows = prodList.size() / 4;
+		productGrid.setLayout(new GridLayout(4,4,0,0));
 		
 		for (Product product : prodList) {
 			ProductSquareItem i = new ProductSquareItem(product, 1);
