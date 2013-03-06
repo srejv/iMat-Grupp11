@@ -80,6 +80,8 @@ public class MainWindow{
 	private static ListView listView;
 	private static ListViewEdit editListView;
 	private static ListView shoppingCartView;
+	private static HistoryView historyView;
+
 	
 	private static ProductView productView;
 	
@@ -109,7 +111,7 @@ public class MainWindow{
 	private void fillMenu() {
 		
 		leftMenuItems.add(new NavigationLink("Start", "StartPage"));
-		//leftMenuItems.add(new NavigationLink("History", history));
+		leftMenuItems.add(new NavigationLink("HistoryView", "HistoryView"));
 		leftMenuItems.add(new NavigationLink("Settings", "Settings"));
 		leftMenuItems.add(new NavigationLink("Checkout", "CheckOut"));
 		leftMenuItems.add(new SeparationLink());
@@ -386,7 +388,7 @@ public class MainWindow{
 		this.checkOutView.setBackground(c);
 		this.settingsView.setBackground(c);
 		
-		HistoryView historyView = new HistoryView();
+		historyView = new HistoryView();
 		panelMainStage.add(historyView, "HistoryView");
 		
 		
