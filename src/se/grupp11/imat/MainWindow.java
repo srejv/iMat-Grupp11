@@ -44,6 +44,7 @@ import se.chalmers.ait.dat215.project.ProductCategory;
 import se.grupp11.imat.controllers.ShoppingCartController;
 import se.grupp11.imat.controllers.ShoppingListController;
 import se.grupp11.imat.models.ShoppingList;
+import se.grupp11.imat.models.CategoriesManual.CatEntry;
 import se.grupp11.imat.views.CategoryView;
 import se.grupp11.imat.views.CheckOutView;
 import se.grupp11.imat.views.HistoryView;
@@ -130,18 +131,15 @@ public class MainWindow{
 		leftMenuItems.add(new NavigationLink("Inställningar", "Settings"));
 		leftMenuItems.add(new NavigationLink("Till Kassan", "CheckOut"));
 		leftMenuItems.add(new SeparationLink());
-		leftMenuItems.add(new CategoryLink(ProductCategory.BERRY));
-		leftMenuItems.add(new CategoryLink(ProductCategory.BREAD));
-		leftMenuItems.add(new CategoryLink(ProductCategory.CABBAGE));
-		leftMenuItems.add(new CategoryLink(ProductCategory.CITRUS_FRUIT));
-		leftMenuItems.add(new CategoryLink(ProductCategory.COLD_DRINKS));
-		leftMenuItems.add(new CategoryLink(ProductCategory.DAIRIES));
-		leftMenuItems.add(new CategoryLink(ProductCategory.EXOTIC_FRUIT));
-		leftMenuItems.add(new CategoryLink(ProductCategory.FISH));
-		leftMenuItems.add(new CategoryLink(ProductCategory.FLOUR_SUGAR_SALT));
-		leftMenuItems.add(new CategoryLink(ProductCategory.FRUIT));
-		leftMenuItems.add(new CategoryLink(ProductCategory.HERB));
-		leftMenuItems.add(new CategoryLink(ProductCategory.HOT_DRINKS));
+		leftMenuItems.add(new CategoryLink(CatEntry.BASEFOOD));
+		leftMenuItems.add(new CategoryLink(CatEntry.BREAD));
+		leftMenuItems.add(new CategoryLink(CatEntry.CANDYANDFIKA));
+		leftMenuItems.add(new CategoryLink(CatEntry.CHARK));
+		leftMenuItems.add(new CategoryLink(CatEntry.DAIRY));
+		leftMenuItems.add(new CategoryLink(CatEntry.DRINK));
+		leftMenuItems.add(new CategoryLink(CatEntry.FRUITANDBERRIES));
+		leftMenuItems.add(new CategoryLink(CatEntry.VEG));
+		
 		leftMenuItems.add(new SeparationLink());
 		leftMenuItems.add(new NewListLink());
 		for(ShoppingList l : ShoppingListController.getInstance().getAll()) {

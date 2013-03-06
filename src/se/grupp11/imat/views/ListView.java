@@ -167,13 +167,13 @@ public class ListView extends JPanel  {
 		});
 		add(list_1);
 		
-		lblDescription = new JLabel("Description");
+		lblDescription = new JLabel("Beskrivning");
 		springLayout.putConstraint(SpringLayout.NORTH, list_1, 6, SpringLayout.SOUTH, lblDescription);
 		springLayout.putConstraint(SpringLayout.NORTH, lblDescription, 6, SpringLayout.SOUTH, lblListTitle);
 		springLayout.putConstraint(SpringLayout.WEST, lblDescription, 0, SpringLayout.WEST, lblListTitle);
 		add(lblDescription);
 		
-		btnEdit = new JButton("Edit");
+		btnEdit = new JButton("Ändra");
 		btnEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ListViewEdit lve = MainWindow.getListEditPanel();

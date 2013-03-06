@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
 import se.chalmers.ait.dat215.project.*;
 import se.grupp11.imat.dnd.FromTransferHandler;
+import se.grupp11.imat.models.CategoriesManual;
+import se.grupp11.imat.models.CategoriesManual.CatEntry;
 
 import javax.swing.AbstractListModel;
 import javax.swing.JList;
@@ -36,7 +38,7 @@ public class CategoryView extends JPanel  {
 	public CategoryView() {
 		setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblCategory = new JLabel("Category");
+		JLabel lblCategory = new JLabel("Kategori");
 		lblCategory.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		add(lblCategory, BorderLayout.NORTH);
 		
@@ -48,13 +50,10 @@ public class CategoryView extends JPanel  {
 	}
 	
 	
-	public void LoadCategory(ProductCategory category) {
+	public void LoadCategory(CatEntry category) {
 		
 		productGrid.removeAll();
-		List<Product> prodList = IMatDataHandler.getInstance().getProducts(category);
-		
-
-
+		List<Product> prodList = CategoriesManual.getInstance().getCategory(category);
 		
 		productGrid.setLayout(new GridLayout(4,4));
 		

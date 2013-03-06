@@ -76,7 +76,7 @@ public class ListViewEdit extends JPanel  {
 		txtDescription.setText("Description");
 		add(txtDescription);
 		
-		JButton btnDoneEditing = new JButton("Done Editing");
+		JButton btnDoneEditing = new JButton("Spara Ändring");
 		btnDoneEditing.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ListView l = MainWindow.getListPanel();
