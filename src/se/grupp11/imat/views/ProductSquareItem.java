@@ -140,7 +140,7 @@ public class ProductSquareItem extends JPanel implements Transferable,
 
 		t = new TransferHandler() {
 			public Transferable createTransferable(JComponent c) {
-				return new ProductSquareItem(item, (Integer)spinner.getValue()); 
+				return new ProductSquareItem(item, amount); 
 			}
 		};
 		setTransferHandler(t);
@@ -227,7 +227,7 @@ public class ProductSquareItem extends JPanel implements Transferable,
 	@Override
 	public void dragGestureRecognized(DragGestureEvent arg0) {
 		// TODO Auto-generated method stub
-		source.startDrag(arg0, DragSource.DefaultCopyDrop, new ProductSquareItem(item, (Integer)spinner.getValue()), this);
+		source.startDrag(arg0, DragSource.DefaultCopyDrop, new ProductSquareItem(item, amount), this);
 	}
 	@Override
 	public void dragDropEnd(DragSourceDropEvent arg0) {
@@ -248,7 +248,7 @@ public class ProductSquareItem extends JPanel implements Transferable,
 	public Object getTransferData(DataFlavor arg0)
 			throws UnsupportedFlavorException, IOException {
 		
-		String s = item.getProductId()+"|"+spinner.getValue().toString();
+		String s = item.getProductId()+"|"+amount;
 		return s;
 	}
 	@Override
