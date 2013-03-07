@@ -26,7 +26,11 @@ import javax.swing.ScrollPaneConstants;
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
 
+
+
 public class CategoryView extends JPanel  {
+	
+	private JLabel lblCategory;
 	
 	/**
 	 * 
@@ -38,13 +42,16 @@ public class CategoryView extends JPanel  {
 	public CategoryView() {
 		setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblCategory = new JLabel("Kategori");
+		lblCategory = new JLabel("Kategori");
 		lblCategory.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		add(lblCategory, BorderLayout.NORTH);
 		
 		productGrid = new JPanel();
 		add(productGrid);
 		productGrid.setBackground(new Color(255, 250, 250));
+		
+		productGrid.setMaximumSize(new Dimension(680, 2400));
+		productGrid.setMinimumSize(new Dimension(680, 2400));
 		
 
 	}
@@ -54,6 +61,8 @@ public class CategoryView extends JPanel  {
 		
 		productGrid.removeAll();
 		List<Product> prodList = CategoriesManual.getInstance().getCategory(category);
+		
+		this.lblCategory.setText(category.name());
 		
 		productGrid.setLayout(new GridLayout(4,4));
 		

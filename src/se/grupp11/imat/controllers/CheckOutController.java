@@ -6,9 +6,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import se.chalmers.ait.dat215.project.IMatDataHandler;
+import se.chalmers.ait.dat215.project.Order;
 import se.grupp11.imat.MainWindow;
 import se.grupp11.imat.models.ShoppingList;
 import se.grupp11.imat.models.ShoppingListItem;
+import se.grupp11.imat.views.ReceiptView;
 
 public class CheckOutController implements ActionListener {
 
@@ -35,10 +37,12 @@ public class CheckOutController implements ActionListener {
 				IMatDataHandler.getInstance().getShoppingCart().addItem(i.toShoppingItem());
 			}
 			
-			IMatDataHandler.getInstance().placeOrder(true);
+			Order order=IMatDataHandler.getInstance().placeOrder(true);
 			JOptionPane.showMessageDialog(null ,"Köpet slutfört!");
+			
 			MainWindow.getHistory().updateView();
-			MainWindow.setCard("StartPage");
+			MainWindow.setReceiptView(new ReceiptView(order.getOrderNumber()));
+			MainWindow.setCard("ReceiptView");
 			
 			System.out.println(IMatDataHandler.getInstance().getOrders().size());
 		}

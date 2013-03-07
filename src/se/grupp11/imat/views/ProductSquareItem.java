@@ -163,8 +163,7 @@ public class ProductSquareItem extends JPanel implements Transferable,
 		// TODO jmf-pris??
 		JLabel lblImage = new JLabel("");
 		springLayout.putConstraint(SpringLayout.NORTH, lblImage, 10, SpringLayout.NORTH, this);
-		springLayout.putConstraint(SpringLayout.WEST, lblImage, 32, SpringLayout.WEST, this);
-		springLayout.putConstraint(SpringLayout.EAST, lblImage, -10, SpringLayout.EAST, this);
+		springLayout.putConstraint(SpringLayout.EAST, lblImage, 0, SpringLayout.EAST, this);
 		add(lblImage);
 		
 		JLabel lblNamn = new JLabel(""+ item.getName());
@@ -185,10 +184,11 @@ public class ProductSquareItem extends JPanel implements Transferable,
 		JLabel lblJmfPrisper = new JLabel("Jmfpris: " );
 		springLayout.putConstraint(SpringLayout.NORTH, lblJmfPrisper, 6, SpringLayout.SOUTH, lblPris);
 		springLayout.putConstraint(SpringLayout.WEST, lblJmfPrisper, 64, SpringLayout.WEST, this);
-		springLayout.putConstraint(SpringLayout.EAST, lblJmfPrisper, 0, SpringLayout.EAST, lblImage);
+		springLayout.putConstraint(SpringLayout.EAST, lblJmfPrisper, -10, SpringLayout.EAST, this);
 		add(lblJmfPrisper);
 		
 		spinner = new JSpinner(new SpinnerNumberModel(0, 0, 30, 1));
+		springLayout.putConstraint(SpringLayout.WEST, lblImage, 0, SpringLayout.WEST, spinner);
 		springLayout.putConstraint(SpringLayout.SOUTH, lblJmfPrisper, -58, SpringLayout.NORTH, spinner);
 		springLayout.putConstraint(SpringLayout.NORTH, spinner, 264, SpringLayout.NORTH, this);
 		springLayout.putConstraint(SpringLayout.WEST, spinner, 10, SpringLayout.WEST, this);
@@ -199,13 +199,13 @@ public class ProductSquareItem extends JPanel implements Transferable,
 		add(spinner);
 		
 		
-		lblImage.setIcon(new ImageIcon(((new ImageIcon(System.getProperty("user.home") + "/.dat215/imat/images/" + item.getImageName())).getImage()).getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
+		lblImage.setIcon(new ImageIcon(((new ImageIcon(System.getProperty("user.home") + "/.dat215/imat/images/" + item.getImageName())).getImage()).getScaledInstance(140, 140, java.awt.Image.SCALE_SMOOTH)));
 		
 		JButton btnLggTillI = new JButton("Köp");
 		springLayout.putConstraint(SpringLayout.NORTH, btnLggTillI, 0, SpringLayout.NORTH, spinner);
 		springLayout.putConstraint(SpringLayout.WEST, btnLggTillI, 6, SpringLayout.EAST, spinner);
-		springLayout.putConstraint(SpringLayout.EAST, btnLggTillI, 0, SpringLayout.EAST, lblImage);
 		springLayout.putConstraint(SpringLayout.SOUTH, btnLggTillI, -10, SpringLayout.SOUTH, this);
+		springLayout.putConstraint(SpringLayout.EAST, btnLggTillI, -10, SpringLayout.EAST, this);
 		btnLggTillI.addActionListener(this);
 		add(btnLggTillI);
 		

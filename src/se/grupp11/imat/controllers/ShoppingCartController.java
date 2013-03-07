@@ -150,6 +150,7 @@ public class ShoppingCartController implements ActionListener{
 			MainWindow.setCard("CheckOut");
 		}
 
+
 		
 	}
 

@@ -27,6 +27,7 @@ public class DeliverTimeView extends JPanel {
 		
 		
 		JRadioButton radioButton = new JRadioButton("12-16");
+		radioButton.setSelected(true);
 		panel.add(radioButton);
 		
 		JRadioButton radioButton_1 = new JRadioButton("13-17");
@@ -57,6 +58,7 @@ public class DeliverTimeView extends JPanel {
 		add(panel_1);
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("Torsdag");
+		rdbtnNewRadioButton.setSelected(true);
 		panel_1.add(rdbtnNewRadioButton);
 		
 		JRadioButton rdbtnToday = new JRadioButton("Fredag");

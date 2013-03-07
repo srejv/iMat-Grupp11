@@ -34,7 +34,7 @@ public class CheckOutView extends JPanel{
 		JButton btnNewButton = new JButton("Slutför Köp");
 		btnNewButton.setActionCommand("checkout");
 		btnNewButton.addActionListener(cOC);
-		btnNewButton.setBounds(517, 495, 207, 43);
+		btnNewButton.setBounds(301, 550, 207, 43);
 		add(btnNewButton);
 		
 		JButton settingsBtn = new JButton("Ändra");

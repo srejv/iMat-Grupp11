@@ -34,6 +34,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class ListView extends JPanel  {
 	
@@ -47,6 +48,7 @@ public class ListView extends JPanel  {
 	private JLabel lblDescription;
 	private Vector list_data;
 	private JButton btnEdit;
+	private JLabel lblNewLabel;
 	
 
 	public void setShoppingList(ShoppingList list) {
@@ -89,13 +91,13 @@ public class ListView extends JPanel  {
 		add(lblListTitle);
 		
 		list_1 = new JList();
+		springLayout.putConstraint(SpringLayout.WEST, list_1, 10, SpringLayout.WEST, this);
+		springLayout.putConstraint(SpringLayout.SOUTH, list_1, -10, SpringLayout.SOUTH, this);
+		springLayout.putConstraint(SpringLayout.EAST, list_1, -10, SpringLayout.EAST, this);
 		list_1.setDropMode(DropMode.INSERT);
 		list_1.setTransferHandler(new ToShoppingCartTransferHandler(TransferHandler.COPY, list_1, list_data));
 		list_1.setPreferredSize(new Dimension(200, 500));
-		springLayout.putConstraint(SpringLayout.SOUTH, list_1, -10, SpringLayout.SOUTH, this);
 		list_1.setDragEnabled(true);
-		springLayout.putConstraint(SpringLayout.WEST, list_1, 10, SpringLayout.WEST, this);
-		springLayout.putConstraint(SpringLayout.EAST, list_1, -10, SpringLayout.EAST, this);
 		list_1.setCellRenderer(new CustomCellRenderer());
 		list_1.setModel(new AbstractListModel() {
 			private static final long serialVersionUID = -9065824185601074599L;
@@ -168,8 +170,7 @@ public class ListView extends JPanel  {
 		add(list_1);
 		
 		lblDescription = new JLabel("Beskrivning");
-		springLayout.putConstraint(SpringLayout.NORTH, list_1, 6, SpringLayout.SOUTH, lblDescription);
-		springLayout.putConstraint(SpringLayout.NORTH, lblDescription, 6, SpringLayout.SOUTH, lblListTitle);
+		springLayout.putConstraint(SpringLayout.NORTH, list_1, 19, SpringLayout.SOUTH, lblDescription);
 		springLayout.putConstraint(SpringLayout.WEST, lblDescription, 0, SpringLayout.WEST, lblListTitle);
 		add(lblDescription);
 		
@@ -184,6 +185,13 @@ public class ListView extends JPanel  {
 		springLayout.putConstraint(SpringLayout.NORTH, btnEdit, 0, SpringLayout.NORTH, lblListTitle);
 		springLayout.putConstraint(SpringLayout.EAST, btnEdit, -10, SpringLayout.EAST, this);
 		add(btnEdit);
+		
+		lblNewLabel = new JLabel("Totalt pris: ");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		springLayout.putConstraint(SpringLayout.NORTH, lblDescription, 0, SpringLayout.NORTH, lblNewLabel);
+		springLayout.putConstraint(SpringLayout.NORTH, lblNewLabel, 7, SpringLayout.SOUTH, btnEdit);
+		springLayout.putConstraint(SpringLayout.EAST, lblNewLabel, -10, SpringLayout.EAST, btnEdit);
+		add(lblNewLabel);
 	}
 	
 	
@@ -196,6 +204,7 @@ public class ListView extends JPanel  {
 			list_data.add(o);
 		}
 		list_1.setListData(list_data);
+		lblNewLabel.setText("Totalt pris: " + list.getPrice() + ":-");
 
 	}
 	public JLabel getLblProductname() {
@@ -228,5 +237,8 @@ public class ListView extends JPanel  {
 		private Color row = Color.getHSBColor(0.f, 0.f, 1.f);
 		private Color altRow = Color.getHSBColor(0.f, 0.f, 0.9f);
 		private Color sel = Color.getHSBColor(0.3f, 0.1f, 0.9f);
+	}
+	public JLabel getLblPrice() {
+		return lblNewLabel;
 	}
 }
