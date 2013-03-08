@@ -205,34 +205,35 @@ public class MainWindow{
 		menuBar.add(mnEdit);
 		
 		JMenuItem mntmUndo = new JMenuItem("Ångra");
+		mntmUndo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.META_MASK));
 		mnEdit.add(mntmUndo);
 		
 		JMenuItem mntmRedo = new JMenuItem("Upprepa");
+		mntmRedo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.SHIFT_MASK | InputEvent.META_MASK));
 		mnEdit.add(mntmRedo);
 		
 		JSeparator separator_1 = new JSeparator();
 		mnEdit.add(separator_1);
 		
 		JMenuItem mntmCut = new JMenuItem("Klipp ut");
+		mntmCut.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.META_MASK));
 		mnEdit.add(mntmCut);
 		
 		JMenuItem mntmCopy = new JMenuItem("Kopiera");
+		mntmCopy.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.META_MASK));
 		mnEdit.add(mntmCopy);
 		
 		JMenuItem mntmPaste = new JMenuItem("Klistra in");
+		mntmPaste.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.META_MASK));
 		mnEdit.add(mntmPaste);
 		
 		JMenuItem mntmDelete = new JMenuItem("Ta bort");
+		mntmDelete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE, InputEvent.META_MASK));
 		mnEdit.add(mntmDelete);
 		
-		JSeparator separator_2 = new JSeparator();
-		mnEdit.add(separator_2);
-		
 		JMenuItem mntmSelectAll = new JMenuItem("Markera alla");
+		mntmSelectAll.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.META_MASK));
 		mnEdit.add(mntmSelectAll);
-		
-		JMenuItem mntmDeselectAll = new JMenuItem("Avmarkera alla");
-		mnEdit.add(mntmDeselectAll);
 		
 		JMenu mnView = new JMenu("Vy");
 		menuBar.add(mnView);
@@ -266,6 +267,7 @@ public class MainWindow{
 		panelTop.add(westPanel, BorderLayout.WEST);
 		
 		btnBack = new JButton("<");
+		btnBack.setToolTipText("gå ett steg bakåt");
 		btnBack.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnBack.setPreferredSize(new Dimension(45, 29));
 		btnBack.setFont(new Font("Comic Sans", Font.BOLD, 15));
@@ -285,6 +287,7 @@ public class MainWindow{
 		
 		
 		JButton btnForward = new JButton(">");
+		btnForward.setToolTipText("Gå ett steg framåt");
 		btnForward.setPreferredSize(new Dimension(45, 29));
 		btnForward.setFont(new Font("Sens Serif", Font.BOLD, 15));
 		westPanel.add(btnForward);
@@ -455,6 +458,7 @@ public class MainWindow{
 				}));
 		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setToolTipText("Dra produkter till kundvagnen för att lägga till!");
 		ShoppingCartPanel.add(scrollPane, "1, 1, fill, fill");
 		scrollPane.setBackground(Color.WHITE);
 		
@@ -466,11 +470,13 @@ public class MainWindow{
 		ShoppingCartPanel.add(southPanelShoppingCart, "1, 2, fill, fill");
 		
 		JButton btnRensa = new JButton("Rensa");
+		btnRensa.setToolTipText("Ta bort allt i kundvagnen");
 		southPanelShoppingCart.add(btnRensa);
 		btnRensa.addActionListener(scc);
 		btnRensa.setActionCommand("erase");
 		
 		JButton buyButton = new JButton("Till Kassan");
+		buyButton.setToolTipText("Gå vidare till kassan");
 		southPanelShoppingCart.add(buyButton);
 		buyButton.addActionListener(scc);
 		buyButton.setActionCommand("buy");

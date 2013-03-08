@@ -1,5 +1,6 @@
 package se.grupp11.imat.views;
 
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
@@ -68,6 +69,9 @@ public class ListView extends JPanel  {
 		setLayout(springLayout);
 		
 		lblListTitle = new JLabel("ListName");
+		
+		this.setToolTipText("Dra varor hit för att lägga till");
+
 		lblListTitle.addMouseListener(new MouseAdapter() {
 			JTextField field;
 			@Override
@@ -226,6 +230,7 @@ public class ListView extends JPanel  {
 			}
 			
 			Component c = (Component)value;
+			((JComponent) c).setToolTipText("Dra varor hit för att lägga till");
 			if(!isSelected) {
 				c.setBackground((index % 2 == 1) ? altRow : row);
 			} else {
@@ -240,5 +245,13 @@ public class ListView extends JPanel  {
 	}
 	public JLabel getLblPrice() {
 		return lblNewLabel;
+	}
+
+	public JButton getBtnEdit() {
+		return btnEdit;
+	}
+
+	public void setBtnEdit(JButton btnEdit) {
+		this.btnEdit = btnEdit;
 	}
 }

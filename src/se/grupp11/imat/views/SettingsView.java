@@ -3,12 +3,18 @@ package se.grupp11.imat.views;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.*;
+
+import se.chalmers.ait.dat215.project.Customer;
+import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.grupp11.imat.controllers.SettingsController;
 
 import com.jgoodies.forms.factories.FormFactory;
@@ -16,7 +22,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
-public class SettingsView extends JPanel {
+public class SettingsView extends JPanel implements FocusListener {
 	private static JTextField textFieldFirstName;
 	private static JTextField textFieldLastName;
 	private static JTextField textFieldAdress;
@@ -28,6 +34,8 @@ public class SettingsView extends JPanel {
 	private static JTextField card2;
 	private static JTextField card3;
 	private static JTextField card4;
+	
+	private Customer c=IMatDataHandler.getInstance().getCustomer();
 
 	/**
 	 * Create the panel.
@@ -82,44 +90,51 @@ public class SettingsView extends JPanel {
 		JLabel lblFirstName = new JLabel("Förnamn");
 		add(lblFirstName, "1, 6, right, default");
 		
-		textFieldFirstName = new JTextField();
+		textFieldFirstName = new JTextField(c.getFirstName());
 		add(textFieldFirstName, "2, 6, fill, default");
 		textFieldFirstName.setColumns(10);
+		textFieldFirstName.addFocusListener(this); 
+
 		
 		JLabel lblLastName = new JLabel("Efternamn");
 		add(lblLastName, "1, 8, right, default");
 		
-		textFieldLastName = new JTextField();
+		textFieldLastName = new JTextField(c.getLastName());
 		add(textFieldLastName, "2, 8, fill, default");
 		textFieldLastName.setColumns(10);
+		textFieldLastName.addFocusListener(this); 
 		
 		JLabel lblAdress = new JLabel("Address");
 		add(lblAdress, "1, 10, right, default");
 		
-		textFieldAdress = new JTextField();
+		textFieldAdress = new JTextField(c.getAddress());
 		add(textFieldAdress, "2, 10, fill, default");
 		textFieldAdress.setColumns(10);
+		textFieldAdress.addFocusListener(this); 
 		
 		JLabel lblPostalCode = new JLabel("Postnummer");
 		add(lblPostalCode, "1, 12, right, default");
 		
-		textFieldPostalCode = new JTextField();
+		textFieldPostalCode = new JTextField(c.getPostCode());
 		add(textFieldPostalCode, "2, 12, fill, default");
 		textFieldPostalCode.setColumns(10);
+		textFieldPostalCode.addFocusListener(this); 
 		
 		JLabel lblCity = new JLabel("Stad");
 		add(lblCity, "1, 14, right, default");
 		
-		textFieldCity = new JTextField();
+		textFieldCity = new JTextField("Göteborg");
 		add(textFieldCity, "2, 14, fill, default");
 		textFieldCity.setColumns(10);
+		textFieldCity.addFocusListener(this); 
 		
 		JLabel lblEmail = new JLabel("El-post");
 		add(lblEmail, "1, 18, right, default");
 		
-		textFieldEmail = new JTextField();
+		textFieldEmail = new JTextField(c.getEmail());
 		add(textFieldEmail, "2, 18, fill, default");
 		textFieldEmail.setColumns(10);
+		textFieldEmail.addFocusListener(this); 
 		
 		JLabel lblDinepostse = new JLabel("din@epost.se");
 		lblDinepostse.setFont(new Font("Lucida Grande", Font.ITALIC, 10));
@@ -128,9 +143,10 @@ public class SettingsView extends JPanel {
 		JLabel lblCellphone = new JLabel("Mobiltelefon");
 		add(lblCellphone, "1, 20, right, default");
 		
-		textFieldCellphone = new JTextField();
+		textFieldCellphone = new JTextField(c.getMobilePhoneNumber());
 		add(textFieldCellphone, "2, 20, fill, default");
 		textFieldCellphone.setColumns(10);
+		textFieldCellphone.addFocusListener(this); 
 		
 		JLabel label = new JLabel("0703121212");
 		label.setFont(new Font("Lucida Grande", Font.ITALIC, 10));
@@ -162,22 +178,30 @@ public class SettingsView extends JPanel {
 		card1 = new JTextField();
 		card1.setDocument(pd[0]);
 		panel.add(card1);
+		card1.setText("****");
 		card1.setColumns(4);
+		card1.addFocusListener(this); 
 		
 		card2 = new JTextField();
 		card2.setDocument(pd[1]);
 		panel.add(card2);
+		card2.setText("****");
 		card2.setColumns(4);
+		card2.addFocusListener(this); 
 		
 		card3 = new JTextField();
 		card3.setDocument(pd[2]);
 		panel.add(card3);
+		card3.setText("****");
 		card3.setColumns(4);
+		card3.addFocusListener(this); 
 		
 		card4 = new JTextField();
 		card4.setDocument(pd[3]);
 		panel.add(card4);
+		card4.setText("****");
 		card4.setColumns(4);
+		card4.addFocusListener(this); 
 		
 		JButton btnSave = new JButton("Spara");
 		add(btnSave, "2, 28, right, default");
@@ -228,11 +252,28 @@ public class SettingsView extends JPanel {
 		try{
 			
 			String cardNbr = card1.getText() + card2.getText() + card3.getText() + card4.getText();
+			if(cardNbr.equals("****************"))
+				return cardNbr;
 			Long.parseLong(cardNbr);
 			return cardNbr;
 		}catch(NumberFormatException e){
 			return null;
 		}
+	}
+
+
+
+		@Override
+		public void focusGained(FocusEvent arg0) {
+			((JTextComponent) arg0.getSource()).selectAll();
+		}
+	
+
+
+	@Override
+	public void focusLost(FocusEvent e) {
+		
+		
 	}
 
 }
