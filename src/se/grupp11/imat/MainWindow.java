@@ -560,7 +560,7 @@ public class MainWindow{
 	}
 	
 	class NavigationRenderer implements ListCellRenderer {
-		private Color category = new Color(255, 119, 41);
+		private Color category = new Color(255, 120, 120);
 		private Color selection = new Color(255,250,250);
 		@Override
 		public Component getListCellRendererComponent(JList list, Object value,
