@@ -97,6 +97,7 @@ public class ProductSquareItem extends JPanel implements Transferable,
 	 * @wbp.parser.constructor
 	 */
 	public ProductSquareItem(final Product item) {
+		setPreferredSize(new Dimension(160, 300));
 		this.amount=1;
 		
 		_popupMenu = new JPopupMenu();

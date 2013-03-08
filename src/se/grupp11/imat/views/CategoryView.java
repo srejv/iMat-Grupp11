@@ -64,7 +64,7 @@ public class CategoryView extends JPanel  {
 		
 		this.lblCategory.setText(category.name());
 		
-		productGrid.setLayout(new GridLayout(4,4));
+		productGrid.setLayout(new GridLayout(0,4));
 		
 		int nulllbls=16-prodList.size();
 		for (Product product : prodList) {

@@ -53,15 +53,15 @@ public class SearchView extends JPanel  {
 		productGrid.removeAll();
 		List<Product> prodList = IMatDataHandler.getInstance().findProducts(search);
 		
-		for(int i = 0; i < 16; i++) {
-			if(i >= prodList.size()) {
-				productGrid.add(new JLabel(""));
-				continue;
-			}
-			ProductSquareItem s = new ProductSquareItem(prodList.get(i), 1);
+		productGrid.setLayout(new GridLayout(0,4));
+		for(Product p : prodList) {
+			ProductSquareItem s = new ProductSquareItem(p, 1);
 			productGrid.add(s);
 		}
-		productGrid.setLayout(new GridLayout(0,4));
+		for(int i = prodList.size(); i < 16; i++) {
+			productGrid.add(new JLabel(""));
+		}
+		
 		
 		this.updateUI();
 	}
