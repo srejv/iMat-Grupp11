@@ -49,11 +49,6 @@ public class CategoryView extends JPanel  {
 		productGrid = new JPanel();
 		add(productGrid);
 		productGrid.setBackground(new Color(255, 250, 250));
-		
-		productGrid.setMaximumSize(new Dimension(680, 2400));
-		productGrid.setMinimumSize(new Dimension(680, 2400));
-		
-
 	}
 	
 	
