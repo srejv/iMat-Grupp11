@@ -31,6 +31,7 @@ public class ShoppingListController implements Observer {
 	}
 	
 	public void delete(String id) {
+		ShoppingListHandler.DeleteShoppingList(id);
 		_lists.remove(id);
 	}
 	

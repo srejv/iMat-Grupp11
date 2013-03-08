@@ -17,6 +17,7 @@ public class CategoryLink extends NavigationLink {
 		super(CategoriesManual.getInstance().getMenuName(category), "Category");
 		cat = category;
 		type = NavType.CategoryLink;
+		setToolTipText("Kategori " + getText());
 	}
 	
 	public CatEntry getCategory() {

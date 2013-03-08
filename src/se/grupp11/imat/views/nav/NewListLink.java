@@ -5,5 +5,6 @@ public class NewListLink extends NavigationLink {
 	public NewListLink() {
 		super("<html><b>Ny Lista </b></html>", "StartPage");
 		type = NavType.NewListLink;
+		setToolTipText("Skapa en ny lista");
 	}
 }

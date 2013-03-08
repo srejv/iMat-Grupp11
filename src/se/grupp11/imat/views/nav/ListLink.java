@@ -34,6 +34,7 @@ public class ListLink extends NavigationLink {
 		popupMenu.add(menuItem);
 		this.addMouseListener(new PopClickListener());
 		this.setComponentPopupMenu(popupMenu);
+		setToolTipText("Lista " + list.getTitle() + " med " + list.getAmount() + " produkter för " + list.getPrice() + " kr");
 	}
 	
 	public ListLink(String text, ShoppingList list) {

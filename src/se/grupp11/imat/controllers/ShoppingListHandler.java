@@ -26,13 +26,22 @@ public class ShoppingListHandler {
 	
 	private static void writeFile(String title, String content) {
         try {
+        	DeleteShoppingList(title);
         	BufferedWriter out = new BufferedWriter(new FileWriter("shoppinglists/" + title + ".json" ));
-        	
         	out.write(content.toString());
             out.close();
         } catch (IOException e) {
         	System.out.println(e.getMessage());
         }
+	}
+	
+	public static void DeleteShoppingList(String id) {
+		try {
+			File f = new File("shoppinglists/" + id + ".json");
+			f.delete();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private static String readFile(String path) throws IOException {
